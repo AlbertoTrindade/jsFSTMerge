@@ -1,14 +1,11 @@
-### Status
-[![Build Status](https://api.travis-ci.org/guilhermejccavalcanti/jFSTMerge.svg?branch=master)](https://travis-ci.org/guilhermejccavalcanti/jFSTMerge)
-
-jFSTMerge
+jsFSTMerge
 ========
 
 Copyright (c) 2016 by the Federal University of Pernambuco.
 
-A semistructured merge tool for Java applications.
+A semistructured merge tool for JavaScript applications, based on [jFSTMerge](https://github.com/guilhermejccavalcanti/jFSTMerge), a tool for Java applications developed by Guilherme Cavalcanti  &lt;<gjcc@cin.ufpe.br>&gt;.
 
-Contact Guilherme Cavalcanti &lt;<gjcc@cin.ufpe.br>&gt;.
+Contact: Alberto Trindade Tavares &lt;<att@cin.ufpe.br>&gt;.
 
 Compilation
 -----------
@@ -16,7 +13,7 @@ This project uses Gradle to manage all dependencies and versioning.
 
 Installation
 -------------
-Double-click on the jar from the [/installer](https://github.com/guilhermejccavalcanti/jFSTMerge/tree/master/installer) folder.
+Double-click on the jar from the [/installer](https://github.com/AlbertoTrindade/jsFSTMerge/tree/master/installer) folder.
 In case double-click does not work, install with the command 
 `java -jar s3mInstaller.jar`
 
@@ -31,7 +28,7 @@ After installation, the tool is automatically integrated with git, with no need 
 
 #### Running standalone
 
-Use the jar from the [/binary](https://github.com/guilhermejccavalcanti/jFSTMerge/tree/master/binary) folder, or from the installed folder.
+Use the jar from the [/binary](https://github.com/AlbertoTrindade/jsFSTMerge/tree/master/binary) folder, or from the installed folder.
 
 * Merging 3 files:
 
