@@ -6,12 +6,6 @@ sourceSets {
             srcDir 'src'
         }
       }
-	  
-	test {
-        java {
-            srcDirs = ["src/br/ufpe/cin/mergers/handlers/tests"]
-        }
-    }
 }
 
 repositories {
