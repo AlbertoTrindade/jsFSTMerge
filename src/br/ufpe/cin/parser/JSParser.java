@@ -17,31 +17,31 @@ import de.ovgu.cide.fstgen.ast.FSTNode;
 import de.ovgu.cide.fstgen.ast.FSTNonTerminal;
 
 /**
- * Class responsible for parsing java files, based on a 
- * <i>featurebnf</i> Java 1.8 annotated grammar: 
- * {@link http://tinyurl.com/java18featurebnf}
+ * Class responsible for parsing javascript files, based on a 
+ * <i>featurebnf</i> JavaScript annotated grammar: 
+ * {@link http://tinyurl.com/java18featurebnf TODO: update this when grammar is done }
  * For more information, see the documents in <i>guides</i> package.
- * @author Guilherme
+ * @author Guilherme and Alberto
  */
-public class JParser {
+public class JSParser {
 
 	/**
-	 * Parses a given .java file
-	 * @param javaFile
+	 * Parses a given .js file
+	 * @param javaScriptFile
 	 * @return ast representing the java file
 	 * @throws ParseException 
 	 * @throws FileNotFoundException 
 	 * @throws UnsupportedEncodingException 
 	 */
-	public FSTNode parse(File javaFile) throws FileNotFoundException, UnsupportedEncodingException, ParseException, TokenMgrError  {
+	public FSTNode parse(File javaScriptFile) throws FileNotFoundException, UnsupportedEncodingException, ParseException, TokenMgrError  {
 		FSTFeatureNode generatedAst = new FSTFeatureNode("");//root node
-		if(isValidFile(javaFile)){
+		if(isValidFile(javaScriptFile)){
 			if(!JFSTMerge.isGit){
-				System.out.println("Parsing: " + javaFile.getAbsolutePath());
+				System.out.println("Parsing: " + javaScriptFile.getAbsolutePath());
 			}
-			Java18MergeParser parser = new Java18MergeParser(new OffsetCharStream(new InputStreamReader(new FileInputStream(javaFile),"UTF8")));
+			Java18MergeParser parser = new Java18MergeParser(new OffsetCharStream(new InputStreamReader(new FileInputStream(javaScriptFile),"UTF8")));
 			parser.CompilationUnit(false);
-			generatedAst.addChild(new FSTNonTerminal("Java-File", javaFile.getName()));
+			generatedAst.addChild(new FSTNonTerminal("JavaScript-File", javaScriptFile.getName()));
 			generatedAst.addChild(parser.getRoot());
 		}
 		return generatedAst;
@@ -61,7 +61,7 @@ public class JParser {
 		} else if(file != null && (isJavaFile(file) || JFSTMerge.isGit)){
 			return true;
 		} else if(file != null && !isJavaFile(file)){
-			throw new ParseException("The file " + file.getName() + " is not a valid .java file.");
+			throw new ParseException("The file " + file.getName() + " is not a valid .js file.");
 		} else {
 			return false;
 		}
@@ -69,12 +69,12 @@ public class JParser {
 	
 
 	/**
-	 * Checks if a given file is a .java file.
+	 * Checks if a given file is a .js file.
 	 * @param file
-	 * @return true in case file extension is <i>java</i>, or false
+	 * @return true in case file extension is <i>javascript</i>, or false
 	 */
 	private boolean isJavaFile(File file){
 		//return FilenameUtils.getExtension(file.getAbsolutePath()).equalsIgnoreCase("java");
-		return file.getName().toLowerCase().contains(".java");
+		return file.getName().toLowerCase().contains(".js");
 	}
 }

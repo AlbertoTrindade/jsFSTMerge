@@ -200,7 +200,13 @@ public class JFSTMerge {
 
 	public static void main(String[] args) {
 		JFSTMerge merger = new JFSTMerge();
-		merger.run(args);
+		//merger.run(args);
+		merger.mergeFiles(
+	                    new File("/Users/ata/Documents/Masters/Java/left.js"), 
+	                    new File("/Users/ata/Documents/Masters/Java/base.js"),
+	                    new File("/Users/ata/Documents/Masters/Java/right.js"),
+	                    "/Users/ata/Documents/Masters/Java/output");
+		
 		System.exit(conflictState);
 	}
 

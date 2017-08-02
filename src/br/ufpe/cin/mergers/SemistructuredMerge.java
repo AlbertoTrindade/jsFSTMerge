@@ -12,7 +12,7 @@ import br.ufpe.cin.exceptions.TextualMergeException;
 import br.ufpe.cin.files.FilesManager;
 import br.ufpe.cin.mergers.handlers.ConflictsHandler;
 import br.ufpe.cin.mergers.util.MergeContext;
-import br.ufpe.cin.parser.JParser;
+import br.ufpe.cin.parser.JSParser;
 import br.ufpe.cin.printers.Prettyprinter;
 import cide.gparser.ParseException;
 import cide.gparser.TokenMgrError;
@@ -44,7 +44,7 @@ public final class SemistructuredMerge {
 	public static String merge(File left, File base, File right, MergeContext context)	throws SemistructuredMergeException, TextualMergeException {
 		try {
 			// parsing the files to be merged
-			JParser parser = new JParser();
+			JSParser parser = new JSParser();
 			FSTNode leftTree = parser.parse(left);
 			FSTNode baseTree = parser.parse(base);
 			FSTNode rightTree = parser.parse(right);
