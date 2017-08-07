@@ -14,22 +14,22 @@ public class Generator {
 			/* 1. read the featurebnf grammar in a .gcide file and converts into a javaCC grammar (.jj)
 			   with all associated artefacts (pretty printer,etc) */
 			new FSTgenTask().generate(
-					"grammars/java18_merge_fst.gcide", 
-					"src/br/ufpe/cin/generated/java18_merge.jj",
+					"grammars/javascript_merge_fst.gcide", 
+					"src/br/ufpe/cin/generated/javascript_merge.jj",
 					"br.ufpe.cin.generated"
 					);
 
 			//2. generate a javaCC parser based on the .jj file
 			new JavaCCTask().generate(
-					"src/br/ufpe/cin/generated/java18_merge.jj", 
+					"src/br/ufpe/cin/generated/javascript_merge.jj", 
 					"src/br/ufpe/cin/generated/"
 					);
 
 			//3. test the generated artefacts
 			new GeneratedParserTest().test(
-					"br.ufpe.cin.generated.Java18MergeParser", 
+					"br.ufpe.cin.generated.JavaScriptMergeParser", 
 					"CompilationUnit", 
-					"grammars/java18_merge_fst_test.java"
+					"grammars/javascript_merge_fst_test.java"
 					);
 		
 		}catch(Exception e){

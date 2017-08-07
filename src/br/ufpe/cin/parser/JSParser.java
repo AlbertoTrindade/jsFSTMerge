@@ -8,7 +8,7 @@ import java.io.UnsupportedEncodingException;
 
 import br.ufpe.cin.app.JFSTMerge;
 import br.ufpe.cin.files.FilesManager;
-import br.ufpe.cin.generated.Java18MergeParser;
+import br.ufpe.cin.generated.JavaScriptMergeParser;
 import cide.gparser.OffsetCharStream;
 import cide.gparser.ParseException;
 import cide.gparser.TokenMgrError;
@@ -39,7 +39,7 @@ public class JSParser {
 			if(!JFSTMerge.isGit){
 				System.out.println("Parsing: " + javaScriptFile.getAbsolutePath());
 			}
-			Java18MergeParser parser = new Java18MergeParser(new OffsetCharStream(new InputStreamReader(new FileInputStream(javaScriptFile),"UTF8")));
+			JavaScriptMergeParser parser = new JavaScriptMergeParser(new OffsetCharStream(new InputStreamReader(new FileInputStream(javaScriptFile),"UTF8")));
 			parser.CompilationUnit(false);
 			generatedAst.addChild(new FSTNonTerminal("JavaScript-File", javaScriptFile.getName()));
 			generatedAst.addChild(parser.getRoot());
