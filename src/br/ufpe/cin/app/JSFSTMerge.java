@@ -34,7 +34,7 @@ import com.beust.jcommander.ParameterException;
  * (unstructured) merge is invoked.
  * @author Guilherme
  */
-public class JFSTMerge {
+public class JSFSTMerge {
 
 	//log of activities
 	private static final Logger LOGGER = LoggerFactory.make();
@@ -199,13 +199,13 @@ public class JFSTMerge {
 	}
 
 	public static void main(String[] args) {
-		JFSTMerge merger = new JFSTMerge();
+		JSFSTMerge merger = new JSFSTMerge();
 		//merger.run(args);
 		merger.mergeFiles(
-	                    new File("/Users/ata/Documents/Masters/Java/left.js"), 
-	                    new File("/Users/ata/Documents/Masters/Java/base.js"),
-	                    new File("/Users/ata/Documents/Masters/Java/right.js"),
-	                    "/Users/ata/Documents/Masters/Java/output");
+	                    new File("/Users/ata/Documents/Masters/JavaScript/left.js"), 
+	                    new File("/Users/ata/Documents/Masters/JavaScript/base.js"),
+	                    new File("/Users/ata/Documents/Masters/JavaScript/right.js"),
+	                    "/Users/ata/Documents/Masters/JavaScript/output");
 		
 		System.exit(conflictState);
 	}

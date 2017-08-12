@@ -15,7 +15,7 @@ public final class CommandLineValidator {
 	 * @param merger
 	 * @throws ParameterException in case of invalid command line options
 	 */
-	public static void validateCommandLineOptions(JFSTMerge merger) {
+	public static void validateCommandLineOptions(JSFSTMerge merger) {
 		if(merger.filespath.isEmpty() && merger.directoriespath.isEmpty()){ //one merge option must be given
 			throw new ParameterException("Please inform one merge option (-f or -d).");
 

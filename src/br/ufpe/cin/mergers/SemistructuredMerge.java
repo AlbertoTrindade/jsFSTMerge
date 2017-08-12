@@ -53,7 +53,7 @@ public final class SemistructuredMerge {
 			context.join(merge(leftTree, baseTree, rightTree));
 
 			// handling special kinds of conflicts
-			ConflictsHandler.handle(context);
+			// ConflictsHandler.handle(context);
 
 		} catch (ParseException | FileNotFoundException | UnsupportedEncodingException | TokenMgrError ex) {
 			String message = ExceptionUtils.getCauseMessage(ex);

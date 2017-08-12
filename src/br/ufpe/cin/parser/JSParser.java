@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 
-import br.ufpe.cin.app.JFSTMerge;
+import br.ufpe.cin.app.JSFSTMerge;
 import br.ufpe.cin.files.FilesManager;
 import br.ufpe.cin.generated.JavaScriptMergeParser;
 import cide.gparser.OffsetCharStream;
@@ -36,7 +36,7 @@ public class JSParser {
 	public FSTNode parse(File javaScriptFile) throws FileNotFoundException, UnsupportedEncodingException, ParseException, TokenMgrError  {
 		FSTFeatureNode generatedAst = new FSTFeatureNode("");//root node
 		if(isValidFile(javaScriptFile)){
-			if(!JFSTMerge.isGit){
+			if(!JSFSTMerge.isGit){
 				System.out.println("Parsing: " + javaScriptFile.getAbsolutePath());
 			}
 			JavaScriptMergeParser parser = new JavaScriptMergeParser(new OffsetCharStream(new InputStreamReader(new FileInputStream(javaScriptFile),"UTF8")));
@@ -58,7 +58,7 @@ public class JSParser {
 	{
 		if(FilesManager.readFileContent(file).isEmpty()){
 			throw new FileNotFoundException();
-		} else if(file != null && (isJavaFile(file) || JFSTMerge.isGit)){
+		} else if(file != null && (isJavaFile(file) || JSFSTMerge.isGit)){
 			return true;
 		} else if(file != null && !isJavaFile(file)){
 			throw new ParseException("The file " + file.getName() + " is not a valid .js file.");
