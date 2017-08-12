@@ -52,9 +52,11 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     n = FormalParameters(inTerminal);
                                                                                                                                                 replaceName(n);
     jj_consume_token(RPAREN);
+    jj_consume_token(LBRACE);
     n = FunctionBody(inTerminal);
-                                                                                                                                                                                                 replaceName(n);
-                                                                                                                                                                                                                   {if (true) return productionEndNonTerminal("SourceElement","{Id}","{Id}");}
+                                                                                                                                                                                                     replaceName(n);
+    jj_consume_token(RBRACE);
+                                                                                                                                                                                                                           {if (true) return productionEndNonTerminal("SourceElement","{Id}","{Id}");}
     throw new Error("Missing return statement in function");
   }
 
@@ -69,9 +71,11 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     n = FormalParameters(true);
                                                                                                       replaceName(n);
     jj_consume_token(RPAREN);
+    jj_consume_token(LBRACE);
     n = FunctionBody(true);
-                                                                                                                                                 replaceName(n);
-                                                                                                                                                                   {if (true) return productionEndTerminal("FunctionDeclaration","-","-","Replacement","Default",first,token);}
+                                                                                                                                                     replaceName(n);
+    jj_consume_token(RBRACE);
+                                                                                                                                                                           {if (true) return productionEndTerminal("FunctionDeclaration","-","-","Replacement","Default",first,token);}
     throw new Error("Missing return statement in function");
   }
 
@@ -102,16 +106,27 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
       n = Id(true);
                                                       replaceName(n);
     }
-                                                                          {if (true) return productionEndTerminal("FormalParameters","-","-","Replacement","Default",first,token);}
+                                                                          {if (true) return productionEndTerminal("FormalParameters","-","-","Replacement","LineBased",first,token);}
     throw new Error("Missing return statement in function");
   }
 
   final public FSTInfo FunctionBody(boolean inTerminal) throws ParseException {
                                              Token first=null,t;FSTInfo n;
      first=getToken(1); productionStart(inTerminal);
-    jj_consume_token(LBRACE);
-    jj_consume_token(RBRACE);
-                           {if (true) return productionEndTerminal("FunctionBody","-","-","Replacement","LineBased",first,token);}
+    label_3:
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case FUNCTION:
+        ;
+        break;
+      default:
+        jj_la1[2] = jj_gen;
+        break label_3;
+      }
+      n = SourceElement(inTerminal);
+                                      replaceName(n);
+    }
+                                                          {if (true) return productionEndNonTerminal("FunctionBody","-","-");}
     throw new Error("Missing return statement in function");
   }
 
@@ -119,7 +134,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
   public Token token, jj_nt;
   private int jj_ntk;
   private int jj_gen;
-  final private int[] jj_la1 = new int[2];
+  final private int[] jj_la1 = new int[3];
   static private int[] jj_la1_0;
   static private int[] jj_la1_1;
   static private int[] jj_la1_2;
@@ -131,16 +146,16 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
       jj_la1_3();
    }
    private static void jj_la1_0() {
-      jj_la1_0 = new int[] {0x0,0x0,};
+      jj_la1_0 = new int[] {0x0,0x0,0x0,};
    }
    private static void jj_la1_1() {
-      jj_la1_1 = new int[] {0x8,0x0,};
+      jj_la1_1 = new int[] {0x8,0x0,0x8,};
    }
    private static void jj_la1_2() {
-      jj_la1_2 = new int[] {0x0,0x400000,};
+      jj_la1_2 = new int[] {0x0,0x400000,0x0,};
    }
    private static void jj_la1_3() {
-      jj_la1_3 = new int[] {0x0,0x0,};
+      jj_la1_3 = new int[] {0x0,0x0,0x0,};
    }
 
   public JavaScriptMergeParser(CharStream stream) {
@@ -148,7 +163,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 2; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 3; i++) jj_la1[i] = -1;
   }
 
   public void ReInit(CharStream stream) {
@@ -156,7 +171,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 2; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 3; i++) jj_la1[i] = -1;
   }
 
   public JavaScriptMergeParser(JavaScriptMergeParserTokenManager tm) {
@@ -164,7 +179,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 2; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 3; i++) jj_la1[i] = -1;
   }
 
   public void ReInit(JavaScriptMergeParserTokenManager tm) {
@@ -172,7 +187,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 2; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 3; i++) jj_la1[i] = -1;
   }
 
   final private Token jj_consume_token(int kind) throws ParseException {
@@ -227,7 +242,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
-    for (int i = 0; i < 2; i++) {
+    for (int i = 0; i < 3; i++) {
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
           if ((jj_la1_0[i] & (1<<j)) != 0) {

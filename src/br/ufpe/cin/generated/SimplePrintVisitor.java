@@ -47,11 +47,21 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 				}
 			}
 			printToken(")");
+			printToken("{");
 			{
 				FSTNode v=getChild(nonTerminal, "FunctionBody");
 				if (v!=null) {
 					v.accept(this);
 				}
+			}
+			printToken("}");
+			printFeatures(nonTerminal,false);
+			return false;
+		}
+		if (nonTerminal.getType().equals("FunctionBody")) {
+			printFeatures(nonTerminal,true);
+			for (FSTNode v : getChildren(nonTerminal,"SourceElement")) {
+				v.accept(this);
 			}
 			printFeatures(nonTerminal,false);
 			return false;

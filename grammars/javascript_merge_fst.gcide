@@ -373,6 +373,7 @@ Id: 	<IDENTIFIER>;
  */
 
 // Handle functions and statements
+@FSTNonTerminal()
 SourceElement:
 		@FSTNonTerminal(name="{Id}")
 		FunctionDeclaration
@@ -383,14 +384,15 @@ FunctionDeclaration:
 		Function
 		Id
 		"(" FormalParameters ")"
-		FunctionBody
+		"{" FunctionBody "}"
 ;
 
 @FSTTerminal(merge="LineBased")
 Function: "function"<NONE>
 ;
 
+@FSTTerminal(merge="LineBased")
 FormalParameters: Id ( "," Id )*;
 
-@FSTTerminal(merge="LineBased")
-FunctionBody: <LBRACE> <RBRACE>;
+@FSTNonTerminal()
+FunctionBody: ( SourceElement )*;

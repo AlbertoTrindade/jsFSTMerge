@@ -359,13 +359,13 @@ FSTInfo Id(boolean inTerminal) : { Token first=null,t;FSTInfo n;
 
 FSTInfo SourceElement(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
-	n=Function(inTerminal){ replaceName(n);} n=Id(inTerminal){ replaceName("Id", n);}{ replaceName(n);} "(" n=FormalParameters(inTerminal){ replaceName(n);} ")" n=FunctionBody(inTerminal){ replaceName(n);} {return productionEndNonTerminal("SourceElement","{Id}","{Id}");}
+	n=Function(inTerminal){ replaceName(n);} n=Id(inTerminal){ replaceName("Id", n);}{ replaceName(n);} "(" n=FormalParameters(inTerminal){ replaceName(n);} ")" "{" n=FunctionBody(inTerminal){ replaceName(n);} "}" {return productionEndNonTerminal("SourceElement","{Id}","{Id}");}
 
  )  }
 
 FSTInfo FunctionDeclaration(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
-	n=Function(true){ replaceName(n);} n=Id(true){ replaceName(n);} "(" n=FormalParameters(true){ replaceName(n);} ")" n=FunctionBody(true){ replaceName(n);} {return productionEndTerminal("FunctionDeclaration","-","-","Replacement","Default",first,token);}
+	n=Function(true){ replaceName(n);} n=Id(true){ replaceName(n);} "(" n=FormalParameters(true){ replaceName(n);} ")" "{" n=FunctionBody(true){ replaceName(n);} "}" {return productionEndTerminal("FunctionDeclaration","-","-","Replacement","Default",first,token);}
 
  )  }
 
@@ -377,13 +377,13 @@ FSTInfo Function(boolean inTerminal) : { Token first=null,t;FSTInfo n;
 
 FSTInfo FormalParameters(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
-	n=Id(true){ replaceName(n);} ("," n=Id(true){ replaceName(n);})* {return productionEndTerminal("FormalParameters","-","-","Replacement","Default",first,token);}
+	n=Id(true){ replaceName(n);} ("," n=Id(true){ replaceName(n);})* {return productionEndTerminal("FormalParameters","-","-","Replacement","LineBased",first,token);}
 
  )  }
 
 FSTInfo FunctionBody(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
-	<LBRACE> <RBRACE> {return productionEndTerminal("FunctionBody","-","-","Replacement","LineBased",first,token);}
+	(n=SourceElement(inTerminal){ replaceName(n);})* {return productionEndNonTerminal("FunctionBody","-","-");}
 
  )  }
 

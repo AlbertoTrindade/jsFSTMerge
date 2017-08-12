@@ -202,7 +202,7 @@ public class JSFSTMerge {
 		JSFSTMerge merger = new JSFSTMerge();
 		//merger.run(args);
 		merger.mergeFiles(
-	                    new File("/Users/ata/Documents/Masters/JavaScript/left.js"), 
+	                    new File("/Users/ata/Documents/Masters/JavaScript/left.js"),
 	                    new File("/Users/ata/Documents/Masters/JavaScript/base.js"),
 	                    new File("/Users/ata/Documents/Masters/JavaScript/right.js"),
 	                    "/Users/ata/Documents/Masters/JavaScript/output");
