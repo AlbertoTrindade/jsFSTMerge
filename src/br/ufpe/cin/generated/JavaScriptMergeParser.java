@@ -17,6 +17,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case FUNCTION:
+      case RETURN:
         ;
         break;
       default:
@@ -43,20 +44,33 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
   final public FSTInfo SourceElement(boolean inTerminal) throws ParseException {
                                               Token first=null,t;FSTInfo n;
      first=getToken(1); productionStart(inTerminal);
-    n = Function(inTerminal);
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case FUNCTION:
+      n = Function(inTerminal);
                                 replaceName(n);
-    n = Id(inTerminal);
+      n = Id(inTerminal);
                                                                    replaceName("Id", n);
                                                                                            replaceName(n);
-    jj_consume_token(LPAREN);
-    n = FormalParameters(inTerminal);
+      jj_consume_token(LPAREN);
+      n = FormalParameters(inTerminal);
                                                                                                                                                 replaceName(n);
-    jj_consume_token(RPAREN);
-    jj_consume_token(LBRACE);
-    n = FunctionBody(inTerminal);
+      jj_consume_token(RPAREN);
+      jj_consume_token(LBRACE);
+      n = FunctionBody(inTerminal);
                                                                                                                                                                                                      replaceName(n);
-    jj_consume_token(RBRACE);
-                                                                                                                                                                                                                           {if (true) return productionEndNonTerminal("SourceElement","{Id}","{Id}");}
+      jj_consume_token(RBRACE);
+                                                                                                                                                                                                                           {if (true) return productionEndNonTerminal("SourceElement1","{Id}","{Id}");}
+      break;
+    case RETURN:
+      n = Statements(inTerminal);
+                                  replaceName(n);
+                                                    {if (true) return productionEndNonTerminal("SourceElement2","-","-");}
+      break;
+    default:
+      jj_la1[1] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
     throw new Error("Missing return statement in function");
   }
 
@@ -99,7 +113,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
         ;
         break;
       default:
-        jj_la1[1] = jj_gen;
+        jj_la1[2] = jj_gen;
         break label_2;
       }
       jj_consume_token(COMMA);
@@ -117,10 +131,11 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case FUNCTION:
+      case RETURN:
         ;
         break;
       default:
-        jj_la1[2] = jj_gen;
+        jj_la1[3] = jj_gen;
         break label_3;
       }
       n = SourceElement(inTerminal);
@@ -130,11 +145,478 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     throw new Error("Missing return statement in function");
   }
 
+  final public FSTInfo Statements(boolean inTerminal) throws ParseException {
+                                           Token first=null,t;FSTInfo n;
+     first=getToken(1); productionStart(inTerminal);
+    label_4:
+    while (true) {
+      n = Statement(true);
+                                         replaceName(n);
+      if (jj_2_1(2)) {
+        ;
+      } else {
+        break label_4;
+      }
+    }
+                                                             {if (true) return productionEndTerminal("Statements","-","-","Replacement","LineBased",first,token);}
+    throw new Error("Missing return statement in function");
+  }
+
+  final public FSTInfo Statement(boolean inTerminal) throws ParseException {
+                                          Token first=null,t;FSTInfo n;
+     first=getToken(1); productionStart(inTerminal);
+    n = ReturnStatement(true);
+                                 replaceName(n);
+                                                   {if (true) return productionEndTerminal("Statement","-","-","Replacement","Default",first,token);}
+    throw new Error("Missing return statement in function");
+  }
+
+  final public FSTInfo ReturnStatement(boolean inTerminal) throws ParseException {
+                                                Token first=null,t;FSTInfo n;
+     first=getToken(1); productionStart(inTerminal);
+    jj_consume_token(RETURN);
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case IDENTIFIER:
+      n = Expression(true);
+                                      replaceName(n);
+      break;
+    default:
+      jj_la1[4] = jj_gen;
+      ;
+    }
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case SEMICOLON:
+      jj_consume_token(SEMICOLON);
+      break;
+    default:
+      jj_la1[5] = jj_gen;
+      ;
+    }
+                                                                       {if (true) return productionEndTerminal("ReturnStatement","-","-","Replacement","Default",first,token);}
+    throw new Error("Missing return statement in function");
+  }
+
+  final public FSTInfo Expression(boolean inTerminal) throws ParseException {
+                                           Token first=null,t;FSTInfo n;
+     first=getToken(1); productionStart(inTerminal);
+    n = AssignmentExpression(true);
+                                      replaceName(n);
+    label_5:
+    while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case COMMA:
+        ;
+        break;
+      default:
+        jj_la1[6] = jj_gen;
+        break label_5;
+      }
+      jj_consume_token(COMMA);
+      n = AssignmentExpression(true);
+                                                                                          replaceName(n);
+    }
+                                                                                                              {if (true) return productionEndTerminal("Expression","-","-","Replacement","Default",first,token);}
+    throw new Error("Missing return statement in function");
+  }
+
+  final public FSTInfo AssignmentExpression(boolean inTerminal) throws ParseException {
+                                                     Token first=null,t;FSTInfo n;
+     first=getToken(1); productionStart(inTerminal);
+    n = ConditionalExpression(true);
+                                       replaceName(n);
+                                                         {if (true) return productionEndTerminal("AssignmentExpression","-","-","Replacement","Default",first,token);}
+    throw new Error("Missing return statement in function");
+  }
+
+  final public FSTInfo ConditionalExpression(boolean inTerminal) throws ParseException {
+                                                      Token first=null,t;FSTInfo n;
+     first=getToken(1); productionStart(inTerminal);
+    n = LogicalORExpression(true);
+                                     replaceName(n);
+                                                       {if (true) return productionEndTerminal("ConditionalExpression","-","-","Replacement","Default",first,token);}
+    throw new Error("Missing return statement in function");
+  }
+
+  final public FSTInfo LogicalORExpression(boolean inTerminal) throws ParseException {
+                                                    Token first=null,t;FSTInfo n;
+     first=getToken(1); productionStart(inTerminal);
+    n = LogicalANDExpression(true);
+                                      replaceName(n);
+                                                        {if (true) return productionEndTerminal("LogicalORExpression","-","-","Replacement","Default",first,token);}
+    throw new Error("Missing return statement in function");
+  }
+
+  final public FSTInfo LogicalANDExpression(boolean inTerminal) throws ParseException {
+                                                     Token first=null,t;FSTInfo n;
+     first=getToken(1); productionStart(inTerminal);
+    n = BitwiseORExpression(true);
+                                     replaceName(n);
+                                                       {if (true) return productionEndTerminal("LogicalANDExpression","-","-","Replacement","Default",first,token);}
+    throw new Error("Missing return statement in function");
+  }
+
+  final public FSTInfo BitwiseORExpression(boolean inTerminal) throws ParseException {
+                                                    Token first=null,t;FSTInfo n;
+     first=getToken(1); productionStart(inTerminal);
+    n = BitwiseXORExpression(true);
+                                      replaceName(n);
+                                                        {if (true) return productionEndTerminal("BitwiseORExpression","-","-","Replacement","Default",first,token);}
+    throw new Error("Missing return statement in function");
+  }
+
+  final public FSTInfo BitwiseXORExpression(boolean inTerminal) throws ParseException {
+                                                     Token first=null,t;FSTInfo n;
+     first=getToken(1); productionStart(inTerminal);
+    n = BitwiseANDExpression(true);
+                                      replaceName(n);
+                                                        {if (true) return productionEndTerminal("BitwiseXORExpression","-","-","Replacement","Default",first,token);}
+    throw new Error("Missing return statement in function");
+  }
+
+  final public FSTInfo BitwiseANDExpression(boolean inTerminal) throws ParseException {
+                                                     Token first=null,t;FSTInfo n;
+     first=getToken(1); productionStart(inTerminal);
+    n = EqualityExpression(true);
+                                    replaceName(n);
+                                                      {if (true) return productionEndTerminal("BitwiseANDExpression","-","-","Replacement","Default",first,token);}
+    throw new Error("Missing return statement in function");
+  }
+
+  final public FSTInfo EqualityExpression(boolean inTerminal) throws ParseException {
+                                                   Token first=null,t;FSTInfo n;
+     first=getToken(1); productionStart(inTerminal);
+    n = RelationalExpression(true);
+                                      replaceName(n);
+                                                        {if (true) return productionEndTerminal("EqualityExpression","-","-","Replacement","Default",first,token);}
+    throw new Error("Missing return statement in function");
+  }
+
+  final public FSTInfo RelationalExpression(boolean inTerminal) throws ParseException {
+                                                     Token first=null,t;FSTInfo n;
+     first=getToken(1); productionStart(inTerminal);
+    n = ShiftExpression(true);
+                                 replaceName(n);
+                                                   {if (true) return productionEndTerminal("RelationalExpression","-","-","Replacement","Default",first,token);}
+    throw new Error("Missing return statement in function");
+  }
+
+  final public FSTInfo ShiftExpression(boolean inTerminal) throws ParseException {
+                                                Token first=null,t;FSTInfo n;
+     first=getToken(1); productionStart(inTerminal);
+    n = AdditiveExpression(true);
+                                    replaceName(n);
+                                                      {if (true) return productionEndTerminal("ShiftExpression","-","-","Replacement","Default",first,token);}
+    throw new Error("Missing return statement in function");
+  }
+
+  final public FSTInfo AdditiveExpression(boolean inTerminal) throws ParseException {
+                                                   Token first=null,t;FSTInfo n;
+     first=getToken(1); productionStart(inTerminal);
+    n = MultiplicativeExpression(true);
+                                          replaceName(n);
+    label_6:
+    while (true) {
+      if (jj_2_2(2)) {
+        ;
+      } else {
+        break label_6;
+      }
+      n = AdditiveExpressionInternal(true);
+                                                                                                             replaceName(n);
+    }
+                                                                                                                                 {if (true) return productionEndTerminal("AdditiveExpression","-","-","Replacement","Default",first,token);}
+    throw new Error("Missing return statement in function");
+  }
+
+  final public FSTInfo AdditiveExpressionInternal(boolean inTerminal) throws ParseException {
+                                                           Token first=null,t;FSTInfo n;
+     first=getToken(1); productionStart(inTerminal);
+    n = AdditiveOperator(true);
+                                  replaceName(n);
+    n = MultiplicativeExpression(true);
+                                                                                     replaceName(n);
+                                                                                                       {if (true) return productionEndTerminal("AdditiveExpressionInternal","-","-","Replacement","Default",first,token);}
+    throw new Error("Missing return statement in function");
+  }
+
+  final public FSTInfo MultiplicativeExpression(boolean inTerminal) throws ParseException {
+                                                         Token first=null,t;FSTInfo n;
+     first=getToken(1); productionStart(inTerminal);
+    n = UnaryExpression(true);
+                                 replaceName(n);
+                                                   {if (true) return productionEndTerminal("MultiplicativeExpression","-","-","Replacement","Default",first,token);}
+    throw new Error("Missing return statement in function");
+  }
+
+  final public FSTInfo UnaryExpression(boolean inTerminal) throws ParseException {
+                                                Token first=null,t;FSTInfo n;
+     first=getToken(1); productionStart(inTerminal);
+    n = PostfixExpression(true);
+                                   replaceName(n);
+                                                     {if (true) return productionEndTerminal("UnaryExpression","-","-","Replacement","Default",first,token);}
+    throw new Error("Missing return statement in function");
+  }
+
+  final public FSTInfo PostfixExpression(boolean inTerminal) throws ParseException {
+                                                  Token first=null,t;FSTInfo n;
+     first=getToken(1); productionStart(inTerminal);
+    n = LeftHandSideExpression(true);
+                                        replaceName(n);
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case INCR:
+    case DECR:
+      n = PostfixOperator(true);
+                                                                                   replaceName(n);
+      break;
+    default:
+      jj_la1[7] = jj_gen;
+      ;
+    }
+                                                                                                      {if (true) return productionEndTerminal("PostfixExpression","-","-","Replacement","Default",first,token);}
+    throw new Error("Missing return statement in function");
+  }
+
+  final public FSTInfo LeftHandSideExpression(boolean inTerminal) throws ParseException {
+                                                       Token first=null,t;FSTInfo n;
+     first=getToken(1); productionStart(inTerminal);
+    n = MemberExpression(true);
+                                  replaceName(n);
+                                                    {if (true) return productionEndTerminal("LeftHandSideExpression","-","-","Replacement","Default",first,token);}
+    throw new Error("Missing return statement in function");
+  }
+
+  final public FSTInfo MemberExpression(boolean inTerminal) throws ParseException {
+                                                 Token first=null,t;FSTInfo n;
+     first=getToken(1); productionStart(inTerminal);
+    n = PrimaryExpression(true);
+                                   replaceName(n);
+                                                     {if (true) return productionEndTerminal("MemberExpression","-","-","Replacement","Default",first,token);}
+    throw new Error("Missing return statement in function");
+  }
+
+  final public FSTInfo PrimaryExpression(boolean inTerminal) throws ParseException {
+                                                  Token first=null,t;FSTInfo n;
+     first=getToken(1); productionStart(inTerminal);
+    n = Id(true);
+                    replaceName(n);
+                                      {if (true) return productionEndTerminal("PrimaryExpression","-","-","Replacement","Default",first,token);}
+    throw new Error("Missing return statement in function");
+  }
+
+  final public FSTInfo PostfixOperator(boolean inTerminal) throws ParseException {
+                                                Token first=null,t;FSTInfo n;
+     first=getToken(1); productionStart(inTerminal);
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case INCR:
+      jj_consume_token(INCR);
+               {if (true) return productionEndTerminal("PostfixOperator1","-","-","Replacement","Default",first,token);}
+      break;
+    case DECR:
+      jj_consume_token(DECR);
+               {if (true) return productionEndTerminal("PostfixOperator2","-","-","Replacement","Default",first,token);}
+      break;
+    default:
+      jj_la1[8] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+    throw new Error("Missing return statement in function");
+  }
+
+  final public FSTInfo AdditiveOperator(boolean inTerminal) throws ParseException {
+                                                 Token first=null,t;FSTInfo n;
+     first=getToken(1); productionStart(inTerminal);
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case PLUS:
+      jj_consume_token(PLUS);
+              {if (true) return productionEndTerminal("AdditiveOperator1","-","-","Replacement","Default",first,token);}
+      break;
+    case MINUS:
+      jj_consume_token(MINUS);
+              {if (true) return productionEndTerminal("AdditiveOperator2","-","-","Replacement","Default",first,token);}
+      break;
+    default:
+      jj_la1[9] = jj_gen;
+      jj_consume_token(-1);
+      throw new ParseException();
+    }
+    throw new Error("Missing return statement in function");
+  }
+
+  final private boolean jj_2_1(int xla) {
+    jj_la = xla; jj_lastpos = jj_scanpos = token;
+    try { return !jj_3_1(); }
+    catch(LookaheadSuccess ls) { return true; }
+    finally { jj_save(0, xla); }
+  }
+
+  final private boolean jj_2_2(int xla) {
+    jj_la = xla; jj_lastpos = jj_scanpos = token;
+    try { return !jj_3_2(); }
+    catch(LookaheadSuccess ls) { return true; }
+    finally { jj_save(1, xla); }
+  }
+
+  final private boolean jj_3R_18() {
+    if (jj_3R_20()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_19() {
+    if (jj_3R_21()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_29() {
+    if (jj_3R_30()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_16() {
+    if (jj_3R_18()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_17() {
+    if (jj_3R_19()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_28() {
+    if (jj_3R_29()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_9() {
+    if (jj_scan_token(RETURN)) return true;
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_12()) jj_scanpos = xsp;
+    xsp = jj_scanpos;
+    if (jj_scan_token(85)) jj_scanpos = xsp;
+    return false;
+  }
+
+  final private boolean jj_3R_25() {
+    if (jj_scan_token(IDENTIFIER)) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_15() {
+    if (jj_3R_17()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_27() {
+    if (jj_3R_28()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_7() {
+    if (jj_3R_9()) return true;
+    return false;
+  }
+
+  final private boolean jj_3_1() {
+    if (jj_3R_7()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_14() {
+    if (jj_scan_token(MINUS)) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_13() {
+    if (jj_scan_token(PLUS)) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_11() {
+    if (jj_3R_15()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_26() {
+    if (jj_3R_27()) return true;
+    return false;
+  }
+
+  final private boolean jj_3_2() {
+    if (jj_3R_8()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_10() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_13()) {
+    jj_scanpos = xsp;
+    if (jj_3R_14()) return true;
+    }
+    return false;
+  }
+
+  final private boolean jj_3R_8() {
+    if (jj_3R_10()) return true;
+    if (jj_3R_11()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_24() {
+    if (jj_3R_26()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_32() {
+    if (jj_3R_11()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_22() {
+    if (jj_3R_24()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_23() {
+    if (jj_3R_25()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_31() {
+    if (jj_3R_32()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_20() {
+    if (jj_3R_22()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_12() {
+    if (jj_3R_16()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_21() {
+    if (jj_3R_23()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_30() {
+    if (jj_3R_31()) return true;
+    return false;
+  }
+
   public JavaScriptMergeParserTokenManager token_source;
   public Token token, jj_nt;
   private int jj_ntk;
+  private Token jj_scanpos, jj_lastpos;
+  private int jj_la;
+  public boolean lookingAhead = false;
+  private boolean jj_semLA;
   private int jj_gen;
-  final private int[] jj_la1 = new int[3];
+  final private int[] jj_la1 = new int[10];
   static private int[] jj_la1_0;
   static private int[] jj_la1_1;
   static private int[] jj_la1_2;
@@ -146,24 +628,28 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
       jj_la1_3();
    }
    private static void jj_la1_0() {
-      jj_la1_0 = new int[] {0x0,0x0,0x0,};
+      jj_la1_0 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
    }
    private static void jj_la1_1() {
-      jj_la1_1 = new int[] {0x8,0x0,0x8,};
+      jj_la1_1 = new int[] {0x80008,0x80008,0x0,0x80008,0x0,0x0,0x0,0x0,0x0,0x0,};
    }
    private static void jj_la1_2() {
-      jj_la1_2 = new int[] {0x0,0x400000,0x0,};
+      jj_la1_2 = new int[] {0x0,0x0,0x400000,0x0,0x1000,0x200000,0x400000,0x0,0x0,0x0,};
    }
    private static void jj_la1_3() {
-      jj_la1_3 = new int[] {0x0,0x0,0x0,};
+      jj_la1_3 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x60,0x60,0x180,};
    }
+  final private JJCalls[] jj_2_rtns = new JJCalls[2];
+  private boolean jj_rescan = false;
+  private int jj_gc = 0;
 
   public JavaScriptMergeParser(CharStream stream) {
     token_source = new JavaScriptMergeParserTokenManager(stream);
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 3; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 10; i++) jj_la1[i] = -1;
+    for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
   public void ReInit(CharStream stream) {
@@ -171,7 +657,8 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 3; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 10; i++) jj_la1[i] = -1;
+    for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
   public JavaScriptMergeParser(JavaScriptMergeParserTokenManager tm) {
@@ -179,7 +666,8 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 3; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 10; i++) jj_la1[i] = -1;
+    for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
   public void ReInit(JavaScriptMergeParserTokenManager tm) {
@@ -187,7 +675,8 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 3; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 10; i++) jj_la1[i] = -1;
+    for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
   final private Token jj_consume_token(int kind) throws ParseException {
@@ -197,11 +686,44 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     jj_ntk = -1;
     if (token.kind == kind) {
       jj_gen++;
+      if (++jj_gc > 100) {
+        jj_gc = 0;
+        for (int i = 0; i < jj_2_rtns.length; i++) {
+          JJCalls c = jj_2_rtns[i];
+          while (c != null) {
+            if (c.gen < jj_gen) c.first = null;
+            c = c.next;
+          }
+        }
+      }
       return token;
     }
     token = oldToken;
     jj_kind = kind;
     throw generateParseException();
+  }
+
+  static private final class LookaheadSuccess extends java.lang.Error { }
+  final private LookaheadSuccess jj_ls = new LookaheadSuccess();
+  final private boolean jj_scan_token(int kind) {
+    if (jj_scanpos == jj_lastpos) {
+      jj_la--;
+      if (jj_scanpos.next == null) {
+        jj_lastpos = jj_scanpos = jj_scanpos.next = token_source.getNextToken();
+      } else {
+        jj_lastpos = jj_scanpos = jj_scanpos.next;
+      }
+    } else {
+      jj_scanpos = jj_scanpos.next;
+    }
+    if (jj_rescan) {
+      int i = 0; Token tok = token;
+      while (tok != null && tok != jj_scanpos) { i++; tok = tok.next; }
+      if (tok != null) jj_add_error_token(kind, i);
+    }
+    if (jj_scanpos.kind != kind) return true;
+    if (jj_la == 0 && jj_scanpos == jj_lastpos) throw jj_ls;
+    return false;
   }
 
   final public Token getNextToken() {
@@ -213,7 +735,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
   }
 
   final public Token getToken(int index) {
-    Token t = token;
+    Token t = lookingAhead ? jj_scanpos : token;
     for (int i = 0; i < index; i++) {
       if (t.next != null) t = t.next;
       else t = t.next = token_source.getNextToken();
@@ -231,6 +753,36 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
   private java.util.Vector jj_expentries = new java.util.Vector();
   private int[] jj_expentry;
   private int jj_kind = -1;
+  private int[] jj_lasttokens = new int[100];
+  private int jj_endpos;
+
+  private void jj_add_error_token(int kind, int pos) {
+    if (pos >= 100) return;
+    if (pos == jj_endpos + 1) {
+      jj_lasttokens[jj_endpos++] = kind;
+    } else if (jj_endpos != 0) {
+      jj_expentry = new int[jj_endpos];
+      for (int i = 0; i < jj_endpos; i++) {
+        jj_expentry[i] = jj_lasttokens[i];
+      }
+      boolean exists = false;
+      for (java.util.Enumeration e = jj_expentries.elements(); e.hasMoreElements();) {
+        int[] oldentry = (int[])(e.nextElement());
+        if (oldentry.length == jj_expentry.length) {
+          exists = true;
+          for (int i = 0; i < jj_expentry.length; i++) {
+            if (oldentry[i] != jj_expentry[i]) {
+              exists = false;
+              break;
+            }
+          }
+          if (exists) break;
+        }
+      }
+      if (!exists) jj_expentries.addElement(jj_expentry);
+      if (pos != 0) jj_lasttokens[(jj_endpos = pos) - 1] = kind;
+    }
+  }
 
   public ParseException generateParseException() {
     jj_expentries.removeAllElements();
@@ -242,7 +794,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 10; i++) {
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
           if ((jj_la1_0[i] & (1<<j)) != 0) {
@@ -267,6 +819,9 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
         jj_expentries.addElement(jj_expentry);
       }
     }
+    jj_endpos = 0;
+    jj_rescan_token();
+    jj_add_error_token(0, 0);
     int[][] exptokseq = new int[jj_expentries.size()][];
     for (int i = 0; i < jj_expentries.size(); i++) {
       exptokseq[i] = (int[])jj_expentries.elementAt(i);
@@ -278,6 +833,42 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
   }
 
   final public void disable_tracing() {
+  }
+
+  final private void jj_rescan_token() {
+    jj_rescan = true;
+    for (int i = 0; i < 2; i++) {
+    try {
+      JJCalls p = jj_2_rtns[i];
+      do {
+        if (p.gen > jj_gen) {
+          jj_la = p.arg; jj_lastpos = jj_scanpos = p.first;
+          switch (i) {
+            case 0: jj_3_1(); break;
+            case 1: jj_3_2(); break;
+          }
+        }
+        p = p.next;
+      } while (p != null);
+      } catch(LookaheadSuccess ls) { }
+    }
+    jj_rescan = false;
+  }
+
+  final private void jj_save(int index, int xla) {
+    JJCalls p = jj_2_rtns[index];
+    while (p.gen > jj_gen) {
+      if (p.next == null) { p = p.next = new JJCalls(); break; }
+      p = p.next;
+    }
+    p.gen = jj_gen + xla - jj_la; p.first = token; p.arg = xla;
+  }
+
+  static final class JJCalls {
+    int gen;
+    Token first;
+    int arg;
+    JJCalls next;
   }
 
 }

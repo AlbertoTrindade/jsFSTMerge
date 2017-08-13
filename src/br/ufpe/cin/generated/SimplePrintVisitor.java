@@ -25,7 +25,7 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 			printFeatures(nonTerminal,false);
 			return false;
 		}
-		if (nonTerminal.getType().equals("SourceElement")) {
+		if (nonTerminal.getType().equals("SourceElement1")) {
 			printFeatures(nonTerminal,true);
 			{
 				FSTNode v=getChild(nonTerminal, "Function");
@@ -58,6 +58,17 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 			printFeatures(nonTerminal,false);
 			return false;
 		}
+		if (nonTerminal.getType().equals("SourceElement2")) {
+			printFeatures(nonTerminal,true);
+			{
+				FSTNode v=getChild(nonTerminal, "Statements");
+				if (v!=null) {
+					v.accept(this);
+				}
+			}
+			printFeatures(nonTerminal,false);
+			return false;
+		}
 		if (nonTerminal.getType().equals("FunctionBody")) {
 			printFeatures(nonTerminal,true);
 			for (FSTNode v : getChildren(nonTerminal,"SourceElement")) {
@@ -70,6 +81,12 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 	}
 	protected boolean isSubtype(String type, String expectedType) {
 		if (type.equals(expectedType)) return true;
+		if (type.equals("SourceElement2") && expectedType.equals("SourceElement")) return true;
+		if (type.equals("PostfixOperator1") && expectedType.equals("PostfixOperator")) return true;
+		if (type.equals("PostfixOperator2") && expectedType.equals("PostfixOperator")) return true;
+		if (type.equals("AdditiveOperator1") && expectedType.equals("AdditiveOperator")) return true;
+		if (type.equals("SourceElement1") && expectedType.equals("SourceElement")) return true;
+		if (type.equals("AdditiveOperator2") && expectedType.equals("AdditiveOperator")) return true;
 		return false;
 	}
 }

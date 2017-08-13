@@ -377,10 +377,12 @@ Id: 	<IDENTIFIER>;
 SourceElement:
 		@FSTNonTerminal(name="{Id}")
 		FunctionDeclaration
+		|
+		Statements
 ;
 
 @FSTInline
-FunctionDeclaration:  
+FunctionDeclaration:
 		Function
 		Id
 		"(" FormalParameters ")"
@@ -396,3 +398,53 @@ FormalParameters: Id ( "," Id )*;
 
 @FSTNonTerminal()
 FunctionBody: ( SourceElement )*;
+
+@FSTTerminal(merge="LineBased")
+Statements: ( LOOK_AHEAD(2) Statement )+;
+
+@FSTInline
+Statement: ReturnStatement;
+
+ReturnStatement: "return" [ Expression ] [ <SEMICOLON> ];
+
+Expression: AssignmentExpression ( "," AssignmentExpression)*;
+		
+AssignmentExpression: ConditionalExpression;
+
+ConditionalExpression: LogicalORExpression;
+
+LogicalORExpression:	LogicalANDExpression;
+
+LogicalANDExpression: BitwiseORExpression;
+
+BitwiseORExpression: BitwiseXORExpression;
+
+BitwiseXORExpression: BitwiseANDExpression;
+
+BitwiseANDExpression: EqualityExpression;
+
+EqualityExpression: RelationalExpression;
+
+RelationalExpression: ShiftExpression;
+
+ShiftExpression: AdditiveExpression;
+
+AdditiveExpression: MultiplicativeExpression ( LOOK_AHEAD(2) AdditiveExpressionInternal )*;
+
+AdditiveExpressionInternal: AdditiveOperator MultiplicativeExpression;
+
+MultiplicativeExpression: UnaryExpression;
+
+UnaryExpression: PostfixExpression;
+
+PostfixExpression: LeftHandSideExpression ( PostfixOperator )?;
+
+LeftHandSideExpression: MemberExpression;
+
+MemberExpression: PrimaryExpression;
+
+PrimaryExpression: Id;
+
+PostfixOperator: "++" | "--";
+
+AdditiveOperator: "+" | "-";
