@@ -162,6 +162,7 @@ TOKEN :
 | < TRANSIENT: "transient" >
 | < TRUE: "true" >
 | < TRY: "try" >
+| < VAR: "var" >
 | < VOID: "void" >
 | < VOLATILE: "volatile" >
 | < WHILE: "while" >
@@ -403,7 +404,10 @@ FunctionBody: ( SourceElement )*;
 Statements: ( LOOK_AHEAD(2) Statement )+;
 
 @FSTInline
-Statement: ReturnStatement;
+Statement: 
+	ReturnStatement
+	|
+	VariableStatement;
 
 ReturnStatement: "return" [ Expression ] [ <SEMICOLON> ];
 
@@ -448,3 +452,11 @@ PrimaryExpression: Id;
 PostfixOperator: "++" | "--";
 
 AdditiveOperator: "+" | "-";
+
+VariableStatement: "var" VariableDeclarationList [ <SEMICOLON> ];
+
+VariableDeclarationList: VariableDeclaration ( "," VariableDeclaration)*;
+
+VariableDeclaration: Id (Initializer)?;
+
+Initializer: "=" AssignmentExpression;

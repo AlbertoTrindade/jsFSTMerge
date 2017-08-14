@@ -162,6 +162,7 @@ TOKEN :
 | < TRANSIENT: "transient" >
 | < TRUE: "true" >
 | < TRY: "try" >
+| < VAR: "var" >
 | < VOID: "void" >
 | < VOLATILE: "volatile" >
 | < WHILE: "while" >
@@ -397,7 +398,9 @@ FSTInfo Statements(boolean inTerminal) : { Token first=null,t;FSTInfo n;
 
 FSTInfo Statement(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
-	n=ReturnStatement(true){ replaceName(n);} {return productionEndTerminal("Statement","-","-","Replacement","Default",first,token);}
+	n=ReturnStatement(true){ replaceName(n);} {return productionEndTerminal("Statement1","-","-","Replacement","Default",first,token);}
+ |
+	n=VariableStatement(true){ replaceName(n);} {return productionEndTerminal("Statement2","-","-","Replacement","Default",first,token);}
 
  )  }
 
@@ -534,6 +537,30 @@ FSTInfo AdditiveOperator(boolean inTerminal) : { Token first=null,t;FSTInfo n;
 	"+"  {return productionEndTerminal("AdditiveOperator1","-","-","Replacement","Default",first,token);}
  |
 	"-"  {return productionEndTerminal("AdditiveOperator2","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo VariableStatement(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	"var" n=VariableDeclarationList(true){ replaceName(n);} [<SEMICOLON>] {return productionEndTerminal("VariableStatement","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo VariableDeclarationList(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	n=VariableDeclaration(true){ replaceName(n);} ("," n=VariableDeclaration(true){ replaceName(n);})* {return productionEndTerminal("VariableDeclarationList","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo VariableDeclaration(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	n=Id(true){ replaceName(n);} [n=Initializer(true){ replaceName(n);}] {return productionEndTerminal("VariableDeclaration","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo Initializer(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	"=" n=AssignmentExpression(true){ replaceName(n);} {return productionEndTerminal("Initializer","-","-","Replacement","Default",first,token);}
 
  )  }
 
