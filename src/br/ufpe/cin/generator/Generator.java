@@ -26,11 +26,11 @@ public class Generator {
 					);
 
 			//3. test the generated artefacts
-			/*new GeneratedParserTest().test(
+			new GeneratedParserTest().test(
 					"br.ufpe.cin.generated.JavaScriptMergeParser", 
 					"CompilationUnit", 
-					"grammars/javascript_merge_fst_test.java"
-					);*/
+					"grammars/javascript_merge_fst_test.js"
+					);
 		
 		}catch(Exception e){
 			System.err.println("Refresh the root project folder (F5). Try again.");
