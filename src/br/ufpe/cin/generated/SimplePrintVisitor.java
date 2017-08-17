@@ -61,7 +61,7 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 		if (nonTerminal.getType().equals("SourceElement2")) {
 			printFeatures(nonTerminal,true);
 			{
-				FSTNode v=getChild(nonTerminal, "Statements");
+				FSTNode v=getChild(nonTerminal, "StatementList");
 				if (v!=null) {
 					v.accept(this);
 				}

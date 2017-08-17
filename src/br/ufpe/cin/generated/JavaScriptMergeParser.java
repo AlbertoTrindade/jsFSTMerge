@@ -64,9 +64,9 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
       break;
     case RETURN:
     case VAR:
-      n = Statements(inTerminal);
-                                  replaceName(n);
-                                                    {if (true) return productionEndNonTerminal("SourceElement2","-","-");}
+      n = StatementList(inTerminal);
+                                     replaceName(n);
+                                                       {if (true) return productionEndNonTerminal("SourceElement2","-","-");}
       break;
     default:
       jj_la1[1] = jj_gen;
@@ -148,8 +148,8 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     throw new Error("Missing return statement in function");
   }
 
-  final public FSTInfo Statements(boolean inTerminal) throws ParseException {
-                                           Token first=null,t;FSTInfo n;
+  final public FSTInfo StatementList(boolean inTerminal) throws ParseException {
+                                              Token first=null,t;FSTInfo n;
      first=getToken(1); productionStart(inTerminal);
     label_4:
     while (true) {
@@ -161,7 +161,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
         break label_4;
       }
     }
-                                                             {if (true) return productionEndTerminal("Statements","-","-","Replacement","LineBased",first,token);}
+                                                             {if (true) return productionEndTerminal("StatementList","-","-","Replacement","LineBased",first,token);}
     throw new Error("Missing return statement in function");
   }
 

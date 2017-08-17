@@ -379,7 +379,7 @@ SourceElement:
 		@FSTNonTerminal(name="{Id}")
 		FunctionDeclaration
 		|
-		Statements
+		StatementList
 ;
 
 @FSTInline
@@ -401,7 +401,7 @@ FormalParameters: Id ( "," Id )*;
 FunctionBody: ( SourceElement )*;
 
 @FSTTerminal(merge="LineBased")
-Statements: ( LOOK_AHEAD(2) Statement )+;
+StatementList: ( LOOK_AHEAD(2) Statement )+;
 
 @FSTInline
 Statement: 

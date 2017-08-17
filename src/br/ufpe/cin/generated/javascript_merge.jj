@@ -362,7 +362,7 @@ FSTInfo SourceElement(boolean inTerminal) : { Token first=null,t;FSTInfo n;
 } { {first=getToken(1); productionStart(inTerminal); } (
 	n=Function(inTerminal){ replaceName(n);} n=Id(inTerminal){ replaceName("Id", n);}{ replaceName(n);} "(" n=FormalParameters(inTerminal){ replaceName(n);} ")" "{" n=FunctionBody(inTerminal){ replaceName(n);} "}" {return productionEndNonTerminal("SourceElement1","{Id}","{Id}");}
  |
-	n=Statements(inTerminal){ replaceName(n);} {return productionEndNonTerminal("SourceElement2","-","-");}
+	n=StatementList(inTerminal){ replaceName(n);} {return productionEndNonTerminal("SourceElement2","-","-");}
 
  )  }
 
@@ -390,9 +390,9 @@ FSTInfo FunctionBody(boolean inTerminal) : { Token first=null,t;FSTInfo n;
 
  )  }
 
-FSTInfo Statements(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+FSTInfo StatementList(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
-	(LOOKAHEAD(2) n=Statement(true){ replaceName(n);})+ {return productionEndTerminal("Statements","-","-","Replacement","LineBased",first,token);}
+	(LOOKAHEAD(2) n=Statement(true){ replaceName(n);})+ {return productionEndTerminal("StatementList","-","-","Replacement","LineBased",first,token);}
 
  )  }
 
