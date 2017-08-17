@@ -405,15 +405,58 @@ StatementList: ( LOOK_AHEAD(2) Statement )+;
 
 @FSTInline
 Statement: 
-	ReturnStatement
+	VariableStatement
 	|
-	VariableStatement;
+	ExpressionStatement
+	|
+	ReturnStatement
+;
 
-ReturnStatement: "return" [ Expression ] [ <SEMICOLON> ];
+VariableStatement: "var" VariableDeclarationList [ <SEMICOLON> ];
+
+VariableDeclarationList: VariableDeclaration ( "," VariableDeclaration)*;
+
+VariableDeclaration: Id (Initializer)?;
+
+Initializer: "=" AssignmentExpression;
+
+ExpressionStatement: Expression [ <SEMICOLON> ];
 
 Expression: AssignmentExpression ( "," AssignmentExpression)*;
-		
-AssignmentExpression: ConditionalExpression;
+
+AssignmentExpression: 
+	LOOK_AHEAD(3) LeftHandSideExpression AssignmentOperator AssignmentExpression
+	|
+	ConditionalExpression
+;
+	
+LeftHandSideExpression:
+	LOOK_AHEAD(2) CallExpression
+	|
+	MemberExpression
+;
+	
+CallExpression: MemberExpression Arguments ( CallExpressionPart )*;
+
+MemberExpression: PrimaryExpression;
+
+PrimaryExpression: Id;
+
+Arguments: "(" ( ArgumentList )? ")";
+
+ArgumentList: AssignmentExpression ( "," AssignmentExpression )*;
+
+CallExpressionPart:
+	Arguments
+	|
+	"[" Expression "]"
+	|
+	"." Id
+;
+
+AssignmentOperator:
+  "=" <NONE> | "*=" <NONE> | "/=" <NONE> | "%=" <NONE> | "+=" <NONE> | "-=" <NONE>| "<<=" <NONE> | ">>=" <NONE> | ">>>=" <NONE> | "&=" <NONE> | "^=" <NONE> | "|=" <NONE>
+;
 
 ConditionalExpression: LogicalORExpression;
 
@@ -443,20 +486,8 @@ UnaryExpression: PostfixExpression;
 
 PostfixExpression: LeftHandSideExpression ( PostfixOperator )?;
 
-LeftHandSideExpression: MemberExpression;
-
-MemberExpression: PrimaryExpression;
-
-PrimaryExpression: Id;
-
 PostfixOperator: "++" | "--";
 
 AdditiveOperator: "+" | "-";
 
-VariableStatement: "var" VariableDeclarationList [ <SEMICOLON> ];
-
-VariableDeclarationList: VariableDeclaration ( "," VariableDeclaration)*;
-
-VariableDeclaration: Id (Initializer)?;
-
-Initializer: "=" AssignmentExpression;
+ReturnStatement: "return" [ LOOK_AHEAD(2) Expression ] [ <SEMICOLON> ];

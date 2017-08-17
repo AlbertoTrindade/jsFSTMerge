@@ -398,15 +398,41 @@ FSTInfo StatementList(boolean inTerminal) : { Token first=null,t;FSTInfo n;
 
 FSTInfo Statement(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
-	n=ReturnStatement(true){ replaceName(n);} {return productionEndTerminal("Statement1","-","-","Replacement","Default",first,token);}
+	n=VariableStatement(true){ replaceName(n);} {return productionEndTerminal("Statement1","-","-","Replacement","Default",first,token);}
  |
-	n=VariableStatement(true){ replaceName(n);} {return productionEndTerminal("Statement2","-","-","Replacement","Default",first,token);}
+	n=ExpressionStatement(true){ replaceName(n);} {return productionEndTerminal("Statement2","-","-","Replacement","Default",first,token);}
+ |
+	n=ReturnStatement(true){ replaceName(n);} {return productionEndTerminal("Statement3","-","-","Replacement","Default",first,token);}
 
  )  }
 
-FSTInfo ReturnStatement(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+FSTInfo VariableStatement(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
-	"return" [n=Expression(true){ replaceName(n);}] [<SEMICOLON>] {return productionEndTerminal("ReturnStatement","-","-","Replacement","Default",first,token);}
+	"var" n=VariableDeclarationList(true){ replaceName(n);} [<SEMICOLON>] {return productionEndTerminal("VariableStatement","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo VariableDeclarationList(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	n=VariableDeclaration(true){ replaceName(n);} ("," n=VariableDeclaration(true){ replaceName(n);})* {return productionEndTerminal("VariableDeclarationList","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo VariableDeclaration(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	n=Id(true){ replaceName(n);} [n=Initializer(true){ replaceName(n);}] {return productionEndTerminal("VariableDeclaration","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo Initializer(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	"=" n=AssignmentExpression(true){ replaceName(n);} {return productionEndTerminal("Initializer","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo ExpressionStatement(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	n=Expression(true){ replaceName(n);} [<SEMICOLON>] {return productionEndTerminal("ExpressionStatement","-","-","Replacement","Default",first,token);}
 
  )  }
 
@@ -418,7 +444,85 @@ FSTInfo Expression(boolean inTerminal) : { Token first=null,t;FSTInfo n;
 
 FSTInfo AssignmentExpression(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
-	n=ConditionalExpression(true){ replaceName(n);} {return productionEndTerminal("AssignmentExpression","-","-","Replacement","Default",first,token);}
+	LOOKAHEAD(3) n=LeftHandSideExpression(true){ replaceName(n);} n=AssignmentOperator(true){ replaceName(n);} n=AssignmentExpression(true){ replaceName(n);} {return productionEndTerminal("AssignmentExpression1","-","-","Replacement","Default",first,token);}
+ |
+	n=ConditionalExpression(true){ replaceName(n);} {return productionEndTerminal("AssignmentExpression2","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo LeftHandSideExpression(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	LOOKAHEAD(2) n=CallExpression(true){ replaceName(n);} {return productionEndTerminal("LeftHandSideExpression1","-","-","Replacement","Default",first,token);}
+ |
+	n=MemberExpression(true){ replaceName(n);} {return productionEndTerminal("LeftHandSideExpression2","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo CallExpression(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	n=MemberExpression(true){ replaceName(n);} n=Arguments(true){ replaceName(n);} (n=CallExpressionPart(true){ replaceName(n);})* {return productionEndTerminal("CallExpression","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo MemberExpression(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	n=PrimaryExpression(true){ replaceName(n);} {return productionEndTerminal("MemberExpression","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo PrimaryExpression(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	n=Id(true){ replaceName(n);} {return productionEndTerminal("PrimaryExpression","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo Arguments(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	"(" [n=ArgumentList(true){ replaceName(n);}] ")" {return productionEndTerminal("Arguments","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo ArgumentList(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	n=AssignmentExpression(true){ replaceName(n);} ("," n=AssignmentExpression(true){ replaceName(n);})* {return productionEndTerminal("ArgumentList","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo CallExpressionPart(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	n=Arguments(true){ replaceName(n);} {return productionEndTerminal("CallExpressionPart1","-","-","Replacement","Default",first,token);}
+ |
+	"[" n=Expression(true){ replaceName(n);} "]" {return productionEndTerminal("CallExpressionPart2","-","-","Replacement","Default",first,token);}
+ |
+	"." n=Id(true){ replaceName(n);} {return productionEndTerminal("CallExpressionPart3","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo AssignmentOperator(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	"="  {return productionEndTerminal("AssignmentOperator1","-","-","Replacement","Default",first,token);}
+ |
+	"*="  {return productionEndTerminal("AssignmentOperator2","-","-","Replacement","Default",first,token);}
+ |
+	"/="  {return productionEndTerminal("AssignmentOperator3","-","-","Replacement","Default",first,token);}
+ |
+	"%="  {return productionEndTerminal("AssignmentOperator4","-","-","Replacement","Default",first,token);}
+ |
+	"+="  {return productionEndTerminal("AssignmentOperator5","-","-","Replacement","Default",first,token);}
+ |
+	"-="  {return productionEndTerminal("AssignmentOperator6","-","-","Replacement","Default",first,token);}
+ |
+	"<<="  {return productionEndTerminal("AssignmentOperator7","-","-","Replacement","Default",first,token);}
+ |
+	">>="  {return productionEndTerminal("AssignmentOperator8","-","-","Replacement","Default",first,token);}
+ |
+	">>>="  {return productionEndTerminal("AssignmentOperator9","-","-","Replacement","Default",first,token);}
+ |
+	"&="  {return productionEndTerminal("AssignmentOperator10","-","-","Replacement","Default",first,token);}
+ |
+	"^="  {return productionEndTerminal("AssignmentOperator11","-","-","Replacement","Default",first,token);}
+ |
+	"|="  {return productionEndTerminal("AssignmentOperator12","-","-","Replacement","Default",first,token);}
 
  )  }
 
@@ -506,24 +610,6 @@ FSTInfo PostfixExpression(boolean inTerminal) : { Token first=null,t;FSTInfo n;
 
  )  }
 
-FSTInfo LeftHandSideExpression(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
-} { {first=getToken(1); productionStart(inTerminal); } (
-	n=MemberExpression(true){ replaceName(n);} {return productionEndTerminal("LeftHandSideExpression","-","-","Replacement","Default",first,token);}
-
- )  }
-
-FSTInfo MemberExpression(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
-} { {first=getToken(1); productionStart(inTerminal); } (
-	n=PrimaryExpression(true){ replaceName(n);} {return productionEndTerminal("MemberExpression","-","-","Replacement","Default",first,token);}
-
- )  }
-
-FSTInfo PrimaryExpression(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
-} { {first=getToken(1); productionStart(inTerminal); } (
-	n=Id(true){ replaceName(n);} {return productionEndTerminal("PrimaryExpression","-","-","Replacement","Default",first,token);}
-
- )  }
-
 FSTInfo PostfixOperator(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
 	"++"  {return productionEndTerminal("PostfixOperator1","-","-","Replacement","Default",first,token);}
@@ -540,27 +626,9 @@ FSTInfo AdditiveOperator(boolean inTerminal) : { Token first=null,t;FSTInfo n;
 
  )  }
 
-FSTInfo VariableStatement(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+FSTInfo ReturnStatement(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
-	"var" n=VariableDeclarationList(true){ replaceName(n);} [<SEMICOLON>] {return productionEndTerminal("VariableStatement","-","-","Replacement","Default",first,token);}
-
- )  }
-
-FSTInfo VariableDeclarationList(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
-} { {first=getToken(1); productionStart(inTerminal); } (
-	n=VariableDeclaration(true){ replaceName(n);} ("," n=VariableDeclaration(true){ replaceName(n);})* {return productionEndTerminal("VariableDeclarationList","-","-","Replacement","Default",first,token);}
-
- )  }
-
-FSTInfo VariableDeclaration(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
-} { {first=getToken(1); productionStart(inTerminal); } (
-	n=Id(true){ replaceName(n);} [n=Initializer(true){ replaceName(n);}] {return productionEndTerminal("VariableDeclaration","-","-","Replacement","Default",first,token);}
-
- )  }
-
-FSTInfo Initializer(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
-} { {first=getToken(1); productionStart(inTerminal); } (
-	"=" n=AssignmentExpression(true){ replaceName(n);} {return productionEndTerminal("Initializer","-","-","Replacement","Default",first,token);}
+	"return" [LOOKAHEAD(2) n=Expression(true){ replaceName(n);}] [<SEMICOLON>] {return productionEndTerminal("ReturnStatement","-","-","Replacement","Default",first,token);}
 
  )  }
 
