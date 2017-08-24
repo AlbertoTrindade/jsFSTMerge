@@ -377,22 +377,13 @@ Id: 	<IDENTIFIER>;
 @FSTNonTerminal()
 SourceElement:
 		@FSTNonTerminal(name="{Id}")
-		FunctionDeclaration
+		LOOK_AHEAD("Function()") Function Id "(" [ FormalParameters ] ")" "{" FunctionBody "}" :: FunctionDeclaration
 		|
 		StatementList
 ;
 
-@FSTInline
-FunctionDeclaration:
-		Function
-		Id
-		"(" FormalParameters ")"
-		"{" FunctionBody "}"
-;
-
 @FSTTerminal(merge="LineBased")
-Function: "function"<NONE>
-;
+Function: "function"<NONE>;
 
 @FSTTerminal(merge="LineBased")
 FormalParameters: Id ( "," Id )*;
@@ -405,11 +396,11 @@ StatementList: ( LOOK_AHEAD(2) Statement )+;
 
 @FSTInline
 Statement: 
-	VariableStatement
-	|
-	ExpressionStatement
-	|
-	ReturnStatement
+		VariableStatement
+		|
+		ExpressionStatement
+		|
+		ReturnStatement
 ;
 
 VariableStatement: "var" VariableDeclarationList [ <SEMICOLON> ];
@@ -418,22 +409,35 @@ VariableDeclarationList: VariableDeclaration ( "," VariableDeclaration)*;
 
 VariableDeclaration: Id (Initializer)?;
 
-Initializer: "=" AssignmentExpression;
+Initializer: "=" InitializerExpression;
+
+InitializerExpression:
+		AssignmentExpression
+		|
+		FunctionExpression
+;
 
 ExpressionStatement: Expression [ <SEMICOLON> ];
 
 Expression: AssignmentExpression ( "," AssignmentExpression)*;
 
 AssignmentExpression: 
-	LOOK_AHEAD(3) LeftHandSideExpression AssignmentOperator AssignmentExpression
-	|
-	ConditionalExpression
+		LOOK_AHEAD(3) LeftHandSideExpression AssignmentOperator AssignmentExpression
+		|
+		ConditionalExpression
+;
+
+FunctionExpression:
+		Function
+		[ Id ]
+		"(" [ FormalParameters ] ")"
+		"{" FunctionBody "}"
 ;
 	
 LeftHandSideExpression:
-	LOOK_AHEAD(2) CallExpression
-	|
-	MemberExpression
+		LOOK_AHEAD(2) CallExpression
+		|
+		MemberExpression
 ;
 	
 CallExpression: MemberExpression Arguments ( CallExpressionPart )*;
@@ -447,11 +451,11 @@ Arguments: "(" ( ArgumentList )? ")";
 ArgumentList: AssignmentExpression ( "," AssignmentExpression )*;
 
 CallExpressionPart:
-	Arguments
-	|
-	"[" Expression "]"
-	|
-	"." Id
+		Arguments
+		|
+		"[" Expression "]"
+		|
+		"." Id
 ;
 
 AssignmentOperator:
