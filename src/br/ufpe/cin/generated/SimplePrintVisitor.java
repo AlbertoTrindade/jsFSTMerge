@@ -25,7 +25,7 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 			printFeatures(nonTerminal,false);
 			return false;
 		}
-		if (nonTerminal.getType().equals("FunctionDeclaration")) {
+		if (nonTerminal.getType().equals("SourceElement1")) {
 			printFeatures(nonTerminal,true);
 			{
 				FSTNode v=getChild(nonTerminal, "Function");
@@ -82,6 +82,7 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 	protected boolean isSubtype(String type, String expectedType) {
 		if (type.equals(expectedType)) return true;
 		if (type.equals("CallExpressionPart1") && expectedType.equals("CallExpressionPart")) return true;
+		if (type.equals("Argument1") && expectedType.equals("Argument")) return true;
 		if (type.equals("LeftHandSideExpression2") && expectedType.equals("LeftHandSideExpression")) return true;
 		if (type.equals("CallExpressionPart3") && expectedType.equals("CallExpressionPart")) return true;
 		if (type.equals("AssignmentOperator4") && expectedType.equals("AssignmentOperator")) return true;
@@ -96,7 +97,6 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 		if (type.equals("InitializerExpression2") && expectedType.equals("InitializerExpression")) return true;
 		if (type.equals("PostfixOperator1") && expectedType.equals("PostfixOperator")) return true;
 		if (type.equals("AssignmentOperator7") && expectedType.equals("AssignmentOperator")) return true;
-		if (type.equals("FunctionDeclaration") && expectedType.equals("SourceElement")) return true;
 		if (type.equals("CallExpressionPart2") && expectedType.equals("CallExpressionPart")) return true;
 		if (type.equals("Statement3") && expectedType.equals("Statement")) return true;
 		if (type.equals("LeftHandSideExpression1") && expectedType.equals("LeftHandSideExpression")) return true;
@@ -105,11 +105,13 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 		if (type.equals("AssignmentOperator3") && expectedType.equals("AssignmentOperator")) return true;
 		if (type.equals("AssignmentOperator11") && expectedType.equals("AssignmentOperator")) return true;
 		if (type.equals("AssignmentOperator1") && expectedType.equals("AssignmentOperator")) return true;
+		if (type.equals("SourceElement1") && expectedType.equals("SourceElement")) return true;
 		if (type.equals("AdditiveOperator2") && expectedType.equals("AdditiveOperator")) return true;
 		if (type.equals("AssignmentOperator8") && expectedType.equals("AssignmentOperator")) return true;
 		if (type.equals("AssignmentOperator6") && expectedType.equals("AssignmentOperator")) return true;
 		if (type.equals("InitializerExpression1") && expectedType.equals("InitializerExpression")) return true;
 		if (type.equals("PostfixOperator2") && expectedType.equals("PostfixOperator")) return true;
+		if (type.equals("Argument2") && expectedType.equals("Argument")) return true;
 		if (type.equals("AssignmentExpression2") && expectedType.equals("AssignmentExpression")) return true;
 		return false;
 	}

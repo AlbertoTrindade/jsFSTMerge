@@ -377,9 +377,17 @@ Id: 	<IDENTIFIER>;
 @FSTNonTerminal()
 SourceElement:
 		@FSTNonTerminal(name="{Id}")
-		LOOK_AHEAD("Function()") Function Id "(" [ FormalParameters ] ")" "{" FunctionBody "}" :: FunctionDeclaration
+		FunctionDeclaration
 		|
 		StatementList
+;
+
+@FSTInline		
+FunctionDeclaration:		
+		Function		
+		Id		
+		"(" FormalParameters ")"		
+		"{" FunctionBody "}"		
 ;
 
 @FSTTerminal(merge="LineBased")
@@ -422,7 +430,7 @@ ExpressionStatement: Expression [ <SEMICOLON> ];
 Expression: AssignmentExpression ( "," AssignmentExpression)*;
 
 AssignmentExpression: 
-		LOOK_AHEAD(3) LeftHandSideExpression AssignmentOperator AssignmentExpression
+		LOOK_AHEAD("LeftHandSideExpression() AssignmentOperator()") LeftHandSideExpression AssignmentOperator AssignmentExpression
 		|
 		ConditionalExpression
 ;
@@ -448,7 +456,13 @@ PrimaryExpression: Id;
 
 Arguments: "(" ( ArgumentList )? ")";
 
-ArgumentList: AssignmentExpression ( "," AssignmentExpression )*;
+ArgumentList: Argument ( "," Argument )*;
+
+Argument:
+		AssignmentExpression
+		|
+		FunctionExpression
+;
 
 CallExpressionPart:
 		Arguments

@@ -9,9 +9,11 @@ function x(a, b, c) {
 	return a + b;
   }
   
-  var z = function() {
-	  return a + b;
-  }
+  var z = function(f) {
+	  return f(a);
+  };
+  
+  a = z(function(x) { return x + x; });
   
   return s;
 }
