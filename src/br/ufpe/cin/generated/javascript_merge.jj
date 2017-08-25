@@ -650,7 +650,15 @@ FSTInfo AdditiveOperator(boolean inTerminal) : { Token first=null,t;FSTInfo n;
 
 FSTInfo ReturnStatement(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
-	"return" [LOOKAHEAD(2) n=Expression(true){ replaceName(n);}] [<SEMICOLON>] {return productionEndTerminal("ReturnStatement","-","-","Replacement","Default",first,token);}
+	"return" [LOOKAHEAD(2) n=ReturnExpression(true){ replaceName(n);}] [<SEMICOLON>] {return productionEndTerminal("ReturnStatement","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo ReturnExpression(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	LOOKAHEAD(Expression()) n=Expression(true){ replaceName(n);} {return productionEndTerminal("ReturnExpression1","-","-","Replacement","Default",first,token);}
+ |
+	n=FunctionExpression(true){ replaceName(n);} {return productionEndTerminal("ReturnExpression2","-","-","Replacement","Default",first,token);}
 
  )  }
 

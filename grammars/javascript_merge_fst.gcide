@@ -508,4 +508,10 @@ PostfixOperator: "++" | "--";
 
 AdditiveOperator: "+" | "-";
 
-ReturnStatement: "return" [ LOOK_AHEAD(2) Expression ] [ <SEMICOLON> ];
+ReturnStatement: "return" [ LOOK_AHEAD(2) ReturnExpression ] [ <SEMICOLON> ];
+
+ReturnExpression:
+		LOOK_AHEAD("Expression()") Expression
+		|
+		FunctionExpression
+;

@@ -15,5 +15,5 @@ function x(a, b, c) {
   
   a = z(function(x) { return x + x; });
   
-  return s;
+  return function() { return a };
 }
