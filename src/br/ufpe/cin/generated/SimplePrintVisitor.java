@@ -81,11 +81,13 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 	}
 	protected boolean isSubtype(String type, String expectedType) {
 		if (type.equals(expectedType)) return true;
+		if (type.equals("CallExpressionInternal1") && expectedType.equals("CallExpressionInternal")) return true;
 		if (type.equals("CallExpressionPart1") && expectedType.equals("CallExpressionPart")) return true;
 		if (type.equals("Argument1") && expectedType.equals("Argument")) return true;
 		if (type.equals("LeftHandSideExpression2") && expectedType.equals("LeftHandSideExpression")) return true;
 		if (type.equals("ReturnExpression1") && expectedType.equals("ReturnExpression")) return true;
 		if (type.equals("CallExpressionPart3") && expectedType.equals("CallExpressionPart")) return true;
+		if (type.equals("FunctionExpression2") && expectedType.equals("FunctionExpression")) return true;
 		if (type.equals("AssignmentOperator4") && expectedType.equals("AssignmentOperator")) return true;
 		if (type.equals("Statement2") && expectedType.equals("Statement")) return true;
 		if (type.equals("AssignmentOperator2") && expectedType.equals("AssignmentOperator")) return true;
@@ -98,9 +100,11 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 		if (type.equals("InitializerExpression2") && expectedType.equals("InitializerExpression")) return true;
 		if (type.equals("PostfixOperator1") && expectedType.equals("PostfixOperator")) return true;
 		if (type.equals("AssignmentOperator7") && expectedType.equals("AssignmentOperator")) return true;
+		if (type.equals("CallExpressionInternal2") && expectedType.equals("CallExpressionInternal")) return true;
 		if (type.equals("CallExpressionPart2") && expectedType.equals("CallExpressionPart")) return true;
 		if (type.equals("ReturnExpression2") && expectedType.equals("ReturnExpression")) return true;
 		if (type.equals("Statement3") && expectedType.equals("Statement")) return true;
+		if (type.equals("FunctionExpression1") && expectedType.equals("FunctionExpression")) return true;
 		if (type.equals("LeftHandSideExpression1") && expectedType.equals("LeftHandSideExpression")) return true;
 		if (type.equals("AssignmentOperator5") && expectedType.equals("AssignmentOperator")) return true;
 		if (type.equals("Statement1") && expectedType.equals("Statement")) return true;

@@ -420,7 +420,7 @@ VariableDeclaration: Id (Initializer)?;
 Initializer: "=" InitializerExpression;
 
 InitializerExpression:
-		AssignmentExpression
+		LOOK_AHEAD("AssignmentExpression()") AssignmentExpression
 		|
 		FunctionExpression
 ;
@@ -436,19 +436,24 @@ AssignmentExpression:
 ;
 
 FunctionExpression:
-		Function
-		[ Id ]
-		"(" [ FormalParameters ] ")"
-		"{" FunctionBody "}"
+		Function [ Id ] "(" [ FormalParameters ] ")" "{" FunctionBody "}"
+		|
+		"(" FunctionExpression ")"
 ;
 	
 LeftHandSideExpression:
-		LOOK_AHEAD(2) CallExpression
+		LOOK_AHEAD("CallExpressionInternal() Arguments()") CallExpression
 		|
 		MemberExpression
 ;
 	
-CallExpression: MemberExpression Arguments ( CallExpressionPart )*;
+CallExpression: CallExpressionInternal Arguments ( LOOK_AHEAD(2) CallExpressionPart )*;
+
+CallExpressionInternal:
+		MemberExpression
+		|
+		"(" FunctionExpression ")"
+;
 
 MemberExpression: PrimaryExpression;
 
@@ -459,7 +464,7 @@ Arguments: "(" ( ArgumentList )? ")";
 ArgumentList: Argument ( "," Argument )*;
 
 Argument:
-		AssignmentExpression
+		LOOK_AHEAD("AssignmentExpression()") AssignmentExpression
 		|
 		FunctionExpression
 ;
