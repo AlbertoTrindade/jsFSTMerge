@@ -83,6 +83,7 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 		if (type.equals(expectedType)) return true;
 		if (type.equals("CallExpressionInternal1") && expectedType.equals("CallExpressionInternal")) return true;
 		if (type.equals("CallExpressionPart1") && expectedType.equals("CallExpressionPart")) return true;
+		if (type.equals("MemberExpression1") && expectedType.equals("MemberExpression")) return true;
 		if (type.equals("Argument1") && expectedType.equals("Argument")) return true;
 		if (type.equals("LeftHandSideExpression2") && expectedType.equals("LeftHandSideExpression")) return true;
 		if (type.equals("ReturnExpression1") && expectedType.equals("ReturnExpression")) return true;
@@ -101,7 +102,9 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 		if (type.equals("InitializerExpression2") && expectedType.equals("InitializerExpression")) return true;
 		if (type.equals("PostfixOperator1") && expectedType.equals("PostfixOperator")) return true;
 		if (type.equals("AssignmentOperator7") && expectedType.equals("AssignmentOperator")) return true;
+		if (type.equals("MemberExpressionPart2") && expectedType.equals("MemberExpressionPart")) return true;
 		if (type.equals("CallExpressionInternal2") && expectedType.equals("CallExpressionInternal")) return true;
+		if (type.equals("MemberExpression2") && expectedType.equals("MemberExpression")) return true;
 		if (type.equals("CallExpressionPart2") && expectedType.equals("CallExpressionPart")) return true;
 		if (type.equals("ReturnExpression2") && expectedType.equals("ReturnExpression")) return true;
 		if (type.equals("Statement3") && expectedType.equals("Statement")) return true;
@@ -114,6 +117,7 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 		if (type.equals("AssignmentOperator1") && expectedType.equals("AssignmentOperator")) return true;
 		if (type.equals("SourceElement1") && expectedType.equals("SourceElement")) return true;
 		if (type.equals("AdditiveOperator2") && expectedType.equals("AdditiveOperator")) return true;
+		if (type.equals("MemberExpressionPart1") && expectedType.equals("MemberExpressionPart")) return true;
 		if (type.equals("AssignmentOperator8") && expectedType.equals("AssignmentOperator")) return true;
 		if (type.equals("AssignmentOperator6") && expectedType.equals("AssignmentOperator")) return true;
 		if (type.equals("InitializerExpression1") && expectedType.equals("InitializerExpression")) return true;

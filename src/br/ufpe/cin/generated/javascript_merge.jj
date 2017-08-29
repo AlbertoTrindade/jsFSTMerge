@@ -498,13 +498,35 @@ FSTInfo CallExpressionInternal(boolean inTerminal) : { Token first=null,t;FSTInf
 
 FSTInfo MemberExpression(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
-	n=PrimaryExpression(true){ replaceName(n);} {return productionEndTerminal("MemberExpression","-","-","Replacement","Default",first,token);}
+	n=PrimaryExpression(true){ replaceName(n);} (n=MemberExpressionPart(true){ replaceName(n);})* {return productionEndTerminal("MemberExpression1","-","-","Replacement","Default",first,token);}
+ |
+	n=AllocationExpression(true){ replaceName(n);} {return productionEndTerminal("MemberExpression2","-","-","Replacement","Default",first,token);}
 
  )  }
 
 FSTInfo PrimaryExpression(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
 	n=Id(true){ replaceName(n);} {return productionEndTerminal("PrimaryExpression","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo MemberExpressionPart(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	"[" n=Expression(true){ replaceName(n);} "]" {return productionEndTerminal("MemberExpressionPart1","-","-","Replacement","Default",first,token);}
+ |
+	"." n=Id(true){ replaceName(n);} {return productionEndTerminal("MemberExpressionPart2","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo AllocationExpression(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	"new" n=MemberExpression(true){ replaceName(n);} (LOOKAHEAD(2) n=AllocationExpressionInternal(true){ replaceName(n);})* {return productionEndTerminal("AllocationExpression","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo AllocationExpressionInternal(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	n=Arguments(true){ replaceName(n);} (n=MemberExpressionPart(true){ replaceName(n);})* {return productionEndTerminal("AllocationExpressionInternal","-","-","Replacement","Default",first,token);}
 
  )  }
 
