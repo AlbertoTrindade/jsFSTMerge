@@ -400,15 +400,17 @@ FSTInfo Statement(boolean inTerminal) : { Token first=null,t;FSTInfo n;
 } { {first=getToken(1); productionStart(inTerminal); } (
 	n=VariableStatement(true){ replaceName(n);} {return productionEndTerminal("Statement1","-","-","Replacement","Default",first,token);}
  |
-	n=ExpressionStatement(true){ replaceName(n);} {return productionEndTerminal("Statement2","-","-","Replacement","Default",first,token);}
+	n=EmptyStatement(true){ replaceName(n);} {return productionEndTerminal("Statement2","-","-","Replacement","Default",first,token);}
  |
-	n=ReturnStatement(true){ replaceName(n);} {return productionEndTerminal("Statement3","-","-","Replacement","Default",first,token);}
+	n=ExpressionStatement(true){ replaceName(n);} {return productionEndTerminal("Statement3","-","-","Replacement","Default",first,token);}
+ |
+	n=ReturnStatement(true){ replaceName(n);} {return productionEndTerminal("Statement4","-","-","Replacement","Default",first,token);}
 
  )  }
 
 FSTInfo VariableStatement(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
-	"var" n=VariableDeclarationList(true){ replaceName(n);} [<SEMICOLON>] {return productionEndTerminal("VariableStatement","-","-","Replacement","Default",first,token);}
+	"var" n=VariableDeclarationList(true){ replaceName(n);} [LOOKAHEAD(2) <SEMICOLON>] {return productionEndTerminal("VariableStatement","-","-","Replacement","Default",first,token);}
 
  )  }
 
@@ -438,9 +440,15 @@ FSTInfo InitializerExpression(boolean inTerminal) : { Token first=null,t;FSTInfo
 
  )  }
 
+FSTInfo EmptyStatement(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	<SEMICOLON> {return productionEndTerminal("EmptyStatement","-","-","Replacement","Default",first,token);}
+
+ )  }
+
 FSTInfo ExpressionStatement(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
-	n=Expression(true){ replaceName(n);} [<SEMICOLON>] {return productionEndTerminal("ExpressionStatement","-","-","Replacement","Default",first,token);}
+	n=Expression(true){ replaceName(n);} [LOOKAHEAD(2) <SEMICOLON>] {return productionEndTerminal("ExpressionStatement","-","-","Replacement","Default",first,token);}
 
  )  }
 
@@ -660,7 +668,7 @@ FSTInfo AdditiveOperator(boolean inTerminal) : { Token first=null,t;FSTInfo n;
 
 FSTInfo ReturnStatement(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
-	"return" [LOOKAHEAD(2) n=ReturnExpression(true){ replaceName(n);}] [<SEMICOLON>] {return productionEndTerminal("ReturnStatement","-","-","Replacement","Default",first,token);}
+	"return" [LOOKAHEAD(2) n=ReturnExpression(true){ replaceName(n);}] [LOOKAHEAD(2) <SEMICOLON>] {return productionEndTerminal("ReturnStatement","-","-","Replacement","Default",first,token);}
 
  )  }
 

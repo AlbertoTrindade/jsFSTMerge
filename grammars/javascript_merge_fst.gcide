@@ -406,12 +406,14 @@ StatementList: ( LOOK_AHEAD(2) Statement )+;
 Statement: 
 		VariableStatement
 		|
+		EmptyStatement
+		|
 		ExpressionStatement
 		|
 		ReturnStatement
 ;
 
-VariableStatement: "var" VariableDeclarationList [ <SEMICOLON> ];
+VariableStatement: "var" VariableDeclarationList [ LOOK_AHEAD(2) <SEMICOLON> ];
 
 VariableDeclarationList: VariableDeclaration ( "," VariableDeclaration)*;
 
@@ -425,7 +427,9 @@ InitializerExpression:
 		FunctionExpression
 ;
 
-ExpressionStatement: Expression [ <SEMICOLON> ];
+EmptyStatement: <SEMICOLON>;
+
+ExpressionStatement: Expression [ LOOK_AHEAD(2) <SEMICOLON> ];
 
 Expression: AssignmentExpression ( "," AssignmentExpression)*;
 
@@ -513,7 +517,7 @@ PostfixOperator: "++" | "--";
 
 AdditiveOperator: "+" | "-";
 
-ReturnStatement: "return" [ LOOK_AHEAD(2) ReturnExpression ] [ <SEMICOLON> ];
+ReturnStatement: "return" [ LOOK_AHEAD(2) ReturnExpression ] [ LOOK_AHEAD(2) <SEMICOLON> ];
 
 ReturnExpression:
 		LOOK_AHEAD("Expression()") Expression

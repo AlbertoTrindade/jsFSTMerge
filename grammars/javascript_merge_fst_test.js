@@ -7,7 +7,7 @@ function x(a, b, c) {
   
   function w(a) {
 	return a + b;
-  }
+  };;; // empty statements
   
   var z = function(f) {
 	  return f(a);
