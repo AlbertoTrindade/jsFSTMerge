@@ -123,6 +123,7 @@ TOKEN :
 | < CONST: "const" >
 | < CONTINUE: "continue" >
 | < _DEFAULT: "default" >
+| < DELETE: "delete" >
 | < DO: "do" >
 | < DOUBLE: "double" >
 | < ELSE: "else" >
@@ -139,6 +140,7 @@ TOKEN :
 | < IMPLEMENTS: "implements" >
 | < IMPORT: "import" >
 | < INSTANCEOF: "instanceof" >
+| < IN: "in" >
 | < INT: "int" >
 | < INTERFACE: "interface" >
 | < LONG: "long" >
@@ -162,6 +164,7 @@ TOKEN :
 | < TRANSIENT: "transient" >
 | < TRUE: "true" >
 | < TRY: "try" >
+| < TYPEOF: "typeof" >
 | < VAR: "var" >
 | < VOID: "void" >
 | < VOLATILE: "volatile" >
@@ -503,35 +506,59 @@ ConditionalExpression: LogicalORExpression ( ConditionalExpressionInternal )?;
 
 ConditionalExpressionInternal: "?" AssignmentExpression ":" AssignmentExpression;
 
-LogicalORExpression:	LogicalANDExpression;
+LogicalORExpression:	LogicalANDExpression ( "||" LogicalANDExpression )*;
 
-LogicalANDExpression: BitwiseORExpression;
+LogicalANDExpression: BitwiseORExpression ( "&&" BitwiseORExpression )*;
 
-BitwiseORExpression: BitwiseXORExpression;
+BitwiseORExpression: BitwiseXORExpression ( "|" BitwiseXORExpression )*;
 
-BitwiseXORExpression: BitwiseANDExpression;
+BitwiseXORExpression: BitwiseANDExpression ( "^" BitwiseANDExpression )*;
 
-BitwiseANDExpression: EqualityExpression;
+BitwiseANDExpression: EqualityExpression ( "&" EqualityExpression )*;
 
-EqualityExpression: RelationalExpression;
+EqualityExpression: RelationalExpression ( EqualityExpressionInternal )*;
 
-RelationalExpression: ShiftExpression;
+EqualityExpressionInternal: EqualityOperator RelationalExpression;
 
-ShiftExpression: AdditiveExpression;
+EqualityOperator	: "==" | "!=" | "===" | "!==";
+
+RelationalExpression: ShiftExpression ( RelationalExpressionInternal )*;
+
+RelationalExpressionInternal: RelationalOperator ShiftExpression;
+
+RelationalOperator: "<" | ">" | "<=" | ">=" | "instanceof" | "in";
+
+ShiftExpression: AdditiveExpression ( ShiftExpressionInternal )*;
+
+ShiftExpressionInternal: ShiftOperator AdditiveExpression;
+
+ShiftOperator: "<<" | ">>" | ">>>";
 
 AdditiveExpression: MultiplicativeExpression ( LOOK_AHEAD(2) AdditiveExpressionInternal )*;
 
 AdditiveExpressionInternal: AdditiveOperator MultiplicativeExpression;
 
-MultiplicativeExpression: UnaryExpression;
+AdditiveOperator: "+" | "-";
 
-UnaryExpression: PostfixExpression;
+MultiplicativeExpression: UnaryExpression ( MultiplicativeExpressionInternal )*;
 
-PostfixExpression: LeftHandSideExpression ( PostfixOperator )?;
+MultiplicativeExpressionInternal: MultiplicativeOperator UnaryExpression;
+
+MultiplicativeOperator: "*" | "/" | "%";
+
+UnaryExpression: 
+	PostfixExpression
+	|
+	( LOOK_AHEAD(2) UnaryExpressionInternal )+
+;
+
+UnaryExpressionInternal: UnaryOperator UnaryExpression;
+
+UnaryOperator: "delete" | "void" | "typeof" | "++" | "--" | "+" | "-" | "~" | "!";
+
+PostfixExpression: LeftHandSideExpression ( LOOK_AHEAD(2) PostfixOperator )?;
 
 PostfixOperator: "++" | "--";
-
-AdditiveOperator: "+" | "-";
 
 ReturnStatement: "return" [ LOOK_AHEAD(2) ReturnExpression ] [ LOOK_AHEAD(2) <SEMICOLON> ];
 

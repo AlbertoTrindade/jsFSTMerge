@@ -21,109 +21,112 @@ public interface JavaScriptMergeParserConstants {
   int CONST = 22;
   int CONTINUE = 23;
   int _DEFAULT = 24;
-  int DO = 25;
-  int DOUBLE = 26;
-  int ELSE = 27;
-  int ENUM = 28;
-  int EXTENDS = 29;
-  int FALSE = 30;
-  int FINAL = 31;
-  int FINALLY = 32;
-  int FLOAT = 33;
-  int FOR = 34;
-  int FUNCTION = 35;
-  int GOTO = 36;
-  int IF = 37;
-  int IMPLEMENTS = 38;
-  int IMPORT = 39;
-  int INSTANCEOF = 40;
-  int INT = 41;
-  int INTERFACE = 42;
-  int LONG = 43;
-  int NATIVE = 44;
-  int NEW = 45;
-  int NULL = 46;
-  int PACKAGE = 47;
-  int PRIVATE = 48;
-  int PROTECTED = 49;
-  int PUBLIC = 50;
-  int RETURN = 51;
-  int SHORT = 52;
-  int STATIC = 53;
-  int STRICTFP = 54;
-  int SUPER = 55;
-  int SWITCH = 56;
-  int SYNCHRONIZED = 57;
-  int THIS = 58;
-  int THROW = 59;
-  int THROWS = 60;
-  int TRANSIENT = 61;
-  int TRUE = 62;
-  int TRY = 63;
-  int VAR = 64;
-  int VOID = 65;
-  int VOLATILE = 66;
-  int WHILE = 67;
-  int INTEGER_LITERAL = 68;
-  int DECIMAL_LITERAL = 69;
-  int HEX_LITERAL = 70;
-  int BINARY_LITERAL = 71;
-  int OCTAL_LITERAL = 72;
-  int FLOATING_POINT_LITERAL = 73;
-  int EXPONENT = 74;
-  int CHARACTER_LITERAL = 75;
-  int STRING_LITERAL = 76;
-  int IDENTIFIER = 77;
-  int LETTER = 78;
-  int DIGIT = 79;
-  int LPAREN = 80;
-  int RPAREN = 81;
-  int LBRACE = 82;
-  int RBRACE = 83;
-  int LBRACKET = 84;
-  int RBRACKET = 85;
-  int SEMICOLON = 86;
-  int COMMA = 87;
-  int DOT = 88;
-  int AT = 89;
-  int ASSIGN = 90;
-  int LT = 91;
-  int BANG = 92;
-  int TILDE = 93;
-  int HOOK = 94;
-  int COLON = 95;
-  int EQ = 96;
-  int LE = 97;
-  int GE = 98;
-  int NE = 99;
-  int SC_OR = 100;
-  int SC_AND = 101;
-  int INCR = 102;
-  int DECR = 103;
-  int PLUS = 104;
-  int MINUS = 105;
-  int STAR = 106;
-  int SLASH = 107;
-  int BIT_AND = 108;
-  int BIT_OR = 109;
-  int XOR = 110;
-  int REM = 111;
-  int LSHIFT = 112;
-  int PLUSASSIGN = 113;
-  int MINUSASSIGN = 114;
-  int STARASSIGN = 115;
-  int SLASHASSIGN = 116;
-  int ANDASSIGN = 117;
-  int ORASSIGN = 118;
-  int XORASSIGN = 119;
-  int REMASSIGN = 120;
-  int LSHIFTASSIGN = 121;
-  int RSIGNEDSHIFTASSIGN = 122;
-  int RUNSIGNEDSHIFTASSIGN = 123;
-  int ELLIPSIS = 124;
-  int POINTER = 125;
-  int DIAMOND = 126;
-  int GT = 127;
+  int DELETE = 25;
+  int DO = 26;
+  int DOUBLE = 27;
+  int ELSE = 28;
+  int ENUM = 29;
+  int EXTENDS = 30;
+  int FALSE = 31;
+  int FINAL = 32;
+  int FINALLY = 33;
+  int FLOAT = 34;
+  int FOR = 35;
+  int FUNCTION = 36;
+  int GOTO = 37;
+  int IF = 38;
+  int IMPLEMENTS = 39;
+  int IMPORT = 40;
+  int INSTANCEOF = 41;
+  int IN = 42;
+  int INT = 43;
+  int INTERFACE = 44;
+  int LONG = 45;
+  int NATIVE = 46;
+  int NEW = 47;
+  int NULL = 48;
+  int PACKAGE = 49;
+  int PRIVATE = 50;
+  int PROTECTED = 51;
+  int PUBLIC = 52;
+  int RETURN = 53;
+  int SHORT = 54;
+  int STATIC = 55;
+  int STRICTFP = 56;
+  int SUPER = 57;
+  int SWITCH = 58;
+  int SYNCHRONIZED = 59;
+  int THIS = 60;
+  int THROW = 61;
+  int THROWS = 62;
+  int TRANSIENT = 63;
+  int TRUE = 64;
+  int TRY = 65;
+  int TYPEOF = 66;
+  int VAR = 67;
+  int VOID = 68;
+  int VOLATILE = 69;
+  int WHILE = 70;
+  int INTEGER_LITERAL = 71;
+  int DECIMAL_LITERAL = 72;
+  int HEX_LITERAL = 73;
+  int BINARY_LITERAL = 74;
+  int OCTAL_LITERAL = 75;
+  int FLOATING_POINT_LITERAL = 76;
+  int EXPONENT = 77;
+  int CHARACTER_LITERAL = 78;
+  int STRING_LITERAL = 79;
+  int IDENTIFIER = 80;
+  int LETTER = 81;
+  int DIGIT = 82;
+  int LPAREN = 83;
+  int RPAREN = 84;
+  int LBRACE = 85;
+  int RBRACE = 86;
+  int LBRACKET = 87;
+  int RBRACKET = 88;
+  int SEMICOLON = 89;
+  int COMMA = 90;
+  int DOT = 91;
+  int AT = 92;
+  int ASSIGN = 93;
+  int LT = 94;
+  int BANG = 95;
+  int TILDE = 96;
+  int HOOK = 97;
+  int COLON = 98;
+  int EQ = 99;
+  int LE = 100;
+  int GE = 101;
+  int NE = 102;
+  int SC_OR = 103;
+  int SC_AND = 104;
+  int INCR = 105;
+  int DECR = 106;
+  int PLUS = 107;
+  int MINUS = 108;
+  int STAR = 109;
+  int SLASH = 110;
+  int BIT_AND = 111;
+  int BIT_OR = 112;
+  int XOR = 113;
+  int REM = 114;
+  int LSHIFT = 115;
+  int PLUSASSIGN = 116;
+  int MINUSASSIGN = 117;
+  int STARASSIGN = 118;
+  int SLASHASSIGN = 119;
+  int ANDASSIGN = 120;
+  int ORASSIGN = 121;
+  int XORASSIGN = 122;
+  int REMASSIGN = 123;
+  int LSHIFTASSIGN = 124;
+  int RSIGNEDSHIFTASSIGN = 125;
+  int RUNSIGNEDSHIFTASSIGN = 126;
+  int ELLIPSIS = 127;
+  int POINTER = 128;
+  int DIAMOND = 129;
+  int GT = 130;
 
   int DEFAULT = 0;
   int IN_SINGLE_LINE_COMMENT = 1;
@@ -156,6 +159,7 @@ public interface JavaScriptMergeParserConstants {
     "\"const\"",
     "\"continue\"",
     "\"default\"",
+    "\"delete\"",
     "\"do\"",
     "\"double\"",
     "\"else\"",
@@ -172,6 +176,7 @@ public interface JavaScriptMergeParserConstants {
     "\"implements\"",
     "\"import\"",
     "\"instanceof\"",
+    "\"in\"",
     "\"int\"",
     "\"interface\"",
     "\"long\"",
@@ -195,6 +200,7 @@ public interface JavaScriptMergeParserConstants {
     "\"transient\"",
     "\"true\"",
     "\"try\"",
+    "\"typeof\"",
     "\"var\"",
     "\"void\"",
     "\"volatile\"",
@@ -259,6 +265,10 @@ public interface JavaScriptMergeParserConstants {
     "\"->\"",
     "\"<>\"",
     "\">\"",
+    "\"===\"",
+    "\"!==\"",
+    "\">>\"",
+    "\">>>\"",
   };
 
 }

@@ -15,10 +15,12 @@ function x(a, b, c) {
   
   a = z(function(x) { return x + x; });
   
-  a = a + w(a);
-  a = a + (function() { return b; })();
+  a = a * w(a);
+  a = a / (function() { return b; })();
   
   var ternary = a ? b : c;
+  ternary = ternary || s;
+  ternary = ternary && a;
   
   return function() { return a };
 }
