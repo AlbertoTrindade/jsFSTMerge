@@ -386,7 +386,7 @@ SourceElement:
 FunctionDeclaration:		
 		Function		
 		Id		
-		"(" FormalParameters ")"		
+		"(" [ FormalParameters ] ")"		
 		"{" FunctionBody "}"		
 ;
 
@@ -499,7 +499,9 @@ AssignmentOperator:
   "=" <NONE> | "*=" <NONE> | "/=" <NONE> | "%=" <NONE> | "+=" <NONE> | "-=" <NONE>| "<<=" <NONE> | ">>=" <NONE> | ">>>=" <NONE> | "&=" <NONE> | "^=" <NONE> | "|=" <NONE>
 ;
 
-ConditionalExpression: LogicalORExpression;
+ConditionalExpression: LogicalORExpression ( ConditionalExpressionInternal )?;
+
+ConditionalExpressionInternal: "?" AssignmentExpression ":" AssignmentExpression;
 
 LogicalORExpression:	LogicalANDExpression;
 

@@ -18,5 +18,7 @@ function x(a, b, c) {
   a = a + w(a);
   a = a + (function() { return b; })();
   
+  var ternary = a ? b : c;
+  
   return function() { return a };
 }

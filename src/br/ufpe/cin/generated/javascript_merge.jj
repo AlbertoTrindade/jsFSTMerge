@@ -360,7 +360,7 @@ FSTInfo Id(boolean inTerminal) : { Token first=null,t;FSTInfo n;
 
 FSTInfo SourceElement(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
-	n=Function(inTerminal){ replaceName(n);} n=Id(inTerminal){ replaceName("Id", n);}{ replaceName(n);} "(" n=FormalParameters(inTerminal){ replaceName(n);} ")" "{" n=FunctionBody(inTerminal){ replaceName(n);} "}" {return productionEndNonTerminal("SourceElement1","{Id}","{Id}");}
+	n=Function(inTerminal){ replaceName(n);} n=Id(inTerminal){ replaceName("Id", n);}{ replaceName(n);} "(" [n=FormalParameters(inTerminal){ replaceName(n);}] ")" "{" n=FunctionBody(inTerminal){ replaceName(n);} "}" {return productionEndNonTerminal("SourceElement1","{Id}","{Id}");}
  |
 	n=StatementList(inTerminal){ replaceName(n);} {return productionEndNonTerminal("SourceElement2","-","-");}
 
@@ -368,7 +368,7 @@ FSTInfo SourceElement(boolean inTerminal) : { Token first=null,t;FSTInfo n;
 
 FSTInfo FunctionDeclaration(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
-	n=Function(true){ replaceName(n);} n=Id(true){ replaceName(n);} "(" n=FormalParameters(true){ replaceName(n);} ")" "{" n=FunctionBody(true){ replaceName(n);} "}" {return productionEndTerminal("FunctionDeclaration","-","-","Replacement","Default",first,token);}
+	n=Function(true){ replaceName(n);} n=Id(true){ replaceName(n);} "(" [n=FormalParameters(true){ replaceName(n);}] ")" "{" n=FunctionBody(true){ replaceName(n);} "}" {return productionEndTerminal("FunctionDeclaration","-","-","Replacement","Default",first,token);}
 
  )  }
 
@@ -590,7 +590,13 @@ FSTInfo AssignmentOperator(boolean inTerminal) : { Token first=null,t;FSTInfo n;
 
 FSTInfo ConditionalExpression(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
-	n=LogicalORExpression(true){ replaceName(n);} {return productionEndTerminal("ConditionalExpression","-","-","Replacement","Default",first,token);}
+	n=LogicalORExpression(true){ replaceName(n);} [n=ConditionalExpressionInternal(true){ replaceName(n);}] {return productionEndTerminal("ConditionalExpression","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo ConditionalExpressionInternal(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	"?" n=AssignmentExpression(true){ replaceName(n);} ":" n=AssignmentExpression(true){ replaceName(n);} {return productionEndTerminal("ConditionalExpressionInternal","-","-","Replacement","Default",first,token);}
 
  )  }
 
