@@ -1198,8 +1198,8 @@ CompilationUnit:
 	   <EOF>
 ;
 
-@FSTTerminal(name="{<IDENTIFIER>}")
-Id: 	<IDENTIFIER>;
+@FSTTerminal(name="{<IDENTIFIER_NAME>}")
+Id: 	<IDENTIFIER_NAME>;
 
 /*
  * Declaration syntax follows.
@@ -1286,18 +1286,78 @@ LeftHandSideExpression:
 CallExpression: CallExpressionInternal Arguments ( LOOK_AHEAD(2) CallExpressionPart )*;
 
 CallExpressionInternal:
-		MemberExpression
+		LOOK_AHEAD(3) MemberExpression
 		|
 		"(" FunctionExpression ")"
 ;
 
 MemberExpression: 
-	PrimaryExpression ( MemberExpressionPart )*
-	|
-	AllocationExpression
+		PrimaryExpression ( LOOK_AHEAD(2) MemberExpressionPart )*
+		|
+		AllocationExpression
 ;
 
-PrimaryExpression: Id;
+PrimaryExpression: 
+		"this"
+		|
+		ObjectLiteral
+		|
+		"(" Expression ")"
+		|
+		Id
+		|
+		ArrayLiteral
+		|
+		Literal
+;
+
+ObjectLiteral: "{" ( PropertyNameAndValueList )? "}";
+
+PropertyNameAndValueList: PropertyNameAndValue ( PropertyNameAndValueListInternal )*;
+
+PropertyNameAndValueListInternal : 
+		LOOK_AHEAD(2) "," PropertyNameAndValue
+		|
+		","
+;
+
+PropertyNameAndValue: PropertyName ":" AssignmentExpression;
+
+PropertyName:
+		Id
+		|
+		<STRING_LITERAL>
+;
+
+ArrayLiteral: "[" ArrayLiteralInternal;
+	
+ArrayLiteralInternal:
+		LOOK_AHEAD(2) ( Elision )? "]"
+		|
+		LOOK_AHEAD("ElementList() Elision()") ElementList Elision "]"
+		|
+		( ElementList )? "]"
+;
+
+ElementList: ( Elision )? AssignmentExpression ( LOOK_AHEAD(2) ElementListInternal )*;
+
+ElementListInternal: Elision AssignmentExpression;
+
+Elision: ( <COMMA> )+;
+
+Literal:   
+		<DECIMAL_LITERAL>
+		|
+		<HEX_INTEGER_LITERAL>
+		|
+		<STRING_LITERAL>
+		|
+		<BOOLEAN_LITERAL>
+		|
+		<NULL_LITERAL>
+		|
+		<REGULAR_EXPRESSION_LITERAL>
+;
 
 MemberExpressionPart: 
 		"[" Expression "]"
@@ -1307,7 +1367,7 @@ MemberExpressionPart:
 
 AllocationExpression: "new" MemberExpression ( LOOK_AHEAD(2) AllocationExpressionInternal )*;
 
-AllocationExpressionInternal: Arguments ( MemberExpressionPart )*;
+AllocationExpressionInternal: Arguments ( LOOK_AHEAD(2) MemberExpressionPart )*;
 
 Arguments: "(" ( ArgumentList )? ")";
 

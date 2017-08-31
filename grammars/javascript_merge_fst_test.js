@@ -13,7 +13,7 @@ function x(a, b, c) {
 	  return f(a);
   };
   
-  a = z(function(x) { return x + x; });
+  a = z(function(x) { return (x) + 10; });
   
   a = a * w(a);
   a = a / (function() { return b; })();
@@ -24,3 +24,14 @@ function x(a, b, c) {
   
   return function() { return a };
 }
+
+function Car (type, color) {
+    this.type = type;
+    this.color = color;
+}
+
+var ferrari = new Car("sport", "red");
+
+var mustang = { type: 'sport', color: 'yellow' };
+
+var cars = [ferrari, mustang];
