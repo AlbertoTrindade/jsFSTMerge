@@ -132,6 +132,7 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 		if (type.equals("ShiftOperator1") && expectedType.equals("ShiftOperator")) return true;
 		if (type.equals("Statement8") && expectedType.equals("Statement")) return true;
 		if (type.equals("MemberExpression1") && expectedType.equals("MemberExpression")) return true;
+		if (type.equals("Statement11") && expectedType.equals("Statement")) return true;
 		if (type.equals("EqualityOperator2") && expectedType.equals("EqualityOperator")) return true;
 		if (type.equals("CallExpressionPart3") && expectedType.equals("CallExpressionPart")) return true;
 		if (type.equals("FunctionExpression2") && expectedType.equals("FunctionExpression")) return true;

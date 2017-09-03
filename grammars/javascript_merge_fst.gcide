@@ -1254,6 +1254,8 @@ Statement:
 		BreakStatement
 		|
 		ReturnStatement
+		|
+		WithStatement
 ;
 
 Block: "{" ( StatementList )? "}";
@@ -1491,3 +1493,5 @@ ReturnExpression:
 		|
 		FunctionExpression
 ;
+
+WithStatement: "with" "(" Expression ")" Statement;

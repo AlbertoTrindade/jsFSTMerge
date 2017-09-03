@@ -1,6 +1,5 @@
 /*
 att@cin.ufpe.br: Modified to support JavaScript
-gjcc@cin.ufpe.br: Modified to support Java 8:
 
 Per Sreenivasa Viswanadha (as posted on the javacc user mailing list), the
 original java 1.5 grammar is licensed under the BSD license, so this modified
@@ -1213,6 +1212,8 @@ FSTInfo Statement(boolean inTerminal) : { Token first=null,t;FSTInfo n;
 	n=BreakStatement(true){ replaceName(n);} {return productionEndTerminal("Statement9","-","-","Replacement","Default",first,token);}
  |
 	n=ReturnStatement(true){ replaceName(n);} {return productionEndTerminal("Statement10","-","-","Replacement","Default",first,token);}
+ |
+	n=WithStatement(true){ replaceName(n);} {return productionEndTerminal("Statement11","-","-","Replacement","Default",first,token);}
 
  )  }
 
@@ -1755,6 +1756,12 @@ FSTInfo ReturnExpression(boolean inTerminal) : { Token first=null,t;FSTInfo n;
 	LOOKAHEAD(Expression()) n=Expression(true){ replaceName(n);} {return productionEndTerminal("ReturnExpression1","-","-","Replacement","Default",first,token);}
  |
 	n=FunctionExpression(true){ replaceName(n);} {return productionEndTerminal("ReturnExpression2","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo WithStatement(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	"with" "(" n=Expression(true){ replaceName(n);} ")" n=Statement(true){ replaceName(n);} {return productionEndTerminal("WithStatement","-","-","Replacement","Default",first,token);}
 
  )  }
 

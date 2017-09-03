@@ -1,4 +1,4 @@
-function x(a, b, c) {
+function f1(a, b, c) {
   function y(d, e) {
     return d + e;
   }
@@ -76,4 +76,13 @@ for (i in list) {
 	console.log(i);
 	
 	if (i == 3) break;
+}
+
+var a, x, y;
+var r = 10;
+
+with (Math) {
+  a = PI * r * r;
+  x = r * cos(PI);
+  y = r * sin(PI / 2);
 }
