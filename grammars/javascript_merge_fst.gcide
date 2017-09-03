@@ -1426,7 +1426,11 @@ ConditionalExpression: LogicalORExpression ( ConditionalExpressionInternal )?;
 
 ConditionalExpressionInternal: "?" AssignmentExpression ":" AssignmentExpression;
 
-LogicalORExpression:	LogicalANDExpression ( "||" LogicalANDExpression )*;
+LogicalORExpression:	
+		LOOK_AHEAD("LogicalANDExpression() \"||\" FunctionExpression()") LogicalANDExpression "||" FunctionExpression ( "||" LogicalANDExpression )*
+		|
+		LogicalANDExpression ( "||" LogicalANDExpression )*
+;
 
 LogicalANDExpression: BitwiseORExpression ( "&&" BitwiseORExpression )*;
 

@@ -132,3 +132,6 @@ this.changePriority = function (page, priority) {
     $timeout.cancel(scheduleTimeout);
     scheduleTimeout = $timeout(schedule, 1000);
 };
+
+// function expression in or expression
+this.changePriority = f1 || function anotherFunction() { };

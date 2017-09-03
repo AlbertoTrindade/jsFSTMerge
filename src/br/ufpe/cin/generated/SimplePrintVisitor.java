@@ -113,6 +113,7 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 		if (type.equals("Statement13") && expectedType.equals("Statement")) return true;
 		if (type.equals("Argument1") && expectedType.equals("Argument")) return true;
 		if (type.equals("ShiftOperator3") && expectedType.equals("ShiftOperator")) return true;
+		if (type.equals("LogicalORExpression2") && expectedType.equals("LogicalORExpression")) return true;
 		if (type.equals("ReturnExpression1") && expectedType.equals("ReturnExpression")) return true;
 		if (type.equals("CaseBlockInternal1") && expectedType.equals("CaseBlockInternal")) return true;
 		if (type.equals("AssignmentOperator4") && expectedType.equals("AssignmentOperator")) return true;
@@ -152,6 +153,7 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 		if (type.equals("PrimaryExpression6") && expectedType.equals("PrimaryExpression")) return true;
 		if (type.equals("Statement9") && expectedType.equals("Statement")) return true;
 		if (type.equals("ShiftOperator2") && expectedType.equals("ShiftOperator")) return true;
+		if (type.equals("LogicalORExpression1") && expectedType.equals("LogicalORExpression")) return true;
 		if (type.equals("CallExpressionPart2") && expectedType.equals("CallExpressionPart")) return true;
 		if (type.equals("Statement10") && expectedType.equals("Statement")) return true;
 		if (type.equals("EqualityOperator1") && expectedType.equals("EqualityOperator")) return true;
