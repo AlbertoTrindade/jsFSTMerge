@@ -95,6 +95,7 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 		if (type.equals("AssignmentOperator7") && expectedType.equals("AssignmentOperator")) return true;
 		if (type.equals("MemberExpressionPart2") && expectedType.equals("MemberExpressionPart")) return true;
 		if (type.equals("PropertyName2") && expectedType.equals("PropertyName")) return true;
+		if (type.equals("CaseBlockInternal2") && expectedType.equals("CaseBlockInternal")) return true;
 		if (type.equals("ReturnExpression2") && expectedType.equals("ReturnExpression")) return true;
 		if (type.equals("IterationStatement6") && expectedType.equals("IterationStatement")) return true;
 		if (type.equals("UnaryOperator6") && expectedType.equals("UnaryOperator")) return true;
@@ -109,6 +110,7 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 		if (type.equals("Argument1") && expectedType.equals("Argument")) return true;
 		if (type.equals("ShiftOperator3") && expectedType.equals("ShiftOperator")) return true;
 		if (type.equals("ReturnExpression1") && expectedType.equals("ReturnExpression")) return true;
+		if (type.equals("CaseBlockInternal1") && expectedType.equals("CaseBlockInternal")) return true;
 		if (type.equals("AssignmentOperator4") && expectedType.equals("AssignmentOperator")) return true;
 		if (type.equals("UnaryOperator5") && expectedType.equals("UnaryOperator")) return true;
 		if (type.equals("RelationalOperator5") && expectedType.equals("RelationalOperator")) return true;
@@ -118,6 +120,7 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 		if (type.equals("AssignmentOperator10") && expectedType.equals("AssignmentOperator")) return true;
 		if (type.equals("InitializerExpression2") && expectedType.equals("InitializerExpression")) return true;
 		if (type.equals("CallExpressionInternal2") && expectedType.equals("CallExpressionInternal")) return true;
+		if (type.equals("Statement12") && expectedType.equals("Statement")) return true;
 		if (type.equals("MultiplicativeOperator2") && expectedType.equals("MultiplicativeOperator")) return true;
 		if (type.equals("FunctionExpression1") && expectedType.equals("FunctionExpression")) return true;
 		if (type.equals("AssignmentOperator5") && expectedType.equals("AssignmentOperator")) return true;

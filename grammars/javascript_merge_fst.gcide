@@ -1256,6 +1256,8 @@ Statement:
 		ReturnStatement
 		|
 		WithStatement
+		|
+		SwitchStatement
 ;
 
 Block: "{" ( StatementList )? "}";
@@ -1495,3 +1497,15 @@ ReturnExpression:
 ;
 
 WithStatement: "with" "(" Expression ")" Statement;
+
+SwitchStatement: "switch" "(" Expression ")" CaseBlock;
+
+CaseBlock: "{" [ CaseClauses ] CaseBlockInternal;
+
+CaseBlockInternal: "}" | DefaultClause [ CaseClauses ] "}";
+
+CaseClauses: ( CaseClause )+;
+
+CaseClause: "case" Expression ":" [ StatementList ];
+
+DefaultClause: "default" ":" [ StatementList ];
