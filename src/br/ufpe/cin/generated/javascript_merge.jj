@@ -1200,9 +1200,11 @@ FSTInfo Statement(boolean inTerminal) : { Token first=null,t;FSTInfo n;
  |
 	n=EmptyStatement(true){ replaceName(n);} {return productionEndTerminal("Statement3","-","-","Replacement","Default",first,token);}
  |
-	n=ExpressionStatement(true){ replaceName(n);} {return productionEndTerminal("Statement4","-","-","Replacement","Default",first,token);}
+	LOOKAHEAD(Id() ":") n=LabelledStatement(true){ replaceName(n);} {return productionEndTerminal("Statement4","-","-","Replacement","Default",first,token);}
  |
-	n=ReturnStatement(true){ replaceName(n);} {return productionEndTerminal("Statement5","-","-","Replacement","Default",first,token);}
+	n=ExpressionStatement(true){ replaceName(n);} {return productionEndTerminal("Statement5","-","-","Replacement","Default",first,token);}
+ |
+	n=ReturnStatement(true){ replaceName(n);} {return productionEndTerminal("Statement6","-","-","Replacement","Default",first,token);}
 
  )  }
 
@@ -1247,6 +1249,12 @@ FSTInfo InitializerExpression(boolean inTerminal) : { Token first=null,t;FSTInfo
 FSTInfo EmptyStatement(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
 	<SEMICOLON> {return productionEndTerminal("EmptyStatement","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo LabelledStatement(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	n=Id(true){ replaceName(n);} ":" n=Statement(true){ replaceName(n);} {return productionEndTerminal("LabelledStatement","-","-","Replacement","Default",first,token);}
 
  )  }
 

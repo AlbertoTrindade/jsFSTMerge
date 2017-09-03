@@ -34,7 +34,7 @@ var ferrari = new Car("sport", "red");
 
 var mustang = { type: 'sport', color: 'yellow' };
 
-var cars = [ferrari, mustang];
+carDeclaration: var cars = [ferrari, mustang];
 
 {
 	ferrari.color = "blue";

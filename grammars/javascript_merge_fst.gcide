@@ -1242,6 +1242,8 @@ Statement:
 		|
 		EmptyStatement
 		|
+		LOOK_AHEAD("Id() \":\"") LabelledStatement
+		|
 		ExpressionStatement
 		|
 		ReturnStatement
@@ -1264,6 +1266,8 @@ InitializerExpression:
 ;
 
 EmptyStatement: <SEMICOLON>;
+
+LabelledStatement: Id ":" Statement;
 
 ExpressionStatement: Expression [ LOOK_AHEAD(2) <SEMICOLON> ];
 

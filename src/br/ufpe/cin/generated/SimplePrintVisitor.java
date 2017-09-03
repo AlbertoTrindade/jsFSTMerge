@@ -137,6 +137,7 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 		if (type.equals("Statement2") && expectedType.equals("Statement")) return true;
 		if (type.equals("UnaryOperator5") && expectedType.equals("UnaryOperator")) return true;
 		if (type.equals("RelationalOperator5") && expectedType.equals("RelationalOperator")) return true;
+		if (type.equals("Statement6") && expectedType.equals("Statement")) return true;
 		if (type.equals("ArrayLiteralInternal3") && expectedType.equals("ArrayLiteralInternal")) return true;
 		if (type.equals("UnaryOperator9") && expectedType.equals("UnaryOperator")) return true;
 		if (type.equals("MultiplicativeOperator3") && expectedType.equals("MultiplicativeOperator")) return true;
