@@ -104,3 +104,17 @@ switch (foo) {
   default:
     console.log('default');
 }
+
+function errorFunction() {
+	throw new Error('An error');
+}
+
+try {
+	errorFunction();
+}
+catch (err) {
+	console.log(err.message);
+}
+finally {
+	console.log('Whatever');
+}

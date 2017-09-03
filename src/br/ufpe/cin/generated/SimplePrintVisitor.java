@@ -81,6 +81,7 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 	}
 	protected boolean isSubtype(String type, String expectedType) {
 		if (type.equals(expectedType)) return true;
+		if (type.equals("TryStatementInternal2") && expectedType.equals("TryStatementInternal")) return true;
 		if (type.equals("PropertyName1") && expectedType.equals("PropertyName")) return true;
 		if (type.equals("UnaryExpression1") && expectedType.equals("UnaryExpression")) return true;
 		if (type.equals("UnaryOperator7") && expectedType.equals("UnaryOperator")) return true;
@@ -95,6 +96,7 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 		if (type.equals("AssignmentOperator7") && expectedType.equals("AssignmentOperator")) return true;
 		if (type.equals("MemberExpressionPart2") && expectedType.equals("MemberExpressionPart")) return true;
 		if (type.equals("PropertyName2") && expectedType.equals("PropertyName")) return true;
+		if (type.equals("Statement14") && expectedType.equals("Statement")) return true;
 		if (type.equals("CaseBlockInternal2") && expectedType.equals("CaseBlockInternal")) return true;
 		if (type.equals("ReturnExpression2") && expectedType.equals("ReturnExpression")) return true;
 		if (type.equals("IterationStatement6") && expectedType.equals("IterationStatement")) return true;
@@ -107,6 +109,7 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 		if (type.equals("InitializerExpression1") && expectedType.equals("InitializerExpression")) return true;
 		if (type.equals("PostfixOperator2") && expectedType.equals("PostfixOperator")) return true;
 		if (type.equals("CallExpressionInternal1") && expectedType.equals("CallExpressionInternal")) return true;
+		if (type.equals("Statement13") && expectedType.equals("Statement")) return true;
 		if (type.equals("Argument1") && expectedType.equals("Argument")) return true;
 		if (type.equals("ShiftOperator3") && expectedType.equals("ShiftOperator")) return true;
 		if (type.equals("ReturnExpression1") && expectedType.equals("ReturnExpression")) return true;
@@ -175,6 +178,7 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 		if (type.equals("PrimaryExpression4") && expectedType.equals("PrimaryExpression")) return true;
 		if (type.equals("UnaryExpression2") && expectedType.equals("UnaryExpression")) return true;
 		if (type.equals("MemberExpression2") && expectedType.equals("MemberExpression")) return true;
+		if (type.equals("TryStatementInternal1") && expectedType.equals("TryStatementInternal")) return true;
 		if (type.equals("Statement3") && expectedType.equals("Statement")) return true;
 		if (type.equals("LeftHandSideExpression1") && expectedType.equals("LeftHandSideExpression")) return true;
 		if (type.equals("IterationStatement4") && expectedType.equals("IterationStatement")) return true;
