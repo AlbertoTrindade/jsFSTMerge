@@ -1,6 +1,5 @@
 /*
 att@cin.ufpe.br: Modified to support JavaScript
-gjcc@cin.ufpe.br: Modified to support Java 8:
 
 Per Sreenivasa Viswanadha (as posted on the javacc user mailing list), the
 original java 1.5 grammar is licensed under the BSD license, so this modified
@@ -1250,6 +1249,10 @@ Statement:
 		|
 		IterationStatement
 		|
+		ContinueStatement
+		|
+		BreakStatement
+		|
 		ReturnStatement
 ;
 
@@ -1476,6 +1479,10 @@ IterationStatement:
 		|
 		"for" "(" LeftHandSideExpression "in" Expression ")" Statement
 ;
+
+ContinueStatement: "continue" [ LOOK_AHEAD(2) Id ] [ LOOK_AHEAD(2) <SEMICOLON> ];
+
+BreakStatement: "break" [ LOOK_AHEAD(2) Id ] [ LOOK_AHEAD(2) <SEMICOLON> ];
 
 ReturnStatement: "return" [ LOOK_AHEAD(2) ReturnExpression ] [ LOOK_AHEAD(2) <SEMICOLON> ];
 

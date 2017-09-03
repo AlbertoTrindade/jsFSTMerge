@@ -69,7 +69,11 @@ for (var property in cars[0]) {
 	console.log(property);
 }
 
-var list = [1, 2, 3];
+var list = [1, 2, 3, 4, 5];
 for (i in list) {
+	if (i === 2) continue;
+	
 	console.log(i);
+	
+	if (i == 3) break;
 }

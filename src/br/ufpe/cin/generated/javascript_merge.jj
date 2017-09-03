@@ -1208,7 +1208,11 @@ FSTInfo Statement(boolean inTerminal) : { Token first=null,t;FSTInfo n;
  |
 	n=IterationStatement(true){ replaceName(n);} {return productionEndTerminal("Statement7","-","-","Replacement","Default",first,token);}
  |
-	n=ReturnStatement(true){ replaceName(n);} {return productionEndTerminal("Statement8","-","-","Replacement","Default",first,token);}
+	n=ContinueStatement(true){ replaceName(n);} {return productionEndTerminal("Statement8","-","-","Replacement","Default",first,token);}
+ |
+	n=BreakStatement(true){ replaceName(n);} {return productionEndTerminal("Statement9","-","-","Replacement","Default",first,token);}
+ |
+	n=ReturnStatement(true){ replaceName(n);} {return productionEndTerminal("Statement10","-","-","Replacement","Default",first,token);}
 
  )  }
 
@@ -1725,6 +1729,18 @@ FSTInfo IterationStatement(boolean inTerminal) : { Token first=null,t;FSTInfo n;
 	LOOKAHEAD("for" "(" "var" VariableDeclaration() "in") "for" "(" "var" n=VariableDeclaration(true){ replaceName(n);} "in" n=Expression(true){ replaceName(n);} ")" n=Statement(true){ replaceName(n);} {return productionEndTerminal("IterationStatement5","-","-","Replacement","Default",first,token);}
  |
 	"for" "(" n=LeftHandSideExpression(true){ replaceName(n);} "in" n=Expression(true){ replaceName(n);} ")" n=Statement(true){ replaceName(n);} {return productionEndTerminal("IterationStatement6","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo ContinueStatement(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	"continue" [LOOKAHEAD(2) n=Id(true){ replaceName(n);}] [LOOKAHEAD(2) <SEMICOLON>] {return productionEndTerminal("ContinueStatement","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo BreakStatement(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	"break" [LOOKAHEAD(2) n=Id(true){ replaceName(n);}] [LOOKAHEAD(2) <SEMICOLON>] {return productionEndTerminal("BreakStatement","-","-","Replacement","Default",first,token);}
 
  )  }
 
