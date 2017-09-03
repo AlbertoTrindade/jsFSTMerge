@@ -1204,7 +1204,9 @@ FSTInfo Statement(boolean inTerminal) : { Token first=null,t;FSTInfo n;
  |
 	n=ExpressionStatement(true){ replaceName(n);} {return productionEndTerminal("Statement5","-","-","Replacement","Default",first,token);}
  |
-	n=ReturnStatement(true){ replaceName(n);} {return productionEndTerminal("Statement6","-","-","Replacement","Default",first,token);}
+	n=IfStatement(true){ replaceName(n);} {return productionEndTerminal("Statement6","-","-","Replacement","Default",first,token);}
+ |
+	n=ReturnStatement(true){ replaceName(n);} {return productionEndTerminal("Statement7","-","-","Replacement","Default",first,token);}
 
  )  }
 
@@ -1699,6 +1701,12 @@ FSTInfo PostfixOperator(boolean inTerminal) : { Token first=null,t;FSTInfo n;
 	"++"  {return productionEndTerminal("PostfixOperator1","-","-","Replacement","Default",first,token);}
  |
 	"--"  {return productionEndTerminal("PostfixOperator2","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo IfStatement(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	"if" "(" n=Expression(true){ replaceName(n);} ")" n=Statement(true){ replaceName(n);} [LOOKAHEAD(2) "else" n=Statement(true){ replaceName(n);}] {return productionEndTerminal("IfStatement","-","-","Replacement","Default",first,token);}
 
  )  }
 

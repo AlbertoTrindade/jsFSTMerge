@@ -1246,6 +1246,8 @@ Statement:
 		|
 		ExpressionStatement
 		|
+		IfStatement
+		|
 		ReturnStatement
 ;
 
@@ -1456,6 +1458,8 @@ UnaryOperator: "delete" | "void" | "typeof" | "++" | "--" | "+" | "-" | "~" | "!
 PostfixExpression: LeftHandSideExpression ( LOOK_AHEAD(2) PostfixOperator )?;
 
 PostfixOperator: "++" | "--";
+
+IfStatement: "if" "(" Expression ")" Statement ( LOOK_AHEAD(2) "else" Statement )?;
 
 ReturnStatement: "return" [ LOOK_AHEAD(2) ReturnExpression ] [ LOOK_AHEAD(2) <SEMICOLON> ];
 

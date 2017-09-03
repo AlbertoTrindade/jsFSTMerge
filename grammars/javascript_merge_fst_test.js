@@ -39,3 +39,11 @@ carDeclaration: var cars = [ferrari, mustang];
 {
 	ferrari.color = "blue";
 }
+
+if (ferrari.color === 'blue') {
+	console.log('Ferrari is blue');
+}
+else {
+	console.log('Ferrari is not blue');
+}
+	
