@@ -1321,7 +1321,7 @@ FSTInfo CallExpressionInternal(boolean inTerminal) : { Token first=null,t;FSTInf
 } { {first=getToken(1); productionStart(inTerminal); } (
 	LOOKAHEAD(3) n=MemberExpression(true){ replaceName(n);} {return productionEndTerminal("CallExpressionInternal1","-","-","Replacement","Default",first,token);}
  |
-	"(" n=FunctionExpression(true){ replaceName(n);} ")" {return productionEndTerminal("CallExpressionInternal2","-","-","Replacement","Default",first,token);}
+	"(" n=FunctionExpression(true){ replaceName(n);} ")" (LOOKAHEAD(2) n=MemberExpressionPart(true){ replaceName(n);})* {return productionEndTerminal("CallExpressionInternal2","-","-","Replacement","Default",first,token);}
 
  )  }
 

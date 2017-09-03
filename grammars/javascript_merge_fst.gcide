@@ -1192,10 +1192,7 @@ GRAMMARSTART
  */
 
 @FSTNonTerminal()
-CompilationUnit:        
-	   ( SourceElement )*
-	   <EOF>
-;
+CompilationUnit: ( SourceElement )* <EOF>;
 
 @FSTTerminal(name="{<IDENTIFIER_NAME>}")
 Id: 	<IDENTIFIER_NAME>;
@@ -1313,7 +1310,7 @@ CallExpression: CallExpressionInternal Arguments ( LOOK_AHEAD(2) CallExpressionP
 CallExpressionInternal:
 		LOOK_AHEAD(3) MemberExpression
 		|
-		"(" FunctionExpression ")"
+		"(" FunctionExpression ")" ( LOOK_AHEAD(2) MemberExpressionPart )*
 ;
 
 MemberExpression: 

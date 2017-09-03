@@ -135,3 +135,15 @@ this.changePriority = function (page, priority) {
 
 // function expression in or expression
 this.changePriority = f1 || function anotherFunction() { };
+
+// function expression as callee followed by memberexpressionpart
+(function() {
+	var key, val, _ref;
+
+	_ref = require('./coffee-script');
+	for (key in _ref) {
+	  val = _ref[key];
+	  exports[key] = val;
+	}
+
+}).call(this);
