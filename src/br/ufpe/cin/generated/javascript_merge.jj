@@ -1206,7 +1206,9 @@ FSTInfo Statement(boolean inTerminal) : { Token first=null,t;FSTInfo n;
  |
 	n=IfStatement(true){ replaceName(n);} {return productionEndTerminal("Statement6","-","-","Replacement","Default",first,token);}
  |
-	n=ReturnStatement(true){ replaceName(n);} {return productionEndTerminal("Statement7","-","-","Replacement","Default",first,token);}
+	n=IterationStatement(true){ replaceName(n);} {return productionEndTerminal("Statement7","-","-","Replacement","Default",first,token);}
+ |
+	n=ReturnStatement(true){ replaceName(n);} {return productionEndTerminal("Statement8","-","-","Replacement","Default",first,token);}
 
  )  }
 
@@ -1564,7 +1566,7 @@ FSTInfo EqualityOperator(boolean inTerminal) : { Token first=null,t;FSTInfo n;
 
 FSTInfo RelationalExpression(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
-	n=ShiftExpression(true){ replaceName(n);} (n=RelationalExpressionInternal(true){ replaceName(n);})* {return productionEndTerminal("RelationalExpression","-","-","Replacement","Default",first,token);}
+	n=ShiftExpression(true){ replaceName(n);} (LOOKAHEAD(2) n=RelationalExpressionInternal(true){ replaceName(n);})* {return productionEndTerminal("RelationalExpression","-","-","Replacement","Default",first,token);}
 
  )  }
 
@@ -1707,6 +1709,22 @@ FSTInfo PostfixOperator(boolean inTerminal) : { Token first=null,t;FSTInfo n;
 FSTInfo IfStatement(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
 	"if" "(" n=Expression(true){ replaceName(n);} ")" n=Statement(true){ replaceName(n);} [LOOKAHEAD(2) "else" n=Statement(true){ replaceName(n);}] {return productionEndTerminal("IfStatement","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo IterationStatement(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	"do" n=Statement(true){ replaceName(n);} "while" "(" n=Expression(true){ replaceName(n);} ")" [LOOKAHEAD(2) <SEMICOLON>] {return productionEndTerminal("IterationStatement1","-","-","Replacement","Default",first,token);}
+ |
+	"while" "(" n=Expression(true){ replaceName(n);} ")" n=Statement(true){ replaceName(n);} {return productionEndTerminal("IterationStatement2","-","-","Replacement","Default",first,token);}
+ |
+	LOOKAHEAD("for" "(" ( Expression() )? ";") "for" "(" [n=Expression(true){ replaceName(n);}] ";" [n=Expression(true){ replaceName(n);}] ";" [n=Expression(true){ replaceName(n);}] ")" n=Statement(true){ replaceName(n);} {return productionEndTerminal("IterationStatement3","-","-","Replacement","Default",first,token);}
+ |
+	LOOKAHEAD("for" "(" "var" VariableDeclarationList() ";") "for" "(" "var" n=VariableDeclarationList(true){ replaceName(n);} ";" [n=Expression(true){ replaceName(n);}] ";" [n=Expression(true){ replaceName(n);}] ")" n=Statement(true){ replaceName(n);} {return productionEndTerminal("IterationStatement4","-","-","Replacement","Default",first,token);}
+ |
+	LOOKAHEAD("for" "(" "var" VariableDeclaration() "in") "for" "(" "var" n=VariableDeclaration(true){ replaceName(n);} "in" n=Expression(true){ replaceName(n);} ")" n=Statement(true){ replaceName(n);} {return productionEndTerminal("IterationStatement5","-","-","Replacement","Default",first,token);}
+ |
+	"for" "(" n=LeftHandSideExpression(true){ replaceName(n);} "in" n=Expression(true){ replaceName(n);} ")" n=Statement(true){ replaceName(n);} {return productionEndTerminal("IterationStatement6","-","-","Replacement","Default",first,token);}
 
  )  }
 

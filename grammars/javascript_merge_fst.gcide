@@ -1248,6 +1248,8 @@ Statement:
 		|
 		IfStatement
 		|
+		IterationStatement
+		|
 		ReturnStatement
 ;
 
@@ -1421,7 +1423,7 @@ EqualityExpressionInternal: EqualityOperator RelationalExpression;
 
 EqualityOperator	: "==" | "!=" | "===" | "!==";
 
-RelationalExpression: ShiftExpression ( RelationalExpressionInternal )*;
+RelationalExpression: ShiftExpression ( LOOK_AHEAD(2) RelationalExpressionInternal )*;
 
 RelationalExpressionInternal: RelationalOperator ShiftExpression;
 
@@ -1446,9 +1448,9 @@ MultiplicativeExpressionInternal: MultiplicativeOperator UnaryExpression;
 MultiplicativeOperator: "*" | "/" | "%";
 
 UnaryExpression: 
-	PostfixExpression
-	|
-	( LOOK_AHEAD(2) UnaryExpressionInternal )+
+		PostfixExpression
+		|
+		( LOOK_AHEAD(2) UnaryExpressionInternal )+
 ;
 
 UnaryExpressionInternal: UnaryOperator UnaryExpression;
@@ -1460,6 +1462,20 @@ PostfixExpression: LeftHandSideExpression ( LOOK_AHEAD(2) PostfixOperator )?;
 PostfixOperator: "++" | "--";
 
 IfStatement: "if" "(" Expression ")" Statement ( LOOK_AHEAD(2) "else" Statement )?;
+
+IterationStatement:
+		"do" Statement "while" "(" Expression ")" [ LOOK_AHEAD(2) <SEMICOLON> ]
+		|
+		"while" "(" Expression ")" Statement
+		|
+		LOOK_AHEAD("\"for\" \"(\" ( Expression() )? \";\"") "for" "(" ( Expression )? ";" ( Expression )? ";" ( Expression )? ")" Statement
+		|
+		LOOK_AHEAD("\"for\" \"(\" \"var\" VariableDeclarationList() \";\"") "for" "(" "var" VariableDeclarationList ";" ( Expression )? ";" ( Expression )? ")" Statement
+		|
+		LOOK_AHEAD("\"for\" \"(\" \"var\" VariableDeclaration() \"in\"") "for" "(" "var" VariableDeclaration "in" Expression ")" Statement
+		|
+		"for" "(" LeftHandSideExpression "in" Expression ")" Statement
+;
 
 ReturnStatement: "return" [ LOOK_AHEAD(2) ReturnExpression ] [ LOOK_AHEAD(2) <SEMICOLON> ];
 

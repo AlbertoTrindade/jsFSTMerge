@@ -46,4 +46,30 @@ if (ferrari.color === 'blue') {
 else {
 	console.log('Ferrari is not blue');
 }
-	
+
+var i = 0;
+
+do {
+	i++;
+} while (i < 10);
+
+while (i < 10) {
+	i++;
+}
+
+for (i = 0; i < 10; i++) {
+	console.log("Loop");
+}
+
+for (var j = 0; j < 5; j++) {
+	console.log("Another loop");
+}
+
+for (var property in cars[0]) {
+	console.log(property);
+}
+
+var list = [1, 2, 3];
+for (i in list) {
+	console.log(i);
+}
