@@ -163,6 +163,7 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 		if (type.equals("Literal3") && expectedType.equals("Literal")) return true;
 		if (type.equals("UnaryOperator1") && expectedType.equals("UnaryOperator")) return true;
 		if (type.equals("PrimaryExpression5") && expectedType.equals("PrimaryExpression")) return true;
+		if (type.equals("Element1") && expectedType.equals("Element")) return true;
 		if (type.equals("CallExpressionPart1") && expectedType.equals("CallExpressionPart")) return true;
 		if (type.equals("LeftHandSideExpression2") && expectedType.equals("LeftHandSideExpression")) return true;
 		if (type.equals("RelationalOperator1") && expectedType.equals("RelationalOperator")) return true;
@@ -176,6 +177,7 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 		if (type.equals("Literal4") && expectedType.equals("Literal")) return true;
 		if (type.equals("EqualityOperator4") && expectedType.equals("EqualityOperator")) return true;
 		if (type.equals("PrimaryExpression4") && expectedType.equals("PrimaryExpression")) return true;
+		if (type.equals("Element2") && expectedType.equals("Element")) return true;
 		if (type.equals("UnaryExpression2") && expectedType.equals("UnaryExpression")) return true;
 		if (type.equals("MemberExpression2") && expectedType.equals("MemberExpression")) return true;
 		if (type.equals("TryStatementInternal1") && expectedType.equals("TryStatementInternal")) return true;

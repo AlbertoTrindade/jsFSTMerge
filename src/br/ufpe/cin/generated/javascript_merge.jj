@@ -1399,19 +1399,27 @@ FSTInfo ArrayLiteralInternal(boolean inTerminal) : { Token first=null,t;FSTInfo 
 
 FSTInfo ElementList(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
-	[n=Elision(true){ replaceName(n);}] n=AssignmentExpression(true){ replaceName(n);} (LOOKAHEAD(2) n=ElementListInternal(true){ replaceName(n);})* {return productionEndTerminal("ElementList","-","-","Replacement","Default",first,token);}
+	[n=Elision(true){ replaceName(n);}] n=Element(true){ replaceName(n);} (LOOKAHEAD(2) n=ElementListInternal(true){ replaceName(n);})* {return productionEndTerminal("ElementList","-","-","Replacement","Default",first,token);}
 
  )  }
 
 FSTInfo ElementListInternal(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
-	n=Elision(true){ replaceName(n);} n=AssignmentExpression(true){ replaceName(n);} {return productionEndTerminal("ElementListInternal","-","-","Replacement","Default",first,token);}
+	n=Elision(true){ replaceName(n);} n=Element(true){ replaceName(n);} {return productionEndTerminal("ElementListInternal","-","-","Replacement","Default",first,token);}
 
  )  }
 
 FSTInfo Elision(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
 	(<COMMA>)+ {return productionEndTerminal("Elision","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo Element(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	LOOKAHEAD(AssignmentExpression()) n=AssignmentExpression(true){ replaceName(n);} {return productionEndTerminal("Element1","-","-","Replacement","Default",first,token);}
+ |
+	n=FunctionExpression(true){ replaceName(n);} {return productionEndTerminal("Element2","-","-","Replacement","Default",first,token);}
 
  )  }
 

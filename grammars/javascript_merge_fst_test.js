@@ -118,3 +118,5 @@ catch (err) {
 finally {
 	console.log('Whatever');
 }
+
+var functions = [function() { return 2; }, function() {  return 3; }];

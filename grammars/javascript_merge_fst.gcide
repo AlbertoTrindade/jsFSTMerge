@@ -1362,11 +1362,17 @@ ArrayLiteralInternal:
 		( ElementList )? "]"
 ;
 
-ElementList: ( Elision )? AssignmentExpression ( LOOK_AHEAD(2) ElementListInternal )*;
+ElementList: ( Elision )? Element ( LOOK_AHEAD(2) ElementListInternal )*;
 
-ElementListInternal: Elision AssignmentExpression;
+ElementListInternal: Elision Element;
 
 Elision: ( <COMMA> )+;
+
+Element:
+		LOOK_AHEAD("AssignmentExpression()") AssignmentExpression
+		|
+		FunctionExpression
+;
 
 Literal:   
 		<DECIMAL_LITERAL>
