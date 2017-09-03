@@ -1289,7 +1289,9 @@ ExpressionStatement: Expression [ LOOK_AHEAD(2) <SEMICOLON> ];
 Expression: AssignmentExpression ( "," AssignmentExpression)*;
 
 AssignmentExpression: 
-		LOOK_AHEAD("LeftHandSideExpression() AssignmentOperator()") LeftHandSideExpression AssignmentOperator AssignmentExpression
+		LOOK_AHEAD("LeftHandSideExpression() AssignmentOperator() AssignmentExpression()") LeftHandSideExpression AssignmentOperator AssignmentExpression
+		|
+		LOOK_AHEAD("LeftHandSideExpression() AssignmentOperator() FunctionExpression()") LeftHandSideExpression AssignmentOperator FunctionExpression
 		|
 		ConditionalExpression
 ;

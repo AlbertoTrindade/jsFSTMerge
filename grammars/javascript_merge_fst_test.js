@@ -119,4 +119,16 @@ finally {
 	console.log('Whatever');
 }
 
+// function as array element
 var functions = [function() { return 2; }, function() {  return 3; }];
+
+// function expression in assignment expression
+this.changePriority = function (page, priority) {
+    if (!pages[page] || pages[page].priority === priority) {
+      return;
+    }
+
+    pages[page].priority = priority;
+    $timeout.cancel(scheduleTimeout);
+    scheduleTimeout = $timeout(schedule, 1000);
+};
