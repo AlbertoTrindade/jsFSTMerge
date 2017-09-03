@@ -1147,12 +1147,6 @@ FSTInfo CompilationUnit(boolean inTerminal) : { Token first=null,t;FSTInfo n;
 
  )  }
 
-FSTInfo Id(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
-} { {first=getToken(1); productionStart(inTerminal); } (
-	t=<IDENTIFIER_NAME>{ replaceName(new FSTInfo("<IDENTIFIER_NAME>",t.image));} {return productionEndTerminal("Id","{<IDENTIFIER_NAME>}","{<IDENTIFIER_NAME>}","Replacement","Default",first,token);}
-
- )  }
-
 FSTInfo SourceElement(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
 	n=Function(inTerminal){ replaceName(n);} n=Id(inTerminal){ replaceName("Id", n);}{ replaceName(n);} "(" [n=FormalParameters(inTerminal){ replaceName(n);}] ")" "{" n=FunctionBody(inTerminal){ replaceName(n);} "}" {return productionEndNonTerminal("SourceElement1","{Id}","{Id}");}
@@ -1170,6 +1164,12 @@ FSTInfo FunctionDeclaration(boolean inTerminal) : { Token first=null,t;FSTInfo n
 FSTInfo Function(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
 	"function"  {return productionEndTerminal("Function","-","-","Replacement","LineBased",first,token);}
+
+ )  }
+
+FSTInfo Id(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	t=<IDENTIFIER_NAME>{ replaceName(new FSTInfo("<IDENTIFIER_NAME>",t.image));} {return productionEndTerminal("Id","{<IDENTIFIER_NAME>}","{<IDENTIFIER_NAME>}","Replacement","Default",first,token);}
 
  )  }
 

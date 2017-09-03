@@ -1194,9 +1194,6 @@ GRAMMARSTART
 @FSTNonTerminal()
 CompilationUnit: ( SourceElement )* <EOF>;
 
-@FSTTerminal(name="{<IDENTIFIER_NAME>}")
-Id: 	<IDENTIFIER_NAME>;
-
 /*
  * Declaration syntax follows.
  */
@@ -1220,6 +1217,9 @@ FunctionDeclaration:
 
 @FSTTerminal(merge="LineBased")
 Function: "function"<NONE>;
+
+@FSTTerminal(name="{<IDENTIFIER_NAME>}")
+Id: 	<IDENTIFIER_NAME>;
 
 @FSTTerminal(merge="LineBased")
 FormalParameters: Id ( "," Id )*;
