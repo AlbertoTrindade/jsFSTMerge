@@ -1235,7 +1235,9 @@ FunctionBody: ( SourceElement )*;
 StatementList: ( LOOK_AHEAD(2) Statement )+;
 
 @FSTInline
-Statement: 
+Statement:
+		LOOK_AHEAD("Block()") Block
+		|
 		VariableStatement
 		|
 		EmptyStatement
@@ -1244,6 +1246,8 @@ Statement:
 		|
 		ReturnStatement
 ;
+
+Block: "{" ( StatementList )? "}";
 
 VariableStatement: "var" VariableDeclarationList [ LOOK_AHEAD(2) <SEMICOLON> ];
 

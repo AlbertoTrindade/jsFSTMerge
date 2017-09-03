@@ -1194,13 +1194,21 @@ FSTInfo StatementList(boolean inTerminal) : { Token first=null,t;FSTInfo n;
 
 FSTInfo Statement(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
-	n=VariableStatement(true){ replaceName(n);} {return productionEndTerminal("Statement1","-","-","Replacement","Default",first,token);}
+	LOOKAHEAD(Block()) n=Block(true){ replaceName(n);} {return productionEndTerminal("Statement1","-","-","Replacement","Default",first,token);}
  |
-	n=EmptyStatement(true){ replaceName(n);} {return productionEndTerminal("Statement2","-","-","Replacement","Default",first,token);}
+	n=VariableStatement(true){ replaceName(n);} {return productionEndTerminal("Statement2","-","-","Replacement","Default",first,token);}
  |
-	n=ExpressionStatement(true){ replaceName(n);} {return productionEndTerminal("Statement3","-","-","Replacement","Default",first,token);}
+	n=EmptyStatement(true){ replaceName(n);} {return productionEndTerminal("Statement3","-","-","Replacement","Default",first,token);}
  |
-	n=ReturnStatement(true){ replaceName(n);} {return productionEndTerminal("Statement4","-","-","Replacement","Default",first,token);}
+	n=ExpressionStatement(true){ replaceName(n);} {return productionEndTerminal("Statement4","-","-","Replacement","Default",first,token);}
+ |
+	n=ReturnStatement(true){ replaceName(n);} {return productionEndTerminal("Statement5","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo Block(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	"{" [n=StatementList(true){ replaceName(n);}] "}" {return productionEndTerminal("Block","-","-","Replacement","Default",first,token);}
 
  )  }
 
