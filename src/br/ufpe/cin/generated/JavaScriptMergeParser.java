@@ -90,7 +90,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
       n = FunctionBody(inTerminal);
                                                                                                                                                                                                        replaceName(n);
       jj_consume_token(RBRACE);
-                                                                                                                                                                                                                             {if (true) return productionEndNonTerminal("SourceElement1","{Id}","{Id}");}
+                                                                                                                                                                                                                             {if (true) return productionEndNonTerminal("FuncDeclaration","{Id}","{Id}");}
       break;
     case BREAK:
     case CONTINUE:
@@ -128,7 +128,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     case REGULAR_EXPRESSION_LITERAL:
       n = StatementList(inTerminal);
                                      replaceName(n);
-                                                       {if (true) return productionEndNonTerminal("SourceElement2","-","-");}
+                                                       {if (true) return productionEndNonTerminal("StmtList","-","-");}
       break;
     default:
       jj_la1[2] = jj_gen;

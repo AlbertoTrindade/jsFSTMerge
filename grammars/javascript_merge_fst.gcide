@@ -1202,9 +1202,9 @@ CompilationUnit: ( SourceElement )* <EOF>;
 @FSTNonTerminal()
 SourceElement:
 		@FSTNonTerminal(name="{Id}")
-		FunctionDeclaration
+		FunctionDeclaration :: FuncDeclaration
 		|
-		StatementList
+		StatementList :: StmtList
 ;
 
 @FSTInline		

@@ -25,7 +25,7 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 			printFeatures(nonTerminal,false);
 			return false;
 		}
-		if (nonTerminal.getType().equals("SourceElement1")) {
+		if (nonTerminal.getType().equals("FuncDeclaration")) {
 			printFeatures(nonTerminal,true);
 			{
 				FSTNode v=getChild(nonTerminal, "Function");
@@ -58,7 +58,7 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 			printFeatures(nonTerminal,false);
 			return false;
 		}
-		if (nonTerminal.getType().equals("SourceElement2")) {
+		if (nonTerminal.getType().equals("StmtList")) {
 			printFeatures(nonTerminal,true);
 			{
 				FSTNode v=getChild(nonTerminal, "StatementList");
@@ -85,6 +85,7 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 		if (type.equals("PropertyName1") && expectedType.equals("PropertyName")) return true;
 		if (type.equals("UnaryExpression1") && expectedType.equals("UnaryExpression")) return true;
 		if (type.equals("UnaryOperator7") && expectedType.equals("UnaryOperator")) return true;
+		if (type.equals("StmtList") && expectedType.equals("SourceElement")) return true;
 		if (type.equals("AssignmentOperator12") && expectedType.equals("AssignmentOperator")) return true;
 		if (type.equals("RelationalOperator3") && expectedType.equals("RelationalOperator")) return true;
 		if (type.equals("AdditiveOperator1") && expectedType.equals("AdditiveOperator")) return true;
@@ -124,6 +125,7 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 		if (type.equals("MultiplicativeOperator3") && expectedType.equals("MultiplicativeOperator")) return true;
 		if (type.equals("AssignmentOperator10") && expectedType.equals("AssignmentOperator")) return true;
 		if (type.equals("InitializerExpression2") && expectedType.equals("InitializerExpression")) return true;
+		if (type.equals("FuncDeclaration") && expectedType.equals("SourceElement")) return true;
 		if (type.equals("CallExpressionInternal2") && expectedType.equals("CallExpressionInternal")) return true;
 		if (type.equals("Statement12") && expectedType.equals("Statement")) return true;
 		if (type.equals("MultiplicativeOperator2") && expectedType.equals("MultiplicativeOperator")) return true;
@@ -161,7 +163,6 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 		if (type.equals("AssignmentOperator3") && expectedType.equals("AssignmentOperator")) return true;
 		if (type.equals("ArrayLiteralInternal2") && expectedType.equals("ArrayLiteralInternal")) return true;
 		if (type.equals("IterationStatement2") && expectedType.equals("IterationStatement")) return true;
-		if (type.equals("SourceElement1") && expectedType.equals("SourceElement")) return true;
 		if (type.equals("RelationalOperator6") && expectedType.equals("RelationalOperator")) return true;
 		if (type.equals("Literal3") && expectedType.equals("Literal")) return true;
 		if (type.equals("UnaryOperator1") && expectedType.equals("UnaryOperator")) return true;
@@ -174,7 +175,6 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 		if (type.equals("IterationStatement5") && expectedType.equals("IterationStatement")) return true;
 		if (type.equals("ArrayLiteralInternal3") && expectedType.equals("ArrayLiteralInternal")) return true;
 		if (type.equals("UnaryOperator9") && expectedType.equals("UnaryOperator")) return true;
-		if (type.equals("SourceElement2") && expectedType.equals("SourceElement")) return true;
 		if (type.equals("AssignmentExpression1") && expectedType.equals("AssignmentExpression")) return true;
 		if (type.equals("AssignmentOperator9") && expectedType.equals("AssignmentOperator")) return true;
 		if (type.equals("Literal4") && expectedType.equals("Literal")) return true;

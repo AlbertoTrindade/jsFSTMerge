@@ -30,6 +30,7 @@ public final class SemistructuredMerge {
 
 	static final String MERGE_SEPARATOR = "##FSTMerge##";
 	static final String SEMANTIC_MERGE_MARKER = "~~FSTMerge~~";
+	static final String STATEMENT_LIST_TYPE = "StmtList";
 
 	/**
 	 * Three-way semistructured merge of three given files.
@@ -48,6 +49,11 @@ public final class SemistructuredMerge {
 			FSTNode leftTree = parser.parse(left);
 			FSTNode baseTree = parser.parse(base);
 			FSTNode rightTree = parser.parse(right);
+			
+			// name statementlists by order
+			nameStatementLists(leftTree);
+			nameStatementLists(baseTree);
+			nameStatementLists(rightTree);
 
 			// merging
 			context.join(merge(leftTree, baseTree, rightTree));
@@ -311,6 +317,22 @@ public final class SemistructuredMerge {
 				context.editedRightNodes.add(node);
 			} else if (baseContenttrim.equals(rightContenttrim) && !leftContenttrim.equals(rightContenttrim)) {
 				context.editedLeftNodes.add(node);
+			}
+		}
+	}
+	
+	private static void nameStatementLists(FSTNode node) {
+		if (node instanceof FSTNonTerminal) {
+			FSTNonTerminal nonTerminalNode = (FSTNonTerminal) node;
+			int statementListCount = 1;
+			
+			for (FSTNode childNode : nonTerminalNode.getChildren()) {
+				if (childNode.getType().equals(STATEMENT_LIST_TYPE)) {
+					childNode.setName(STATEMENT_LIST_TYPE + statementListCount);
+					statementListCount++;
+				}
+				
+				nameStatementLists(childNode);
 			}
 		}
 	}
