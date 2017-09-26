@@ -20,11 +20,13 @@ final public class ConflictsHandler {
 	public static void handle(MergeContext context) throws TextualMergeException{
 		context.semistructuredOutput = Prettyprinter.print(context.superImposedTree); //partial result of semistructured merge is necessary for further processing
 		
-		findAndDetectTypeAmbiguityErrors(context);
-		findAndDetectNewElementReferencingEditedOne(context);
-		findAndResolveRenamingOrDeletionConflicts(context);
-		findAndDetectInitializationBlocks(context);
-		findAndAccountDuplicatedDeclarationErrors(context);
+		//findAndDetectTypeAmbiguityErrors(context);
+		//findAndDetectNewElementReferencingEditedOne(context);
+		//findAndResolveRenamingOrDeletionConflicts(context);
+		//findAndDetectInitializationBlocks(context);
+		//findAndAccountDuplicatedDeclarationErrors(context);
+		
+		findAndDetectDeletionsOfHighLevelElements(context);
 	}
 
 	private static void findAndDetectTypeAmbiguityErrors(MergeContext context) {
@@ -78,5 +80,10 @@ final public class ConflictsHandler {
 	private static void findAndAccountDuplicatedDeclarationErrors(MergeContext context) {
 		//invoking the specific handler for duplicated declaration errors
 		DuplicatedDeclarationHandler.handle(context);
+	}
+	
+	private static void findAndDetectDeletionsOfHighLevelElements(MergeContext context) {
+		//invoking the specific handler for high level deletions (classes, inner classes, etc.)
+		DeletionsHandler.handle(context);
 	}
 }

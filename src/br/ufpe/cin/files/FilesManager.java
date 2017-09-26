@@ -222,7 +222,7 @@ public final class FilesManager {
 		//StringBuilder content = new StringBuilder();
 		String content = "";
 		try{
-			BufferedReader reader = Files.newBufferedReader(Paths.get(file.getAbsolutePath()), StandardCharsets.ISO_8859_1);
+			BufferedReader reader = Files.newBufferedReader(Paths.get(file.getAbsolutePath()), StandardCharsets.UTF_8);
 			content = reader.lines().collect(Collectors.joining("\n"));
 		}catch(Exception e){
 			//System.err.println(e.getMessage());
@@ -383,7 +383,7 @@ public final class FilesManager {
 				endLOC = lineCounter;
 				MergeConflict mergeConflict = new MergeConflict(leftConflictingContent,rightConflictingContent,startLOC,endLOC);
 				mergeConflicts.add(mergeConflict);
-				
+
 				//reseting the flags
 				isConflictOpen	= false;
 				isLeftContent   = false;
@@ -453,6 +453,31 @@ public final class FilesManager {
 	}
 
 	/**
+	 * Returns the compatible node of <i>source</i> with <i>id</i>, or null if there isn't.
+	 * @param source
+	 * @param id
+	 */
+	public static FSTNode findNodeByID (FSTNode source, String id){
+		if(source instanceof FSTNonTerminal){
+			for (FSTNode child : ((FSTNonTerminal)source).getChildren()) {
+				FSTNode result = findNodeByID(child, id);
+				if(result!=null){
+					return result;
+				}
+			}
+		} else {
+			if(source instanceof FSTTerminal){
+				if(source.getType().equals("Id")){
+					if(((FSTTerminal) source).getBody().equals(id)){
+						return source;
+					}
+				}
+			}
+		}
+		return null;
+	}
+
+	/**
 	 * Estimates the root path of the project owning the files being merged.
 	 * @param context
 	 * @return projects file path, or "" in case not able to estimate
@@ -511,7 +536,7 @@ public final class FilesManager {
 	public static String indentCode(String sourceCode){
 		String indentedCode = sourceCode;
 		try{
-			CompilationUnit indenter = JavaParser.parse(new ByteArrayInputStream(sourceCode.getBytes()));
+			CompilationUnit indenter = JavaParser.parse(new ByteArrayInputStream(sourceCode.getBytes()), StandardCharsets.UTF_8.displayName());
 			indentedCode = indenter.toString();
 		} catch (Exception e){} //in case of any errors, returns the non-indented sourceCode
 		return indentedCode;
@@ -560,7 +585,7 @@ public final class FilesManager {
 		}
 		return result;
 	}
-	
+
 	/**
 	 * Compute the similarity between two given strings based on the <i>Levenshtein Distance</i>.
 	 * @param first
@@ -582,7 +607,7 @@ public final class FilesManager {
 		int levenshteinDistance = StringUtils.getLevenshteinDistance(first, second);
 		return ((longerLength - levenshteinDistance)/(double) longerLength);
 	}
-	
+
 	@SuppressWarnings("unused")
 	private static String undoReplaceConflictMarkers(String indentedCode) {
 		// dummy code for identation purposes
