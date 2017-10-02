@@ -54,6 +54,7 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 					v.accept(this);
 				}
 			}
+			hintNewLine();
 			printToken("}");
 			printFeatures(nonTerminal,false);
 			return false;

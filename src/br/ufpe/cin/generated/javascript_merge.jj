@@ -391,7 +391,6 @@ TOKEN:
 	< DECIMAL_DIGIT: ["0"-"9"] >
 }
 
-
 /* Section 7.8: Literals */
 /*
 
