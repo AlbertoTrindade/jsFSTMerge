@@ -58,9 +58,9 @@ public class JSParser {
 	{
 		if(FilesManager.readFileContent(file).isEmpty()){
 			throw new FileNotFoundException();
-		} else if(file != null && (isJavaFile(file) || JSFSTMerge.isGit)){
+		} else if(file != null && (isJavaScriptFile(file) || JSFSTMerge.isGit)){
 			return true;
-		} else if(file != null && !isJavaFile(file)){
+		} else if(file != null && !isJavaScriptFile(file)){
 			throw new ParseException("The file " + file.getName() + " is not a valid .js file.");
 		} else {
 			return false;
@@ -73,7 +73,7 @@ public class JSParser {
 	 * @param file
 	 * @return true in case file extension is <i>javascript</i>, or false
 	 */
-	private boolean isJavaFile(File file){
+	private boolean isJavaScriptFile(File file){
 		//return FilenameUtils.getExtension(file.getAbsolutePath()).equalsIgnoreCase("java");
 		return file.getName().toLowerCase().contains(".js");
 	}
