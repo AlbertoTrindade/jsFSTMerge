@@ -182,7 +182,7 @@ public final class SemistructuredMerge {
 
 						if(isProcessingBaseTree){ //node added by left in relation to base
 							context.addedLeftNodes.add(cloneA);
-						} else {
+						} else if(!context.addedLeftNodes.contains(childA)) {
 							context.nodesDeletedByRight.add(cloneA);
 						}
 					} else {
