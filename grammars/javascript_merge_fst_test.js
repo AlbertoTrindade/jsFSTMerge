@@ -152,3 +152,7 @@ this.changePriority = f1 || function anotherFunction() { };
 var obj = {
 	a: function() { console.log('a'); }
 };
+
+// function expression in ternary operator
+var isAdd = true;
+var selectedFunction = isAdd ? function(x, y) { return x + y; } : function(x, y) { return x - y; };

@@ -1426,7 +1426,13 @@ AssignmentOperator:
 
 ConditionalExpression: LogicalORExpression ( ConditionalExpressionInternal )?;
 
-ConditionalExpressionInternal: "?" AssignmentExpression ":" AssignmentExpression;
+ConditionalExpressionInternal: "?" TernaryExpression ":" TernaryExpression;
+
+TernaryExpression:
+		LOOK_AHEAD("AssignmentExpression()") AssignmentExpression
+		|
+		FunctionExpression
+;
 
 LogicalORExpression:	
 		LOOK_AHEAD("LogicalANDExpression() \"||\" FunctionExpression()") LogicalANDExpression "||" FunctionExpression ( "||" LogicalANDExpression )*
