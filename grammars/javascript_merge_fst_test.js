@@ -147,3 +147,8 @@ this.changePriority = f1 || function anotherFunction() { };
 	}
 
 }).call(this);
+
+// function expression as value in object literal
+var obj = {
+	a: function() { console.log('a'); }
+};

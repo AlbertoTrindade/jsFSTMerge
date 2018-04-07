@@ -1342,7 +1342,13 @@ PropertyNameAndValueListInternal :
 		","
 ;
 
-PropertyNameAndValue: PropertyName ":" AssignmentExpression;
+PropertyNameAndValue: PropertyName ":" PropertyValue;
+
+PropertyValue:
+		LOOK_AHEAD("AssignmentExpression()") AssignmentExpression
+		|
+		FunctionExpression
+;
 
 PropertyName:
 		Id
