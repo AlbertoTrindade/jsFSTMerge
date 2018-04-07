@@ -150,7 +150,8 @@ this.changePriority = f1 || function anotherFunction() { };
 
 // function expression as value in object literal
 var obj = {
-	a: function() { console.log('a'); }
+	a: function() { console.log('a'); },
+	0: 1
 };
 
 // function expression in ternary operator

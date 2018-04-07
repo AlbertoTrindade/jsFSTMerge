@@ -1354,6 +1354,8 @@ PropertyName:
 		Id
 		|
 		<STRING_LITERAL>
+		|
+		<DECIMAL_LITERAL>
 ;
 
 ArrayLiteral: "[" ArrayLiteralInternal;
