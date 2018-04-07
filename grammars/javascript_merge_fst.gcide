@@ -1260,7 +1260,7 @@ Statement:
 		TryStatement
 ;
 
-Block: "{" ( StatementList )? "}";
+Block: "{" ( SourceElement )* "}";
 
 VariableStatement: "var" VariableDeclarationList [ LOOK_AHEAD(2) <SEMICOLON> ];
 

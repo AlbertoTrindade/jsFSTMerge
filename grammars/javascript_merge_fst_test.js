@@ -157,3 +157,12 @@ var obj = {
 // function expression in ternary operator
 var isAdd = true;
 var selectedFunction = isAdd ? function(x, y) { return x + y; } : function(x, y) { return x - y; };
+
+// function declaration in block
+if (2 > 1) {
+	function funcInBlock() {
+		console.log('in block!');
+	}
+	
+	funcInBlock();
+}

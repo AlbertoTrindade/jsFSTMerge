@@ -1224,7 +1224,7 @@ FSTInfo Statement(boolean inTerminal) : { Token first=null,t;FSTInfo n;
 
 FSTInfo Block(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
-	"{" [n=StatementList(true){ replaceName(n);}] "}" {return productionEndTerminal("Block","-","-","Replacement","Default",first,token);}
+	"{" (n=SourceElement(true){ replaceName(n);})* "}" {return productionEndTerminal("Block","-","-","Replacement","Default",first,token);}
 
  )  }
 
