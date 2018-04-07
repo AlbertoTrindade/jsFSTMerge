@@ -1285,11 +1285,15 @@ ExpressionStatement: Expression [ LOOK_AHEAD(2) <SEMICOLON> ];
 Expression: AssignmentExpression ( "," AssignmentExpression)*;
 
 AssignmentExpression: 
-		LOOK_AHEAD("LeftHandSideExpression() AssignmentOperator() AssignmentExpression()") LeftHandSideExpression AssignmentOperator AssignmentExpression
-		|
-		LOOK_AHEAD("LeftHandSideExpression() AssignmentOperator() FunctionExpression()") LeftHandSideExpression AssignmentOperator FunctionExpression
+		LOOK_AHEAD("LeftHandSideExpression() AssignmentOperator()") LeftHandSideExpression AssignmentOperator AssignmentExpressionInternal
 		|
 		ConditionalExpression
+;
+
+AssignmentExpressionInternal:
+		LOOK_AHEAD("AssignmentExpression()") AssignmentExpression
+		|
+		FunctionExpression
 ;
 
 FunctionExpression:
@@ -1363,9 +1367,7 @@ ArrayLiteral: "[" ArrayLiteralInternal;
 ArrayLiteralInternal:
 		LOOK_AHEAD(2) ( Elision )? "]"
 		|
-		LOOK_AHEAD("ElementList() Elision()") ElementList Elision "]"
-		|
-		( ElementList )? "]"
+		ElementList ( Elision )? "]"
 ;
 
 ElementList: ( Elision )? Element ( LOOK_AHEAD(2) ElementListInternal )*;

@@ -96,9 +96,9 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 		if (type.equals("PrimaryExpression2") && expectedType.equals("PrimaryExpression")) return true;
 		if (type.equals("PostfixOperator1") && expectedType.equals("PostfixOperator")) return true;
 		if (type.equals("AssignmentOperator7") && expectedType.equals("AssignmentOperator")) return true;
-		if (type.equals("AssignmentExpression3") && expectedType.equals("AssignmentExpression")) return true;
 		if (type.equals("MemberExpressionPart2") && expectedType.equals("MemberExpressionPart")) return true;
 		if (type.equals("PropertyName2") && expectedType.equals("PropertyName")) return true;
+		if (type.equals("AssignmentExpressionInternal2") && expectedType.equals("AssignmentExpressionInternal")) return true;
 		if (type.equals("Statement14") && expectedType.equals("Statement")) return true;
 		if (type.equals("CaseBlockInternal2") && expectedType.equals("CaseBlockInternal")) return true;
 		if (type.equals("ReturnExpression2") && expectedType.equals("ReturnExpression")) return true;
@@ -147,6 +147,8 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 		if (type.equals("EqualityOperator2") && expectedType.equals("EqualityOperator")) return true;
 		if (type.equals("CallExpressionPart3") && expectedType.equals("CallExpressionPart")) return true;
 		if (type.equals("FunctionExpression2") && expectedType.equals("FunctionExpression")) return true;
+		if (type.equals("PropertyValue1") && expectedType.equals("PropertyValue")) return true;
+		if (type.equals("TernaryExpression2") && expectedType.equals("TernaryExpression")) return true;
 		if (type.equals("MultiplicativeOperator1") && expectedType.equals("MultiplicativeOperator")) return true;
 		if (type.equals("AssignmentOperator2") && expectedType.equals("AssignmentOperator")) return true;
 		if (type.equals("IterationStatement3") && expectedType.equals("IterationStatement")) return true;
@@ -168,13 +170,14 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 		if (type.equals("Literal3") && expectedType.equals("Literal")) return true;
 		if (type.equals("UnaryOperator1") && expectedType.equals("UnaryOperator")) return true;
 		if (type.equals("PrimaryExpression5") && expectedType.equals("PrimaryExpression")) return true;
+		if (type.equals("AssignmentExpressionInternal1") && expectedType.equals("AssignmentExpressionInternal")) return true;
 		if (type.equals("Element1") && expectedType.equals("Element")) return true;
 		if (type.equals("CallExpressionPart1") && expectedType.equals("CallExpressionPart")) return true;
+		if (type.equals("PropertyName3") && expectedType.equals("PropertyName")) return true;
 		if (type.equals("LeftHandSideExpression2") && expectedType.equals("LeftHandSideExpression")) return true;
 		if (type.equals("RelationalOperator1") && expectedType.equals("RelationalOperator")) return true;
 		if (type.equals("Statement2") && expectedType.equals("Statement")) return true;
 		if (type.equals("IterationStatement5") && expectedType.equals("IterationStatement")) return true;
-		if (type.equals("ArrayLiteralInternal3") && expectedType.equals("ArrayLiteralInternal")) return true;
 		if (type.equals("UnaryOperator9") && expectedType.equals("UnaryOperator")) return true;
 		if (type.equals("AssignmentExpression1") && expectedType.equals("AssignmentExpression")) return true;
 		if (type.equals("AssignmentOperator9") && expectedType.equals("AssignmentOperator")) return true;
@@ -186,7 +189,9 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 		if (type.equals("MemberExpression2") && expectedType.equals("MemberExpression")) return true;
 		if (type.equals("TryStatementInternal1") && expectedType.equals("TryStatementInternal")) return true;
 		if (type.equals("Statement3") && expectedType.equals("Statement")) return true;
+		if (type.equals("PropertyValue2") && expectedType.equals("PropertyValue")) return true;
 		if (type.equals("LeftHandSideExpression1") && expectedType.equals("LeftHandSideExpression")) return true;
+		if (type.equals("TernaryExpression1") && expectedType.equals("TernaryExpression")) return true;
 		if (type.equals("IterationStatement4") && expectedType.equals("IterationStatement")) return true;
 		if (type.equals("AssignmentOperator1") && expectedType.equals("AssignmentOperator")) return true;
 		if (type.equals("AdditiveOperator2") && expectedType.equals("AdditiveOperator")) return true;
