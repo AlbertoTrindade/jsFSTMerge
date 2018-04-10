@@ -1312,7 +1312,9 @@ FSTInfo LeftHandSideExpression(boolean inTerminal) : { Token first=null,t;FSTInf
 } { {first=getToken(1); productionStart(inTerminal); } (
 	LOOKAHEAD(CallExpressionInternal() Arguments()) n=CallExpression(true){ replaceName(n);} {return productionEndTerminal("LeftHandSideExpression1","-","-","Replacement","Default",first,token);}
  |
-	n=MemberExpression(true){ replaceName(n);} {return productionEndTerminal("LeftHandSideExpression2","-","-","Replacement","Default",first,token);}
+	LOOKAHEAD("(" FunctionExpression()) n=CallExpressionIIFECrockford(true){ replaceName(n);} {return productionEndTerminal("LeftHandSideExpression2","-","-","Replacement","Default",first,token);}
+ |
+	n=MemberExpression(true){ replaceName(n);} {return productionEndTerminal("LeftHandSideExpression3","-","-","Replacement","Default",first,token);}
 
  )  }
 
@@ -1327,6 +1329,12 @@ FSTInfo CallExpressionInternal(boolean inTerminal) : { Token first=null,t;FSTInf
 	LOOKAHEAD(3) n=MemberExpression(true){ replaceName(n);} {return productionEndTerminal("CallExpressionInternal1","-","-","Replacement","Default",first,token);}
  |
 	"(" n=FunctionExpression(true){ replaceName(n);} ")" (LOOKAHEAD(2) n=MemberExpressionPart(true){ replaceName(n);})* {return productionEndTerminal("CallExpressionInternal2","-","-","Replacement","Default",first,token);}
+
+ )  }
+
+FSTInfo CallExpressionIIFECrockford(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	"(" n=FunctionExpression(true){ replaceName(n);} n=Arguments(true){ replaceName(n);} (LOOKAHEAD(2) n=CallExpressionPart(true){ replaceName(n);})* ")" {return productionEndTerminal("CallExpressionIIFECrockford","-","-","Replacement","Default",first,token);}
 
  )  }
 

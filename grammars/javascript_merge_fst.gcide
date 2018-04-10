@@ -1305,6 +1305,8 @@ FunctionExpression:
 LeftHandSideExpression:
 		LOOK_AHEAD("CallExpressionInternal() Arguments()") CallExpression
 		|
+		LOOK_AHEAD("\"(\" FunctionExpression()")  CallExpressionIIFECrockford
+		|
 		MemberExpression
 ;
 	
@@ -1315,6 +1317,8 @@ CallExpressionInternal:
 		|
 		"(" FunctionExpression ")" ( LOOK_AHEAD(2) MemberExpressionPart )*
 ;
+
+CallExpressionIIFECrockford: "(" FunctionExpression Arguments ( LOOK_AHEAD(2) CallExpressionPart )* ")";
 
 MemberExpression: 
 		PrimaryExpression ( LOOK_AHEAD(2) MemberExpressionPart )*

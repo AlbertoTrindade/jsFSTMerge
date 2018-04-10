@@ -166,3 +166,6 @@ if (2 > 1) {
 	
 	funcInBlock();
 }
+
+// IIFE in Crockford's syntax
+(function(){ return 10; }());
