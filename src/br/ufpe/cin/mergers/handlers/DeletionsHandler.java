@@ -32,6 +32,7 @@ import de.ovgu.cide.fstgen.ast.FSTTerminal;
 public class DeletionsHandler {
 
 	private final static double DEFAULT_SIMILARITY_THRESHOLD = 0.9;
+	private final static int RHINO_CALL_TYPE = 38;
 
 	public static void handle(MergeContext context) {
 		normalizeDeletions(context);
@@ -242,7 +243,7 @@ public class DeletionsHandler {
 		rootNode.visit(new NodeVisitor() {
 			@Override
 			public boolean visit(AstNode node) {
-				if(node.toSource().equals(id)) {
+				if(node.toSource().equals(id) && node.getParent().getType() == RHINO_CALL_TYPE) {
 					instances.add(node);
 				}
 				
