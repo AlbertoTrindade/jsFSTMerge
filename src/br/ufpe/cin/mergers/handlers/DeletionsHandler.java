@@ -124,7 +124,7 @@ public class DeletionsHandler {
 				if(renamingCandidate instanceof FSTNonTerminal){
 					if(hasSameShape(renamingCandidate,deletedNode) && hasSimilarContent(renamingCandidate,deletedNode) 
 							&& !hasNewInstance(context,((FSTTerminal) getId(renamingCandidate)).getBody(),!isLeftDeletion)){
-						joinContent(source, identifier, parent, index,renamingCandidate);
+						joinContent(source, identifier, parent, renamingCandidate);
 						conflict = false;
 						break;
 					}
@@ -207,17 +207,16 @@ public class DeletionsHandler {
 		}
 	}
 
-	private static void joinContent(FSTNode source, String identifier, FSTNonTerminal parent, int index, FSTNode renamingCandidate) {
-		//composition corresponds to put the new id on the the original declaration 
-		parent.removeChild(renamingCandidate);
+	private static void joinContent(FSTNode source, String identifier, FSTNonTerminal parent, FSTNode renamingCandidate) {
+		//composition corresponds to put the new body on the renamed declaration
 		FSTNode correspondingInSource = FilesManager.findNodeByID(source, identifier);
 		FSTNode declarationInSource = correspondingInSource.getParent();
-		declarationInSource.setName(renamingCandidate.getName());
 
 		FSTNode newId = getId(renamingCandidate);
+
 		((FSTTerminal) correspondingInSource).setBody(((FSTTerminal) newId).getBody());
 		((FSTTerminal) correspondingInSource).setName(newId.getName());
-		parent.addChild(declarationInSource, index);
+		((FSTNonTerminal) renamingCandidate).setChildren(((FSTNonTerminal) declarationInSource).getChildren());
 	}
 
 	private static boolean hasNewInstance(MergeContext context,	String identifier, boolean isLeftDeletion) {
