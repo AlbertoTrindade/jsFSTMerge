@@ -1,7 +1,7 @@
 jsFSTMerge
 ========
 
-Copyright (c) 2016 by the Federal University of Pernambuco.
+Copyright (c) 2018 by the Federal University of Pernambuco.
 
 A semistructured merge tool for JavaScript applications, based on [jFSTMerge](https://github.com/guilhermejccavalcanti/jFSTMerge), a tool for Java applications developed by Guilherme Cavalcanti  &lt;<gjcc@cin.ufpe.br>&gt;.
 
