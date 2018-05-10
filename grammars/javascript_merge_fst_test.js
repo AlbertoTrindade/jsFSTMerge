@@ -169,3 +169,10 @@ if (2 > 1) {
 
 // IIFE in Crockford's syntax
 (function(){ return 10; }());
+
+// catch, a keyword, allowed in callexpressionpart (like in promise)
+result.then(function(value) {
+    callback(null, value);
+}).catch(function(err) {
+    callback(err.message ? err : new Error(err));
+});

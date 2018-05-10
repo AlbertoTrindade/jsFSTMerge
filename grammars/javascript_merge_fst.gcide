@@ -1425,7 +1425,9 @@ CallExpressionPart:
 		|
 		"[" Expression "]"
 		|
-		"." Id
+		LOOK_AHEAD(2) "." Id
+		|
+		"." <CATCH>
 ;
 
 AssignmentOperator:

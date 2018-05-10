@@ -1508,7 +1508,9 @@ FSTInfo CallExpressionPart(boolean inTerminal) : { Token first=null,t;FSTInfo n;
  |
 	"[" n=Expression(true){ replaceName(n);} "]" {return productionEndTerminal("CallExpressionPart2","-","-","Replacement","Default",first,token);}
  |
-	"." n=Id(true){ replaceName(n);} {return productionEndTerminal("CallExpressionPart3","-","-","Replacement","Default",first,token);}
+	LOOKAHEAD(2) "." n=Id(true){ replaceName(n);} {return productionEndTerminal("CallExpressionPart3","-","-","Replacement","Default",first,token);}
+ |
+	"." <CATCH> {return productionEndTerminal("CallExpressionPart4","-","-","Replacement","Default",first,token);}
 
  )  }
 
