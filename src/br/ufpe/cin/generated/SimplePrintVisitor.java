@@ -19,6 +19,51 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 	public boolean visit(FSTNonTerminal nonTerminal) {
 		if (nonTerminal.getType().equals("CompilationUnit")) {
 			printFeatures(nonTerminal,true);
+			{
+				FSTNode v=getChild(nonTerminal, "SourceElements");
+				if (v!=null) {
+					v.accept(this);
+				}
+			}
+			printFeatures(nonTerminal,false);
+			return false;
+		}
+		if (nonTerminal.getType().equals("SourceElements1")) {
+			printFeatures(nonTerminal,true);
+			{
+				FSTNode v=getChild(nonTerminal, "CallExpression");
+				if (v!=null) {
+					v.accept(this);
+				}
+			}
+			{
+				FSTNode v=getChild(nonTerminal, "EmptyStatement");
+				if (v!=null) {
+					v.accept(this);
+				}
+			}
+			printFeatures(nonTerminal,false);
+			return false;
+		}
+		if (nonTerminal.getType().equals("SourceElements2")) {
+			printFeatures(nonTerminal,true);
+			{
+				FSTNode v=getChild(nonTerminal, "CallExpressionIIFECrockford");
+				if (v!=null) {
+					v.accept(this);
+				}
+			}
+			{
+				FSTNode v=getChild(nonTerminal, "EmptyStatement");
+				if (v!=null) {
+					v.accept(this);
+				}
+			}
+			printFeatures(nonTerminal,false);
+			return false;
+		}
+		if (nonTerminal.getType().equals("SourceElements3")) {
+			printFeatures(nonTerminal,true);
 			for (FSTNode v : getChildren(nonTerminal,"SourceElement")) {
 				v.accept(this);
 			}
@@ -74,6 +119,169 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 			printFeatures(nonTerminal,true);
 			for (FSTNode v : getChildren(nonTerminal,"SourceElement")) {
 				v.accept(this);
+			}
+			printFeatures(nonTerminal,false);
+			return false;
+		}
+		if (nonTerminal.getType().equals("FunctionExpression1")) {
+			printFeatures(nonTerminal,true);
+			{
+				FSTNode v=getChild(nonTerminal, "Function");
+				if (v!=null) {
+					v.accept(this);
+				}
+			}
+			{
+				FSTNode v=getChild(nonTerminal, "Id");
+				if (v!=null) {
+					v.accept(this);
+				}
+			}
+			printToken("(");
+			{
+				FSTNode v=getChild(nonTerminal, "FormalParameters");
+				if (v!=null) {
+					v.accept(this);
+				}
+			}
+			printToken(")");
+			printToken("{");
+			{
+				FSTNode v=getChild(nonTerminal, "FunctionBody");
+				if (v!=null) {
+					v.accept(this);
+				}
+			}
+			printToken("}");
+			printFeatures(nonTerminal,false);
+			return false;
+		}
+		if (nonTerminal.getType().equals("FunctionExpression2")) {
+			printFeatures(nonTerminal,true);
+			printToken("(");
+			{
+				FSTNode v=getChild(nonTerminal, "FunctionExpression");
+				if (v!=null) {
+					v.accept(this);
+				}
+			}
+			printToken(")");
+			printFeatures(nonTerminal,false);
+			return false;
+		}
+		if (nonTerminal.getType().equals("CallExpression")) {
+			printFeatures(nonTerminal,true);
+			{
+				FSTNode v=getChild(nonTerminal, "CallExpressionInternal");
+				if (v!=null) {
+					v.accept(this);
+				}
+			}
+			{
+				FSTNode v=getChild(nonTerminal, "Arguments");
+				if (v!=null) {
+					v.accept(this);
+				}
+			}
+			for (FSTNode v : getChildren(nonTerminal,"CallExpressionPart")) {
+				v.accept(this);
+			}
+			printFeatures(nonTerminal,false);
+			return false;
+		}
+		if (nonTerminal.getType().equals("CallExpressionInternal1")) {
+			printFeatures(nonTerminal,true);
+			{
+				FSTNode v=getChild(nonTerminal, "MemberExpression");
+				if (v!=null) {
+					v.accept(this);
+				}
+			}
+			printFeatures(nonTerminal,false);
+			return false;
+		}
+		if (nonTerminal.getType().equals("CallExpressionInternal2")) {
+			printFeatures(nonTerminal,true);
+			printToken("(");
+			{
+				FSTNode v=getChild(nonTerminal, "FunctionExpression");
+				if (v!=null) {
+					v.accept(this);
+				}
+			}
+			printToken(")");
+			for (FSTNode v : getChildren(nonTerminal,"MemberExpressionPart")) {
+				v.accept(this);
+			}
+			printFeatures(nonTerminal,false);
+			return false;
+		}
+		if (nonTerminal.getType().equals("CallExpressionIIFECrockford")) {
+			printFeatures(nonTerminal,true);
+			printToken("(");
+			{
+				FSTNode v=getChild(nonTerminal, "FunctionExpression");
+				if (v!=null) {
+					v.accept(this);
+				}
+			}
+			{
+				FSTNode v=getChild(nonTerminal, "Arguments");
+				if (v!=null) {
+					v.accept(this);
+				}
+			}
+			for (FSTNode v : getChildren(nonTerminal,"CallExpressionPart")) {
+				v.accept(this);
+			}
+			printToken(")");
+			printFeatures(nonTerminal,false);
+			return false;
+		}
+		if (nonTerminal.getType().equals("Arguments")) {
+			printFeatures(nonTerminal,true);
+			printToken("(");
+			{
+				FSTNode v=getChild(nonTerminal, "ArgumentList");
+				if (v!=null) {
+					v.accept(this);
+				}
+			}
+			printToken(")");
+			printFeatures(nonTerminal,false);
+			return false;
+		}
+		if (nonTerminal.getType().equals("ArgumentList")) {
+			printFeatures(nonTerminal,true);
+			Iterator<FSTNode> listElements = getChildren(nonTerminal, "Argument").iterator();
+			if (listElements.hasNext()) {
+				listElements.next().accept(this);
+			}
+			while (listElements.hasNext()) {
+				printToken(",");
+				listElements.next().accept(this);
+			}
+			printFeatures(nonTerminal,false);
+			return false;
+		}
+		if (nonTerminal.getType().equals("Argument1")) {
+			printFeatures(nonTerminal,true);
+			{
+				FSTNode v=getChild(nonTerminal, "AssignmentExpression");
+				if (v!=null) {
+					v.accept(this);
+				}
+			}
+			printFeatures(nonTerminal,false);
+			return false;
+		}
+		if (nonTerminal.getType().equals("Argument2")) {
+			printFeatures(nonTerminal,true);
+			{
+				FSTNode v=getChild(nonTerminal, "FunctionExpression");
+				if (v!=null) {
+					v.accept(this);
+				}
 			}
 			printFeatures(nonTerminal,false);
 			return false;
@@ -144,6 +352,7 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 		if (type.equals("ShiftOperator1") && expectedType.equals("ShiftOperator")) return true;
 		if (type.equals("Statement8") && expectedType.equals("Statement")) return true;
 		if (type.equals("MemberExpression1") && expectedType.equals("MemberExpression")) return true;
+		if (type.equals("SourceElements3") && expectedType.equals("SourceElements")) return true;
 		if (type.equals("Statement11") && expectedType.equals("Statement")) return true;
 		if (type.equals("EqualityOperator2") && expectedType.equals("EqualityOperator")) return true;
 		if (type.equals("CallExpressionPart3") && expectedType.equals("CallExpressionPart")) return true;
@@ -175,6 +384,7 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 		if (type.equals("AssignmentExpressionInternal1") && expectedType.equals("AssignmentExpressionInternal")) return true;
 		if (type.equals("Element1") && expectedType.equals("Element")) return true;
 		if (type.equals("CallExpressionPart1") && expectedType.equals("CallExpressionPart")) return true;
+		if (type.equals("SourceElements1") && expectedType.equals("SourceElements")) return true;
 		if (type.equals("PropertyName3") && expectedType.equals("PropertyName")) return true;
 		if (type.equals("LeftHandSideExpression2") && expectedType.equals("LeftHandSideExpression")) return true;
 		if (type.equals("RelationalOperator1") && expectedType.equals("RelationalOperator")) return true;
@@ -189,6 +399,7 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 		if (type.equals("Element2") && expectedType.equals("Element")) return true;
 		if (type.equals("UnaryExpression2") && expectedType.equals("UnaryExpression")) return true;
 		if (type.equals("MemberExpression2") && expectedType.equals("MemberExpression")) return true;
+		if (type.equals("SourceElements2") && expectedType.equals("SourceElements")) return true;
 		if (type.equals("TryStatementInternal1") && expectedType.equals("TryStatementInternal")) return true;
 		if (type.equals("Statement3") && expectedType.equals("Statement")) return true;
 		if (type.equals("PropertyValue2") && expectedType.equals("PropertyValue")) return true;

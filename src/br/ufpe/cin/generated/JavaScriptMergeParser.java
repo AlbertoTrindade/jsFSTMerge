@@ -13,8 +13,84 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
   final public FSTInfo CompilationUnit(boolean inTerminal) throws ParseException {
                                                 Token first=null,t;FSTInfo n;
      first=getToken(1); productionStart(inTerminal);
-    label_1:
-    while (true) {
+    switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+    case BREAK:
+    case CONTINUE:
+    case DELETE:
+    case FOR:
+    case FUNCTION:
+    case IF:
+    case NEW:
+    case RETURN:
+    case THIS:
+    case TYPEOF:
+    case VAR:
+    case VOID:
+    case WHILE:
+    case WITH:
+    case DO:
+    case SWITCH:
+    case THROW:
+    case TRY:
+    case LBRACE:
+    case LPAREN:
+    case LBRACKET:
+    case SEMICOLON:
+    case PLUS:
+    case MINUS:
+    case INCR:
+    case DECR:
+    case BANG:
+    case TILDE:
+    case DECIMAL_LITERAL:
+    case HEX_INTEGER_LITERAL:
+    case NULL_LITERAL:
+    case BOOLEAN_LITERAL:
+    case STRING_LITERAL:
+    case IDENTIFIER_NAME:
+    case REGULAR_EXPRESSION_LITERAL:
+      n = SourceElements(inTerminal);
+                                       replaceName(n);
+      break;
+    default:
+      jj_la1[0] = jj_gen;
+      ;
+    }
+    jj_consume_token(0);
+                                                                {if (true) return productionEndNonTerminal("CompilationUnit","-","-");}
+    throw new Error("Missing return statement in function");
+  }
+
+  final public FSTInfo SourceElements(boolean inTerminal) throws ParseException {
+                                               Token first=null,t;FSTInfo n;
+     first=getToken(1); productionStart(inTerminal);
+    if (jj_2_1(2147483647)) {
+      n = CallExpression(inTerminal);
+                                                                                      replaceName(n);
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case SEMICOLON:
+        n = EmptyStatement(inTerminal);
+                                                                                                                                      replaceName(n);
+        break;
+      default:
+        jj_la1[1] = jj_gen;
+        ;
+      }
+                                                                                                                                                         {if (true) return productionEndNonTerminal("SourceElements1","-","-");}
+    } else if (jj_2_2(2147483647)) {
+      n = CallExpressionIIFECrockford(inTerminal);
+                                                                                       replaceName(n);
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case SEMICOLON:
+        n = EmptyStatement(inTerminal);
+                                                                                                                                       replaceName(n);
+        break;
+      default:
+        jj_la1[2] = jj_gen;
+        ;
+      }
+                                                                                                                                                          {if (true) return productionEndNonTerminal("SourceElements2","-","-");}
+    } else {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case BREAK:
       case CONTINUE:
@@ -51,17 +127,61 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
       case STRING_LITERAL:
       case IDENTIFIER_NAME:
       case REGULAR_EXPRESSION_LITERAL:
-        ;
+        label_1:
+        while (true) {
+          n = SourceElement(inTerminal);
+                                      replaceName(n);
+          switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+          case BREAK:
+          case CONTINUE:
+          case DELETE:
+          case FOR:
+          case FUNCTION:
+          case IF:
+          case NEW:
+          case RETURN:
+          case THIS:
+          case TYPEOF:
+          case VAR:
+          case VOID:
+          case WHILE:
+          case WITH:
+          case DO:
+          case SWITCH:
+          case THROW:
+          case TRY:
+          case LBRACE:
+          case LPAREN:
+          case LBRACKET:
+          case SEMICOLON:
+          case PLUS:
+          case MINUS:
+          case INCR:
+          case DECR:
+          case BANG:
+          case TILDE:
+          case DECIMAL_LITERAL:
+          case HEX_INTEGER_LITERAL:
+          case NULL_LITERAL:
+          case BOOLEAN_LITERAL:
+          case STRING_LITERAL:
+          case IDENTIFIER_NAME:
+          case REGULAR_EXPRESSION_LITERAL:
+            ;
+            break;
+          default:
+            jj_la1[3] = jj_gen;
+            break label_1;
+          }
+        }
+                                                          {if (true) return productionEndNonTerminal("SourceElements3","-","-");}
         break;
       default:
-        jj_la1[0] = jj_gen;
-        break label_1;
+        jj_la1[4] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
       }
-      n = SourceElement(inTerminal);
-                                      replaceName(n);
     }
-    jj_consume_token(0);
-                                                                {if (true) return productionEndNonTerminal("CompilationUnit","-","-");}
     throw new Error("Missing return statement in function");
   }
 
@@ -82,7 +202,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                                                                                                                                                  replaceName(n);
         break;
       default:
-        jj_la1[1] = jj_gen;
+        jj_la1[5] = jj_gen;
         ;
       }
       jj_consume_token(RPAREN);
@@ -131,7 +251,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                                                        {if (true) return productionEndNonTerminal("StmtList","-","-");}
       break;
     default:
-      jj_la1[2] = jj_gen;
+      jj_la1[6] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -152,7 +272,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                                                                                                        replaceName(n);
       break;
     default:
-      jj_la1[3] = jj_gen;
+      jj_la1[7] = jj_gen;
       ;
     }
     jj_consume_token(RPAREN);
@@ -193,7 +313,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
         ;
         break;
       default:
-        jj_la1[4] = jj_gen;
+        jj_la1[8] = jj_gen;
         break label_2;
       }
       jj_consume_token(COMMA);
@@ -248,7 +368,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
         ;
         break;
       default:
-        jj_la1[5] = jj_gen;
+        jj_la1[9] = jj_gen;
         break label_3;
       }
       n = SourceElement(inTerminal);
@@ -265,7 +385,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     while (true) {
       n = Statement(true);
                                          replaceName(n);
-      if (jj_2_1(2)) {
+      if (jj_2_3(2)) {
         ;
       } else {
         break label_4;
@@ -278,7 +398,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
   final public FSTInfo Statement(boolean inTerminal) throws ParseException {
                                           Token first=null,t;FSTInfo n;
      first=getToken(1); productionStart(inTerminal);
-    if (jj_2_2(2147483647)) {
+    if (jj_2_4(2147483647)) {
       n = Block(true);
                                           replaceName(n);
                                                             {if (true) return productionEndTerminal("Statement1","-","-","Replacement","Default",first,token);}
@@ -295,8 +415,8 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                                                   {if (true) return productionEndTerminal("Statement3","-","-","Replacement","Default",first,token);}
         break;
       default:
-        jj_la1[6] = jj_gen;
-        if (jj_2_3(2147483647)) {
+        jj_la1[10] = jj_gen;
+        if (jj_2_5(2147483647)) {
           n = LabelledStatement(true);
                                                        replaceName(n);
                                                                          {if (true) return productionEndTerminal("Statement4","-","-","Replacement","Default",first,token);}
@@ -375,7 +495,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                                                 {if (true) return productionEndTerminal("Statement14","-","-","Replacement","Default",first,token);}
             break;
           default:
-            jj_la1[7] = jj_gen;
+            jj_la1[11] = jj_gen;
             jj_consume_token(-1);
             throw new ParseException();
           }
@@ -430,7 +550,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
         ;
         break;
       default:
-        jj_la1[8] = jj_gen;
+        jj_la1[12] = jj_gen;
         break label_5;
       }
       n = SourceElement(true);
@@ -447,7 +567,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     jj_consume_token(VAR);
     n = VariableDeclarationList(true);
                                                replaceName(n);
-    if (jj_2_4(2)) {
+    if (jj_2_6(2)) {
       jj_consume_token(SEMICOLON);
     } else {
       ;
@@ -468,7 +588,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
         ;
         break;
       default:
-        jj_la1[9] = jj_gen;
+        jj_la1[13] = jj_gen;
         break label_6;
       }
       jj_consume_token(COMMA);
@@ -490,7 +610,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                                                            replaceName(n);
       break;
     default:
-      jj_la1[10] = jj_gen;
+      jj_la1[14] = jj_gen;
       ;
     }
                                                                               {if (true) return productionEndTerminal("VariableDeclaration","-","-","Replacement","Default",first,token);}
@@ -510,7 +630,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
   final public FSTInfo InitializerExpression(boolean inTerminal) throws ParseException {
                                                       Token first=null,t;FSTInfo n;
      first=getToken(1); productionStart(inTerminal);
-    if (jj_2_5(2147483647)) {
+    if (jj_2_7(2147483647)) {
       n = AssignmentExpression(true);
                                                                         replaceName(n);
                                                                                           {if (true) return productionEndTerminal("InitializerExpression1","-","-","Replacement","Default",first,token);}
@@ -523,7 +643,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                                                       {if (true) return productionEndTerminal("InitializerExpression2","-","-","Replacement","Default",first,token);}
         break;
       default:
-        jj_la1[11] = jj_gen;
+        jj_la1[15] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -556,7 +676,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
      first=getToken(1); productionStart(inTerminal);
     n = Expression(true);
                             replaceName(n);
-    if (jj_2_6(2)) {
+    if (jj_2_8(2)) {
       jj_consume_token(SEMICOLON);
     } else {
       ;
@@ -577,7 +697,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
         ;
         break;
       default:
-        jj_la1[12] = jj_gen;
+        jj_la1[16] = jj_gen;
         break label_7;
       }
       jj_consume_token(COMMA);
@@ -591,14 +711,14 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
   final public FSTInfo AssignmentExpression(boolean inTerminal) throws ParseException {
                                                      Token first=null,t;FSTInfo n;
      first=getToken(1); productionStart(inTerminal);
-    if (jj_2_7(2147483647)) {
+    if (jj_2_9(2147483647)) {
       n = LeftHandSideExpression(true);
                                                                                                  replaceName(n);
       n = AssignmentOperator(true);
                                                                                                                                               replaceName(n);
       n = AssignmentExpressionInternal(true);
                                                                                                                                                                                                      replaceName(n);
-                                                                                                                                                                                                                       {if (true) return productionEndTerminal("AssignmentExpression1","-","-","Replacement","Default",first,token);}
+                                                                                                                                                                                                                       {if (true) return productionEndTerminal("AssignmentExpression1","-","-","Replacement","LineBased",first,token);}
     } else {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case DELETE:
@@ -624,10 +744,10 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
       case REGULAR_EXPRESSION_LITERAL:
         n = ConditionalExpression(true);
                                        replaceName(n);
-                                                         {if (true) return productionEndTerminal("AssignmentExpression2","-","-","Replacement","Default",first,token);}
+                                                         {if (true) return productionEndTerminal("AssignmentExpression2","-","-","Replacement","LineBased",first,token);}
         break;
       default:
-        jj_la1[13] = jj_gen;
+        jj_la1[17] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -638,7 +758,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
   final public FSTInfo AssignmentExpressionInternal(boolean inTerminal) throws ParseException {
                                                              Token first=null,t;FSTInfo n;
      first=getToken(1); productionStart(inTerminal);
-    if (jj_2_8(2147483647)) {
+    if (jj_2_10(2147483647)) {
       n = AssignmentExpression(true);
                                                                         replaceName(n);
                                                                                           {if (true) return productionEndTerminal("AssignmentExpressionInternal1","-","-","Replacement","Default",first,token);}
@@ -651,7 +771,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                                                       {if (true) return productionEndTerminal("AssignmentExpressionInternal2","-","-","Replacement","Default",first,token);}
         break;
       default:
-        jj_la1[14] = jj_gen;
+        jj_la1[18] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -664,43 +784,43 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
      first=getToken(1); productionStart(inTerminal);
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case FUNCTION:
-      n = Function(true);
-                          replaceName(n);
+      n = Function(inTerminal);
+                                replaceName(n);
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case IDENTIFIER_NAME:
-        n = Id(true);
-                                                        replaceName(n);
+        n = Id(inTerminal);
+                                                                    replaceName(n);
         break;
       default:
-        jj_la1[15] = jj_gen;
+        jj_la1[19] = jj_gen;
         ;
       }
       jj_consume_token(LPAREN);
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case IDENTIFIER_NAME:
-        n = FormalParameters(true);
-                                                                                                         replaceName(n);
+        n = FormalParameters(inTerminal);
+                                                                                                                           replaceName(n);
         break;
       default:
-        jj_la1[16] = jj_gen;
+        jj_la1[20] = jj_gen;
         ;
       }
       jj_consume_token(RPAREN);
       jj_consume_token(LBRACE);
-      n = FunctionBody(true);
-                                                                                                                                                         replaceName(n);
+      n = FunctionBody(inTerminal);
+                                                                                                                                                                                 replaceName(n);
       jj_consume_token(RBRACE);
-                                                                                                                                                                               {if (true) return productionEndTerminal("FunctionExpression1","-","-","Replacement","Default",first,token);}
+                                                                                                                                                                                                       {if (true) return productionEndNonTerminal("FunctionExpression1","-","-");}
       break;
     case LPAREN:
       jj_consume_token(LPAREN);
-      n = FunctionExpression(true);
-                                        replaceName(n);
+      n = FunctionExpression(inTerminal);
+                                              replaceName(n);
       jj_consume_token(RPAREN);
-                                                              {if (true) return productionEndTerminal("FunctionExpression2","-","-","Replacement","Default",first,token);}
+                                                                    {if (true) return productionEndNonTerminal("FunctionExpression2","-","-");}
       break;
     default:
-      jj_la1[17] = jj_gen;
+      jj_la1[21] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -710,11 +830,11 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
   final public FSTInfo LeftHandSideExpression(boolean inTerminal) throws ParseException {
                                                        Token first=null,t;FSTInfo n;
      first=getToken(1); productionStart(inTerminal);
-    if (jj_2_9(2147483647)) {
+    if (jj_2_11(2147483647)) {
       n = CallExpression(true);
                                                                                 replaceName(n);
                                                                                                   {if (true) return productionEndTerminal("LeftHandSideExpression1","-","-","Replacement","Default",first,token);}
-    } else if (jj_2_10(2147483647)) {
+    } else if (jj_2_12(2147483647)) {
       n = CallExpressionIIFECrockford(true);
                                                                                  replaceName(n);
                                                                                                    {if (true) return productionEndTerminal("LeftHandSideExpression2","-","-","Replacement","Default",first,token);}
@@ -737,7 +857,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                                                     {if (true) return productionEndTerminal("LeftHandSideExpression3","-","-","Replacement","Default",first,token);}
         break;
       default:
-        jj_la1[18] = jj_gen;
+        jj_la1[22] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -748,52 +868,52 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
   final public FSTInfo CallExpression(boolean inTerminal) throws ParseException {
                                                Token first=null,t;FSTInfo n;
      first=getToken(1); productionStart(inTerminal);
-    n = CallExpressionInternal(true);
-                                        replaceName(n);
-    n = Arguments(true);
-                                                                            replaceName(n);
+    n = CallExpressionInternal(inTerminal);
+                                              replaceName(n);
+    n = Arguments(inTerminal);
+                                                                                        replaceName(n);
     label_8:
     while (true) {
-      if (jj_2_11(2)) {
+      if (jj_2_13(2)) {
         ;
       } else {
         break label_8;
       }
-      n = CallExpressionPart(true);
-                                                                                                                                       replaceName(n);
+      n = CallExpressionPart(inTerminal);
+                                                                                                                                                         replaceName(n);
     }
-                                                                                                                                                           {if (true) return productionEndTerminal("CallExpression","-","-","Replacement","Default",first,token);}
+                                                                                                                                                                             {if (true) return productionEndNonTerminal("CallExpression","-","-");}
     throw new Error("Missing return statement in function");
   }
 
   final public FSTInfo CallExpressionInternal(boolean inTerminal) throws ParseException {
                                                        Token first=null,t;FSTInfo n;
      first=getToken(1); productionStart(inTerminal);
-    if (jj_2_13(3)) {
-      n = MemberExpression(true);
-                                               replaceName(n);
-                                                                 {if (true) return productionEndTerminal("CallExpressionInternal1","-","-","Replacement","Default",first,token);}
+    if (jj_2_15(3)) {
+      n = MemberExpression(inTerminal);
+                                                     replaceName(n);
+                                                                       {if (true) return productionEndNonTerminal("CallExpressionInternal1","-","-");}
     } else {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case LPAREN:
         jj_consume_token(LPAREN);
-        n = FunctionExpression(true);
-                                        replaceName(n);
+        n = FunctionExpression(inTerminal);
+                                              replaceName(n);
         jj_consume_token(RPAREN);
         label_9:
         while (true) {
-          if (jj_2_12(2)) {
+          if (jj_2_14(2)) {
             ;
           } else {
             break label_9;
           }
-          n = MemberExpressionPart(true);
-                                                                                                         replaceName(n);
+          n = MemberExpressionPart(inTerminal);
+                                                                                                                     replaceName(n);
         }
-                                                                                                                             {if (true) return productionEndTerminal("CallExpressionInternal2","-","-","Replacement","Default",first,token);}
+                                                                                                                                         {if (true) return productionEndNonTerminal("CallExpressionInternal2","-","-");}
         break;
       default:
-        jj_la1[19] = jj_gen;
+        jj_la1[23] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -805,22 +925,22 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                                                             Token first=null,t;FSTInfo n;
      first=getToken(1); productionStart(inTerminal);
     jj_consume_token(LPAREN);
-    n = FunctionExpression(true);
-                                        replaceName(n);
-    n = Arguments(true);
-                                                                            replaceName(n);
+    n = FunctionExpression(inTerminal);
+                                              replaceName(n);
+    n = Arguments(inTerminal);
+                                                                                        replaceName(n);
     label_10:
     while (true) {
-      if (jj_2_14(2)) {
+      if (jj_2_16(2)) {
         ;
       } else {
         break label_10;
       }
-      n = CallExpressionPart(true);
-                                                                                                                                       replaceName(n);
+      n = CallExpressionPart(inTerminal);
+                                                                                                                                                         replaceName(n);
     }
     jj_consume_token(RPAREN);
-                                                                                                                                                               {if (true) return productionEndTerminal("CallExpressionIIFECrockford","-","-","Replacement","Default",first,token);}
+                                                                                                                                                                                 {if (true) return productionEndNonTerminal("CallExpressionIIFECrockford","-","-");}
     throw new Error("Missing return statement in function");
   }
 
@@ -843,7 +963,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                                    replaceName(n);
       label_11:
       while (true) {
-        if (jj_2_15(2)) {
+        if (jj_2_17(2)) {
           ;
         } else {
           break label_11;
@@ -859,7 +979,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                                                         {if (true) return productionEndTerminal("MemberExpression2","-","-","Replacement","Default",first,token);}
       break;
     default:
-      jj_la1[20] = jj_gen;
+      jj_la1[24] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -907,7 +1027,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                                            {if (true) return productionEndTerminal("PrimaryExpression6","-","-","Replacement","Default",first,token);}
       break;
     default:
-      jj_la1[21] = jj_gen;
+      jj_la1[25] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -926,7 +1046,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                                                replaceName(n);
       break;
     default:
-      jj_la1[22] = jj_gen;
+      jj_la1[26] = jj_gen;
       ;
     }
     jj_consume_token(RBRACE);
@@ -946,7 +1066,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
         ;
         break;
       default:
-        jj_la1[23] = jj_gen;
+        jj_la1[27] = jj_gen;
         break label_12;
       }
       n = PropertyNameAndValueListInternal(true);
@@ -959,7 +1079,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
   final public FSTInfo PropertyNameAndValueListInternal(boolean inTerminal) throws ParseException {
                                                                  Token first=null,t;FSTInfo n;
      first=getToken(1); productionStart(inTerminal);
-    if (jj_2_16(2)) {
+    if (jj_2_18(2)) {
       jj_consume_token(COMMA);
       n = PropertyNameAndValue(true);
                                                        replaceName(n);
@@ -971,7 +1091,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
               {if (true) return productionEndTerminal("PropertyNameAndValueListInternal2","-","-","Replacement","Default",first,token);}
         break;
       default:
-        jj_la1[24] = jj_gen;
+        jj_la1[28] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -994,7 +1114,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
   final public FSTInfo PropertyValue(boolean inTerminal) throws ParseException {
                                               Token first=null,t;FSTInfo n;
      first=getToken(1); productionStart(inTerminal);
-    if (jj_2_17(2147483647)) {
+    if (jj_2_19(2147483647)) {
       n = AssignmentExpression(true);
                                                                         replaceName(n);
                                                                                           {if (true) return productionEndTerminal("PropertyValue1","-","-","Replacement","Default",first,token);}
@@ -1007,7 +1127,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                                                       {if (true) return productionEndTerminal("PropertyValue2","-","-","Replacement","Default",first,token);}
         break;
       default:
-        jj_la1[25] = jj_gen;
+        jj_la1[29] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -1033,7 +1153,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                            {if (true) return productionEndTerminal("PropertyName3","-","-","Replacement","Default",first,token);}
       break;
     default:
-      jj_la1[26] = jj_gen;
+      jj_la1[30] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -1053,14 +1173,14 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
   final public FSTInfo ArrayLiteralInternal(boolean inTerminal) throws ParseException {
                                                      Token first=null,t;FSTInfo n;
      first=getToken(1); productionStart(inTerminal);
-    if (jj_2_18(2)) {
+    if (jj_2_20(2)) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case COMMA:
         n = Elision(true);
                                        replaceName(n);
         break;
       default:
-        jj_la1[27] = jj_gen;
+        jj_la1[31] = jj_gen;
         ;
       }
       jj_consume_token(RBRACKET);
@@ -1098,14 +1218,14 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                                                                 replaceName(n);
           break;
         default:
-          jj_la1[28] = jj_gen;
+          jj_la1[32] = jj_gen;
           ;
         }
         jj_consume_token(RBRACKET);
                                                                                        {if (true) return productionEndTerminal("ArrayLiteralInternal2","-","-","Replacement","Default",first,token);}
         break;
       default:
-        jj_la1[29] = jj_gen;
+        jj_la1[33] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -1122,14 +1242,14 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                           replaceName(n);
       break;
     default:
-      jj_la1[30] = jj_gen;
+      jj_la1[34] = jj_gen;
       ;
     }
     n = Element(true);
                                                              replaceName(n);
     label_13:
     while (true) {
-      if (jj_2_19(2)) {
+      if (jj_2_21(2)) {
         ;
       } else {
         break label_13;
@@ -1163,7 +1283,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
         ;
         break;
       default:
-        jj_la1[31] = jj_gen;
+        jj_la1[35] = jj_gen;
         break label_14;
       }
     }
@@ -1174,7 +1294,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
   final public FSTInfo Element(boolean inTerminal) throws ParseException {
                                         Token first=null,t;FSTInfo n;
      first=getToken(1); productionStart(inTerminal);
-    if (jj_2_20(2147483647)) {
+    if (jj_2_22(2147483647)) {
       n = AssignmentExpression(true);
                                                                         replaceName(n);
                                                                                           {if (true) return productionEndTerminal("Element1","-","-","Replacement","Default",first,token);}
@@ -1187,7 +1307,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                                                       {if (true) return productionEndTerminal("Element2","-","-","Replacement","Default",first,token);}
         break;
       default:
-        jj_la1[32] = jj_gen;
+        jj_la1[36] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -1224,7 +1344,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                                       {if (true) return productionEndTerminal("Literal6","-","-","Replacement","Default",first,token);}
       break;
     default:
-      jj_la1[33] = jj_gen;
+      jj_la1[37] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -1249,7 +1369,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                                           {if (true) return productionEndTerminal("MemberExpressionPart2","-","-","Replacement","Default",first,token);}
       break;
     default:
-      jj_la1[34] = jj_gen;
+      jj_la1[38] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -1264,7 +1384,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                                         replaceName(n);
     label_15:
     while (true) {
-      if (jj_2_21(2)) {
+      if (jj_2_23(2)) {
         ;
       } else {
         break label_15;
@@ -1283,7 +1403,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                            replaceName(n);
     label_16:
     while (true) {
-      if (jj_2_22(2)) {
+      if (jj_2_24(2)) {
         ;
       } else {
         break label_16;
@@ -1322,23 +1442,23 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     case STRING_LITERAL:
     case IDENTIFIER_NAME:
     case REGULAR_EXPRESSION_LITERAL:
-      n = ArgumentList(true);
-                                   replaceName(n);
+      n = ArgumentList(inTerminal);
+                                         replaceName(n);
       break;
     default:
-      jj_la1[35] = jj_gen;
+      jj_la1[39] = jj_gen;
       ;
     }
     jj_consume_token(RPAREN);
-                                                          {if (true) return productionEndTerminal("Arguments","-","-","Replacement","Default",first,token);}
+                                                                {if (true) return productionEndNonTerminal("Arguments","-","-");}
     throw new Error("Missing return statement in function");
   }
 
   final public FSTInfo ArgumentList(boolean inTerminal) throws ParseException {
                                              Token first=null,t;FSTInfo n;
      first=getToken(1); productionStart(inTerminal);
-    n = Argument(true);
-                          replaceName(n);
+    n = Argument(inTerminal);
+                                replaceName(n);
     label_17:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -1346,34 +1466,34 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
         ;
         break;
       default:
-        jj_la1[36] = jj_gen;
+        jj_la1[40] = jj_gen;
         break label_17;
       }
       jj_consume_token(COMMA);
-      n = Argument(true);
-                                                                  replaceName(n);
+      n = Argument(inTerminal);
+                                                                              replaceName(n);
     }
-                                                                                      {if (true) return productionEndTerminal("ArgumentList","-","-","Replacement","Default",first,token);}
+                                                                                                  {if (true) return productionEndNonTerminal("ArgumentList","-","-");}
     throw new Error("Missing return statement in function");
   }
 
   final public FSTInfo Argument(boolean inTerminal) throws ParseException {
                                          Token first=null,t;FSTInfo n;
      first=getToken(1); productionStart(inTerminal);
-    if (jj_2_23(2147483647)) {
-      n = AssignmentExpression(true);
-                                                                        replaceName(n);
-                                                                                          {if (true) return productionEndTerminal("Argument1","-","-","Replacement","Default",first,token);}
+    if (jj_2_25(2147483647)) {
+      n = AssignmentExpression(inTerminal);
+                                                                              replaceName(n);
+                                                                                                {if (true) return productionEndNonTerminal("Argument1","-","-");}
     } else {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case FUNCTION:
       case LPAREN:
-        n = FunctionExpression(true);
-                                    replaceName(n);
-                                                      {if (true) return productionEndTerminal("Argument2","-","-","Replacement","Default",first,token);}
+        n = FunctionExpression(inTerminal);
+                                          replaceName(n);
+                                                            {if (true) return productionEndNonTerminal("Argument2","-","-");}
         break;
       default:
-        jj_la1[37] = jj_gen;
+        jj_la1[41] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -1398,8 +1518,8 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                                                       {if (true) return productionEndTerminal("CallExpressionPart2","-","-","Replacement","Default",first,token);}
       break;
     default:
-      jj_la1[38] = jj_gen;
-      if (jj_2_24(2)) {
+      jj_la1[42] = jj_gen;
+      if (jj_2_26(2)) {
         jj_consume_token(DOT);
         n = Id(true);
                                      replaceName(n);
@@ -1412,7 +1532,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                      {if (true) return productionEndTerminal("CallExpressionPart4","-","-","Replacement","Default",first,token);}
           break;
         default:
-          jj_la1[39] = jj_gen;
+          jj_la1[43] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -1474,7 +1594,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                {if (true) return productionEndTerminal("AssignmentOperator12","-","-","Replacement","Default",first,token);}
       break;
     default:
-      jj_la1[40] = jj_gen;
+      jj_la1[44] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -1492,7 +1612,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                                                                                               replaceName(n);
       break;
     default:
-      jj_la1[41] = jj_gen;
+      jj_la1[45] = jj_gen;
       ;
     }
                                                                                                                  {if (true) return productionEndTerminal("ConditionalExpression","-","-","Replacement","Default",first,token);}
@@ -1515,7 +1635,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
   final public FSTInfo TernaryExpression(boolean inTerminal) throws ParseException {
                                                   Token first=null,t;FSTInfo n;
      first=getToken(1); productionStart(inTerminal);
-    if (jj_2_25(2147483647)) {
+    if (jj_2_27(2147483647)) {
       n = AssignmentExpression(true);
                                                                         replaceName(n);
                                                                                           {if (true) return productionEndTerminal("TernaryExpression1","-","-","Replacement","Default",first,token);}
@@ -1528,7 +1648,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                                                       {if (true) return productionEndTerminal("TernaryExpression2","-","-","Replacement","Default",first,token);}
         break;
       default:
-        jj_la1[42] = jj_gen;
+        jj_la1[46] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -1539,7 +1659,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
   final public FSTInfo LogicalORExpression(boolean inTerminal) throws ParseException {
                                                     Token first=null,t;FSTInfo n;
      first=getToken(1); productionStart(inTerminal);
-    if (jj_2_26(2147483647)) {
+    if (jj_2_28(2147483647)) {
       n = LogicalANDExpression(true);
                                                                                                   replaceName(n);
       jj_consume_token(SC_OR);
@@ -1552,7 +1672,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
           ;
           break;
         default:
-          jj_la1[43] = jj_gen;
+          jj_la1[47] = jj_gen;
           break label_18;
         }
         jj_consume_token(SC_OR);
@@ -1592,7 +1712,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
             ;
             break;
           default:
-            jj_la1[44] = jj_gen;
+            jj_la1[48] = jj_gen;
             break label_19;
           }
           jj_consume_token(SC_OR);
@@ -1602,7 +1722,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                                                                                                                {if (true) return productionEndTerminal("LogicalORExpression2","-","-","Replacement","Default",first,token);}
         break;
       default:
-        jj_la1[45] = jj_gen;
+        jj_la1[49] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -1622,7 +1742,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
         ;
         break;
       default:
-        jj_la1[46] = jj_gen;
+        jj_la1[50] = jj_gen;
         break label_20;
       }
       jj_consume_token(SC_AND);
@@ -1645,7 +1765,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
         ;
         break;
       default:
-        jj_la1[47] = jj_gen;
+        jj_la1[51] = jj_gen;
         break label_21;
       }
       jj_consume_token(BIT_OR);
@@ -1668,7 +1788,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
         ;
         break;
       default:
-        jj_la1[48] = jj_gen;
+        jj_la1[52] = jj_gen;
         break label_22;
       }
       jj_consume_token(XOR);
@@ -1691,7 +1811,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
         ;
         break;
       default:
-        jj_la1[49] = jj_gen;
+        jj_la1[53] = jj_gen;
         break label_23;
       }
       jj_consume_token(BIT_AND);
@@ -1717,7 +1837,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
         ;
         break;
       default:
-        jj_la1[50] = jj_gen;
+        jj_la1[54] = jj_gen;
         break label_24;
       }
       n = EqualityExpressionInternal(true);
@@ -1759,7 +1879,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                 {if (true) return productionEndTerminal("EqualityOperator4","-","-","Replacement","Default",first,token);}
       break;
     default:
-      jj_la1[51] = jj_gen;
+      jj_la1[55] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -1773,7 +1893,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                                  replaceName(n);
     label_25:
     while (true) {
-      if (jj_2_27(2)) {
+      if (jj_2_29(2)) {
         ;
       } else {
         break label_25;
@@ -1825,7 +1945,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                {if (true) return productionEndTerminal("RelationalOperator6","-","-","Replacement","Default",first,token);}
       break;
     default:
-      jj_la1[52] = jj_gen;
+      jj_la1[56] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -1846,7 +1966,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
         ;
         break;
       default:
-        jj_la1[53] = jj_gen;
+        jj_la1[57] = jj_gen;
         break label_26;
       }
       n = ShiftExpressionInternal(true);
@@ -1884,7 +2004,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                 {if (true) return productionEndTerminal("ShiftOperator3","-","-","Replacement","Default",first,token);}
       break;
     default:
-      jj_la1[54] = jj_gen;
+      jj_la1[58] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -1898,7 +2018,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                                           replaceName(n);
     label_27:
     while (true) {
-      if (jj_2_28(2)) {
+      if (jj_2_30(2)) {
         ;
       } else {
         break label_27;
@@ -1934,7 +2054,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
               {if (true) return productionEndTerminal("AdditiveOperator2","-","-","Replacement","Default",first,token);}
       break;
     default:
-      jj_la1[55] = jj_gen;
+      jj_la1[59] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -1955,7 +2075,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
         ;
         break;
       default:
-        jj_la1[56] = jj_gen;
+        jj_la1[60] = jj_gen;
         break label_28;
       }
       n = MultiplicativeExpressionInternal(true);
@@ -1993,7 +2113,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
               {if (true) return productionEndTerminal("MultiplicativeOperator3","-","-","Replacement","Default",first,token);}
       break;
     default:
-      jj_la1[57] = jj_gen;
+      jj_la1[61] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -2033,7 +2153,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
       while (true) {
         n = UnaryExpressionInternal(true);
                                                        replaceName(n);
-        if (jj_2_29(2)) {
+        if (jj_2_31(2)) {
           ;
         } else {
           break label_29;
@@ -2042,7 +2162,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                                                                            {if (true) return productionEndTerminal("UnaryExpression2","-","-","Replacement","Default",first,token);}
       break;
     default:
-      jj_la1[58] = jj_gen;
+      jj_la1[62] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -2101,7 +2221,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
               {if (true) return productionEndTerminal("UnaryOperator9","-","-","Replacement","Default",first,token);}
       break;
     default:
-      jj_la1[59] = jj_gen;
+      jj_la1[63] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -2113,7 +2233,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
      first=getToken(1); productionStart(inTerminal);
     n = LeftHandSideExpression(true);
                                         replaceName(n);
-    if (jj_2_30(2)) {
+    if (jj_2_32(2)) {
       n = PostfixOperator(true);
                                                                                                 replaceName(n);
     } else {
@@ -2136,7 +2256,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                {if (true) return productionEndTerminal("PostfixOperator2","-","-","Replacement","Default",first,token);}
       break;
     default:
-      jj_la1[60] = jj_gen;
+      jj_la1[64] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -2153,7 +2273,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     jj_consume_token(RPAREN);
     n = Statement(true);
                                                                              replaceName(n);
-    if (jj_2_31(2)) {
+    if (jj_2_33(2)) {
       jj_consume_token(ELSE);
       n = Statement(true);
                                                                                                                                       replaceName(n);
@@ -2177,7 +2297,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
       n = Expression(true);
                                                                                  replaceName(n);
       jj_consume_token(RPAREN);
-      if (jj_2_32(2)) {
+      if (jj_2_34(2)) {
         jj_consume_token(SEMICOLON);
       } else {
         ;
@@ -2195,8 +2315,8 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                                                                                                   {if (true) return productionEndTerminal("IterationStatement2","-","-","Replacement","Default",first,token);}
       break;
     default:
-      jj_la1[66] = jj_gen;
-      if (jj_2_33(2147483647)) {
+      jj_la1[70] = jj_gen;
+      if (jj_2_35(2147483647)) {
         jj_consume_token(FOR);
         jj_consume_token(LPAREN);
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -2225,7 +2345,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                                                                                   replaceName(n);
           break;
         default:
-          jj_la1[61] = jj_gen;
+          jj_la1[65] = jj_gen;
           ;
         }
         jj_consume_token(SEMICOLON);
@@ -2255,7 +2375,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                                                                                                                              replaceName(n);
           break;
         default:
-          jj_la1[62] = jj_gen;
+          jj_la1[66] = jj_gen;
           ;
         }
         jj_consume_token(SEMICOLON);
@@ -2285,14 +2405,14 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                                                                                                                                                                         replaceName(n);
           break;
         default:
-          jj_la1[63] = jj_gen;
+          jj_la1[67] = jj_gen;
           ;
         }
         jj_consume_token(RPAREN);
         n = Statement(true);
                                                                                                                                                                                                                  replaceName(n);
                                                                                                                                                                                                                                    {if (true) return productionEndTerminal("IterationStatement3","-","-","Replacement","Default",first,token);}
-      } else if (jj_2_34(2147483647)) {
+      } else if (jj_2_36(2147483647)) {
         jj_consume_token(FOR);
         jj_consume_token(LPAREN);
         jj_consume_token(VAR);
@@ -2325,7 +2445,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                                                                                                                                                             replaceName(n);
           break;
         default:
-          jj_la1[64] = jj_gen;
+          jj_la1[68] = jj_gen;
           ;
         }
         jj_consume_token(SEMICOLON);
@@ -2355,14 +2475,14 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                                                                                                                                                                                                        replaceName(n);
           break;
         default:
-          jj_la1[65] = jj_gen;
+          jj_la1[69] = jj_gen;
           ;
         }
         jj_consume_token(RPAREN);
         n = Statement(true);
                                                                                                                                                                                                                                                 replaceName(n);
                                                                                                                                                                                                                                                                   {if (true) return productionEndTerminal("IterationStatement4","-","-","Replacement","Default",first,token);}
-      } else if (jj_2_35(2147483647)) {
+      } else if (jj_2_37(2147483647)) {
         jj_consume_token(FOR);
         jj_consume_token(LPAREN);
         jj_consume_token(VAR);
@@ -2391,7 +2511,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                                                                                                                                                       {if (true) return productionEndTerminal("IterationStatement6","-","-","Replacement","Default",first,token);}
           break;
         default:
-          jj_la1[67] = jj_gen;
+          jj_la1[71] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -2404,13 +2524,13 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                                                   Token first=null,t;FSTInfo n;
      first=getToken(1); productionStart(inTerminal);
     jj_consume_token(CONTINUE);
-    if (jj_2_36(2)) {
+    if (jj_2_38(2)) {
       n = Id(true);
                                              replaceName(n);
     } else {
       ;
     }
-    if (jj_2_37(2)) {
+    if (jj_2_39(2)) {
       jj_consume_token(SEMICOLON);
     } else {
       ;
@@ -2423,13 +2543,13 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                                                Token first=null,t;FSTInfo n;
      first=getToken(1); productionStart(inTerminal);
     jj_consume_token(BREAK);
-    if (jj_2_38(2)) {
+    if (jj_2_40(2)) {
       n = Id(true);
                                           replaceName(n);
     } else {
       ;
     }
-    if (jj_2_39(2)) {
+    if (jj_2_41(2)) {
       jj_consume_token(SEMICOLON);
     } else {
       ;
@@ -2442,13 +2562,13 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                                                 Token first=null,t;FSTInfo n;
      first=getToken(1); productionStart(inTerminal);
     jj_consume_token(RETURN);
-    if (jj_2_40(2)) {
+    if (jj_2_42(2)) {
       n = ReturnExpression(true);
                                                          replaceName(n);
     } else {
       ;
     }
-    if (jj_2_41(2)) {
+    if (jj_2_43(2)) {
       jj_consume_token(SEMICOLON);
     } else {
       ;
@@ -2460,7 +2580,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
   final public FSTInfo ReturnExpression(boolean inTerminal) throws ParseException {
                                                  Token first=null,t;FSTInfo n;
      first=getToken(1); productionStart(inTerminal);
-    if (jj_2_42(2147483647)) {
+    if (jj_2_44(2147483647)) {
       n = Expression(true);
                                                     replaceName(n);
                                                                       {if (true) return productionEndTerminal("ReturnExpression1","-","-","Replacement","Default",first,token);}
@@ -2473,7 +2593,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                                                       {if (true) return productionEndTerminal("ReturnExpression2","-","-","Replacement","Default",first,token);}
         break;
       default:
-        jj_la1[68] = jj_gen;
+        jj_la1[72] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -2519,7 +2639,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                                   replaceName(n);
       break;
     default:
-      jj_la1[69] = jj_gen;
+      jj_la1[73] = jj_gen;
       ;
     }
     n = CaseBlockInternal(true);
@@ -2545,14 +2665,14 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                                                                       replaceName(n);
         break;
       default:
-        jj_la1[70] = jj_gen;
+        jj_la1[74] = jj_gen;
         ;
       }
       jj_consume_token(RBRACE);
                                                                                              {if (true) return productionEndTerminal("CaseBlockInternal2","-","-","Replacement","Default",first,token);}
       break;
     default:
-      jj_la1[71] = jj_gen;
+      jj_la1[75] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -2571,7 +2691,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
         ;
         break;
       default:
-        jj_la1[72] = jj_gen;
+        jj_la1[76] = jj_gen;
         break label_30;
       }
     }
@@ -2625,7 +2745,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                                                                                 replaceName(n);
       break;
     default:
-      jj_la1[73] = jj_gen;
+      jj_la1[77] = jj_gen;
       ;
     }
                                                                                                    {if (true) return productionEndTerminal("CaseClause","-","-","Replacement","Default",first,token);}
@@ -2676,7 +2796,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                                               replaceName(n);
       break;
     default:
-      jj_la1[74] = jj_gen;
+      jj_la1[78] = jj_gen;
       ;
     }
                                                                  {if (true) return productionEndTerminal("DefaultClause","-","-","Replacement","Default",first,token);}
@@ -2689,7 +2809,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     jj_consume_token(THROW);
     n = Expression(true);
                                     replaceName(n);
-    if (jj_2_43(2)) {
+    if (jj_2_45(2)) {
       jj_consume_token(SEMICOLON);
     } else {
       ;
@@ -2728,13 +2848,13 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
                                                           replaceName(n);
         break;
       default:
-        jj_la1[75] = jj_gen;
+        jj_la1[79] = jj_gen;
         ;
       }
                                                                              {if (true) return productionEndTerminal("TryStatementInternal2","-","-","Replacement","Default",first,token);}
       break;
     default:
-      jj_la1[76] = jj_gen;
+      jj_la1[80] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -3066,37 +3186,23 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     finally { jj_save(42, xla); }
   }
 
-  final private boolean jj_3R_79() {
-    if (jj_scan_token(SLASHASSIGN)) return true;
-    return false;
+  final private boolean jj_2_44(int xla) {
+    jj_la = xla; jj_lastpos = jj_scanpos = token;
+    try { return !jj_3_44(); }
+    catch(LookaheadSuccess ls) { return true; }
+    finally { jj_save(43, xla); }
   }
 
-  final private boolean jj_3R_78() {
-    if (jj_scan_token(STARASSIGN)) return true;
-    return false;
+  final private boolean jj_2_45(int xla) {
+    jj_la = xla; jj_lastpos = jj_scanpos = token;
+    try { return !jj_3_45(); }
+    catch(LookaheadSuccess ls) { return true; }
+    finally { jj_save(44, xla); }
   }
 
-  final private boolean jj_3R_77() {
-    if (jj_scan_token(ASSIGN)) return true;
-    return false;
-  }
-
-  final private boolean jj_3_22() {
-    if (jj_3R_41()) return true;
-    return false;
-  }
-
-  final private boolean jj_3R_36() {
+  final private boolean jj_3R_39() {
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3R_77()) {
-    jj_scanpos = xsp;
-    if (jj_3R_78()) {
-    jj_scanpos = xsp;
-    if (jj_3R_79()) {
-    jj_scanpos = xsp;
-    if (jj_3R_80()) {
-    jj_scanpos = xsp;
     if (jj_3R_81()) {
     jj_scanpos = xsp;
     if (jj_3R_82()) {
@@ -3111,7 +3217,15 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     jj_scanpos = xsp;
     if (jj_3R_87()) {
     jj_scanpos = xsp;
-    if (jj_3R_88()) return true;
+    if (jj_3R_88()) {
+    jj_scanpos = xsp;
+    if (jj_3R_89()) {
+    jj_scanpos = xsp;
+    if (jj_3R_90()) {
+    jj_scanpos = xsp;
+    if (jj_3R_91()) {
+    jj_scanpos = xsp;
+    if (jj_3R_92()) return true;
     }
     }
     }
@@ -3132,9 +3246,9 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     return false;
   }
 
-  final private boolean jj_3_24() {
+  final private boolean jj_3_26() {
     if (jj_scan_token(DOT)) return true;
-    if (jj_3R_33()) return true;
+    if (jj_3R_36()) return true;
     return false;
   }
 
@@ -3145,13 +3259,13 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     return false;
   }
 
-  final private boolean jj_3_23() {
-    if (jj_3R_34()) return true;
+  final private boolean jj_3_25() {
+    if (jj_3R_37()) return true;
     return false;
   }
 
   final private boolean jj_3R_93() {
-    if (jj_3R_38()) return true;
+    if (jj_3R_32()) return true;
     return false;
   }
 
@@ -3162,7 +3276,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     jj_scanpos = xsp;
     if (jj_3R_94()) {
     jj_scanpos = xsp;
-    if (jj_3_24()) {
+    if (jj_3_26()) {
     jj_scanpos = xsp;
     if (jj_3R_95()) return true;
     }
@@ -3171,61 +3285,61 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     return false;
   }
 
-  final private boolean jj_3R_203() {
-    if (jj_3R_39()) return true;
+  final private boolean jj_3R_198() {
+    if (jj_3R_33()) return true;
     return false;
   }
 
-  final private boolean jj_3R_202() {
-    if (jj_3R_34()) return true;
+  final private boolean jj_3R_197() {
+    if (jj_3R_37()) return true;
     return false;
   }
 
-  final private boolean jj_3_19() {
+  final private boolean jj_3_21() {
     if (jj_3R_45()) return true;
     return false;
   }
 
-  final private boolean jj_3R_183() {
+  final private boolean jj_3R_171() {
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3R_202()) {
+    if (jj_3R_197()) {
     jj_scanpos = xsp;
-    if (jj_3R_203()) return true;
+    if (jj_3R_198()) return true;
     }
     return false;
   }
 
-  final private boolean jj_3R_90() {
-    if (jj_3R_136()) return true;
+  final private boolean jj_3R_58() {
+    if (jj_3R_118()) return true;
     return false;
   }
 
-  final private boolean jj_3R_136() {
-    if (jj_3R_183()) return true;
+  final private boolean jj_3R_118() {
+    if (jj_3R_171()) return true;
     Token xsp;
     while (true) {
       xsp = jj_scanpos;
-      if (jj_3R_184()) { jj_scanpos = xsp; break; }
+      if (jj_3R_172()) { jj_scanpos = xsp; break; }
     }
     return false;
   }
 
-  final private boolean jj_3R_38() {
+  final private boolean jj_3R_32() {
     if (jj_scan_token(LPAREN)) return true;
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3R_90()) jj_scanpos = xsp;
+    if (jj_3R_58()) jj_scanpos = xsp;
     if (jj_scan_token(RPAREN)) return true;
     return false;
   }
 
   final private boolean jj_3R_46() {
-    if (jj_3R_38()) return true;
+    if (jj_3R_32()) return true;
     Token xsp;
     while (true) {
       xsp = jj_scanpos;
-      if (jj_3_22()) { jj_scanpos = xsp; break; }
+      if (jj_3_24()) { jj_scanpos = xsp; break; }
     }
     return false;
   }
@@ -3236,14 +3350,14 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     Token xsp;
     while (true) {
       xsp = jj_scanpos;
-      if (jj_3_21()) { jj_scanpos = xsp; break; }
+      if (jj_3_23()) { jj_scanpos = xsp; break; }
     }
     return false;
   }
 
   final private boolean jj_3R_97() {
     if (jj_scan_token(DOT)) return true;
-    if (jj_3R_33()) return true;
+    if (jj_3R_36()) return true;
     return false;
   }
 
@@ -3289,8 +3403,8 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     return false;
   }
 
-  final private boolean jj_3_20() {
-    if (jj_3R_34()) return true;
+  final private boolean jj_3_22() {
+    if (jj_3R_37()) return true;
     return false;
   }
 
@@ -3327,12 +3441,12 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
   }
 
   final private boolean jj_3R_147() {
-    if (jj_3R_39()) return true;
+    if (jj_3R_33()) return true;
     return false;
   }
 
   final private boolean jj_3R_146() {
-    if (jj_3R_34()) return true;
+    if (jj_3R_37()) return true;
     return false;
   }
 
@@ -3343,6 +3457,11 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     jj_scanpos = xsp;
     if (jj_3R_147()) return true;
     }
+    return false;
+  }
+
+  final private boolean jj_3_16() {
+    if (jj_3R_40()) return true;
     return false;
   }
 
@@ -3372,13 +3491,13 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     return false;
   }
 
-  final private boolean jj_3_14() {
+  final private boolean jj_3_13() {
     if (jj_3R_40()) return true;
     return false;
   }
 
-  final private boolean jj_3R_242() {
-    if (jj_3R_255()) return true;
+  final private boolean jj_3R_240() {
+    if (jj_3R_246()) return true;
     return false;
   }
 
@@ -3389,7 +3508,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     if (jj_3R_102()) return true;
     while (true) {
       xsp = jj_scanpos;
-      if (jj_3_19()) { jj_scanpos = xsp; break; }
+      if (jj_3_21()) { jj_scanpos = xsp; break; }
     }
     return false;
   }
@@ -3403,7 +3522,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     return false;
   }
 
-  final private boolean jj_3_18() {
+  final private boolean jj_3_20() {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_3R_44()) jj_scanpos = xsp;
@@ -3414,15 +3533,10 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
   final private boolean jj_3R_216() {
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3_18()) {
+    if (jj_3_20()) {
     jj_scanpos = xsp;
     if (jj_3R_228()) return true;
     }
-    return false;
-  }
-
-  final private boolean jj_3_11() {
-    if (jj_3R_40()) return true;
     return false;
   }
 
@@ -3437,8 +3551,8 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     return false;
   }
 
-  final private boolean jj_3_17() {
-    if (jj_3R_34()) return true;
+  final private boolean jj_3_19() {
+    if (jj_3R_37()) return true;
     return false;
   }
 
@@ -3448,7 +3562,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
   }
 
   final private boolean jj_3R_143() {
-    if (jj_3R_33()) return true;
+    if (jj_3R_36()) return true;
     return false;
   }
 
@@ -3465,65 +3579,65 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     return false;
   }
 
-  final private boolean jj_3R_267() {
-    if (jj_3R_39()) return true;
+  final private boolean jj_3R_261() {
+    if (jj_3R_33()) return true;
     return false;
   }
 
-  final private boolean jj_3R_266() {
-    if (jj_3R_34()) return true;
+  final private boolean jj_3R_260() {
+    if (jj_3R_37()) return true;
     return false;
   }
 
-  final private boolean jj_3_15() {
+  final private boolean jj_3_14() {
     if (jj_3R_41()) return true;
     return false;
   }
 
-  final private boolean jj_3R_254() {
+  final private boolean jj_3R_121() {
+    if (jj_3R_173()) return true;
+    return false;
+  }
+
+  final private boolean jj_3_17() {
+    if (jj_3R_41()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_245() {
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3R_266()) {
+    if (jj_3R_260()) {
     jj_scanpos = xsp;
-    if (jj_3R_267()) return true;
+    if (jj_3R_261()) return true;
     }
-    return false;
-  }
-
-  final private boolean jj_3_12() {
-    if (jj_3R_41()) return true;
     return false;
   }
 
   final private boolean jj_3R_43() {
     if (jj_3R_100()) return true;
     if (jj_scan_token(COLON)) return true;
-    if (jj_3R_254()) return true;
+    if (jj_3R_245()) return true;
     return false;
   }
 
-  final private boolean jj_3R_268() {
+  final private boolean jj_3R_262() {
     if (jj_scan_token(COMMA)) return true;
     return false;
   }
 
-  final private boolean jj_3_16() {
+  final private boolean jj_3_18() {
     if (jj_scan_token(COMMA)) return true;
     if (jj_3R_43()) return true;
     return false;
   }
 
-  final private boolean jj_3R_139() {
-    if (jj_3R_185()) return true;
-    return false;
-  }
-
-  final private boolean jj_3R_255() {
+  final private boolean jj_3R_246() {
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3_16()) {
+    if (jj_3_18()) {
     jj_scanpos = xsp;
-    if (jj_3R_268()) return true;
+    if (jj_3R_262()) return true;
     }
     return false;
   }
@@ -3538,7 +3652,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     Token xsp;
     while (true) {
       xsp = jj_scanpos;
-      if (jj_3R_242()) { jj_scanpos = xsp; break; }
+      if (jj_3R_240()) { jj_scanpos = xsp; break; }
     }
     return false;
   }
@@ -3563,7 +3677,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
   }
 
   final private boolean jj_3R_190() {
-    if (jj_3R_33()) return true;
+    if (jj_3R_36()) return true;
     return false;
   }
 
@@ -3581,6 +3695,11 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
 
   final private boolean jj_3R_187() {
     if (jj_scan_token(THIS)) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_120() {
+    if (jj_3R_36()) return true;
     return false;
   }
 
@@ -3616,13 +3735,8 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     Token xsp;
     while (true) {
       xsp = jj_scanpos;
-      if (jj_3_15()) { jj_scanpos = xsp; break; }
+      if (jj_3_17()) { jj_scanpos = xsp; break; }
     }
-    return false;
-  }
-
-  final private boolean jj_3R_138() {
-    if (jj_3R_33()) return true;
     return false;
   }
 
@@ -3636,14 +3750,14 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     return false;
   }
 
-  final private boolean jj_3R_135() {
+  final private boolean jj_3R_140() {
     if (jj_scan_token(LPAREN)) return true;
-    if (jj_3R_39()) return true;
-    if (jj_3R_38()) return true;
+    if (jj_3R_33()) return true;
+    if (jj_3R_32()) return true;
     Token xsp;
     while (true) {
       xsp = jj_scanpos;
-      if (jj_3_14()) { jj_scanpos = xsp; break; }
+      if (jj_3_16()) { jj_scanpos = xsp; break; }
     }
     if (jj_scan_token(RPAREN)) return true;
     return false;
@@ -3651,67 +3765,158 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
 
   final private boolean jj_3R_117() {
     if (jj_scan_token(COMMA)) return true;
-    if (jj_3R_34()) return true;
+    if (jj_3R_37()) return true;
     return false;
   }
 
-  final private boolean jj_3R_89() {
+  final private boolean jj_3R_57() {
     if (jj_scan_token(LPAREN)) return true;
-    if (jj_3R_39()) return true;
+    if (jj_3R_33()) return true;
     if (jj_scan_token(RPAREN)) return true;
     Token xsp;
     while (true) {
       xsp = jj_scanpos;
-      if (jj_3_12()) { jj_scanpos = xsp; break; }
+      if (jj_3_14()) { jj_scanpos = xsp; break; }
     }
     return false;
   }
 
-  final private boolean jj_3_13() {
+  final private boolean jj_3_15() {
     if (jj_3R_42()) return true;
     return false;
   }
 
-  final private boolean jj_3_10() {
+  final private boolean jj_3_12() {
     if (jj_scan_token(LPAREN)) return true;
-    if (jj_3R_39()) return true;
+    if (jj_3R_33()) return true;
     return false;
   }
 
-  final private boolean jj_3R_37() {
+  final private boolean jj_3R_31() {
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3_13()) {
+    if (jj_3_15()) {
     jj_scanpos = xsp;
-    if (jj_3R_89()) return true;
+    if (jj_3R_57()) return true;
+    }
+    return false;
+  }
+
+  final private boolean jj_3_11() {
+    if (jj_3R_31()) return true;
+    if (jj_3R_32()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_139() {
+    if (jj_3R_31()) return true;
+    if (jj_3R_32()) return true;
+    Token xsp;
+    while (true) {
+      xsp = jj_scanpos;
+      if (jj_3_13()) { jj_scanpos = xsp; break; }
+    }
+    return false;
+  }
+
+  final private boolean jj_3R_80() {
+    if (jj_3R_42()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_79() {
+    if (jj_3R_140()) return true;
+    return false;
+  }
+
+  final private boolean jj_3_8() {
+    if (jj_scan_token(SEMICOLON)) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_78() {
+    if (jj_3R_139()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_38() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_78()) {
+    jj_scanpos = xsp;
+    if (jj_3R_79()) {
+    jj_scanpos = xsp;
+    if (jj_3R_80()) return true;
+    }
+    }
+    return false;
+  }
+
+  final private boolean jj_3R_60() {
+    if (jj_scan_token(LPAREN)) return true;
+    if (jj_3R_33()) return true;
+    if (jj_scan_token(RPAREN)) return true;
+    return false;
+  }
+
+  final private boolean jj_3_10() {
+    if (jj_3R_37()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_59() {
+    if (jj_3R_119()) return true;
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_120()) jj_scanpos = xsp;
+    if (jj_scan_token(LPAREN)) return true;
+    xsp = jj_scanpos;
+    if (jj_3R_121()) jj_scanpos = xsp;
+    if (jj_scan_token(RPAREN)) return true;
+    if (jj_scan_token(LBRACE)) return true;
+    if (jj_3R_122()) return true;
+    if (jj_scan_token(RBRACE)) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_33() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_59()) {
+    jj_scanpos = xsp;
+    if (jj_3R_60()) return true;
     }
     return false;
   }
 
   final private boolean jj_3_9() {
-    if (jj_3R_37()) return true;
     if (jj_3R_38()) return true;
+    if (jj_3R_39()) return true;
     return false;
   }
 
-  final private boolean jj_3R_134() {
+  final private boolean jj_3R_184() {
+    if (jj_3R_33()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_183() {
     if (jj_3R_37()) return true;
-    if (jj_3R_38()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_137() {
     Token xsp;
-    while (true) {
-      xsp = jj_scanpos;
-      if (jj_3_11()) { jj_scanpos = xsp; break; }
+    xsp = jj_scanpos;
+    if (jj_3R_183()) {
+    jj_scanpos = xsp;
+    if (jj_3R_184()) return true;
     }
     return false;
   }
 
-  final private boolean jj_3R_76() {
-    if (jj_3R_42()) return true;
-    return false;
-  }
-
-  final private boolean jj_3R_75() {
-    if (jj_3R_135()) return true;
+  final private boolean jj_3R_77() {
+    if (jj_3R_138()) return true;
     return false;
   }
 
@@ -3720,101 +3925,10 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     return false;
   }
 
-  final private boolean jj_3R_74() {
-    if (jj_3R_134()) return true;
-    return false;
-  }
-
-  final private boolean jj_3R_35() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3R_74()) {
-    jj_scanpos = xsp;
-    if (jj_3R_75()) {
-    jj_scanpos = xsp;
-    if (jj_3R_76()) return true;
-    }
-    }
-    return false;
-  }
-
-  final private boolean jj_3R_92() {
-    if (jj_scan_token(LPAREN)) return true;
+  final private boolean jj_3R_76() {
+    if (jj_3R_38()) return true;
     if (jj_3R_39()) return true;
-    if (jj_scan_token(RPAREN)) return true;
-    return false;
-  }
-
-  final private boolean jj_3_8() {
-    if (jj_3R_34()) return true;
-    return false;
-  }
-
-  final private boolean jj_3R_91() {
     if (jj_3R_137()) return true;
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3R_138()) jj_scanpos = xsp;
-    if (jj_scan_token(LPAREN)) return true;
-    xsp = jj_scanpos;
-    if (jj_3R_139()) jj_scanpos = xsp;
-    if (jj_scan_token(RPAREN)) return true;
-    if (jj_scan_token(LBRACE)) return true;
-    if (jj_3R_140()) return true;
-    if (jj_scan_token(RBRACE)) return true;
-    return false;
-  }
-
-  final private boolean jj_3R_39() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3R_91()) {
-    jj_scanpos = xsp;
-    if (jj_3R_92()) return true;
-    }
-    return false;
-  }
-
-  final private boolean jj_3_7() {
-    if (jj_3R_35()) return true;
-    if (jj_3R_36()) return true;
-    return false;
-  }
-
-  final private boolean jj_3R_180() {
-    if (jj_3R_39()) return true;
-    return false;
-  }
-
-  final private boolean jj_3R_179() {
-    if (jj_3R_34()) return true;
-    return false;
-  }
-
-  final private boolean jj_3R_132() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3R_179()) {
-    jj_scanpos = xsp;
-    if (jj_3R_180()) return true;
-    }
-    return false;
-  }
-
-  final private boolean jj_3R_73() {
-    if (jj_3R_133()) return true;
-    return false;
-  }
-
-  final private boolean jj_3_4() {
-    if (jj_scan_token(SEMICOLON)) return true;
-    return false;
-  }
-
-  final private boolean jj_3R_72() {
-    if (jj_3R_35()) return true;
-    if (jj_3R_36()) return true;
-    if (jj_3R_132()) return true;
     return false;
   }
 
@@ -3824,18 +3938,18 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     return false;
   }
 
-  final private boolean jj_3R_34() {
+  final private boolean jj_3R_37() {
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3R_72()) {
+    if (jj_3R_76()) {
     jj_scanpos = xsp;
-    if (jj_3R_73()) return true;
+    if (jj_3R_77()) return true;
     }
     return false;
   }
 
   final private boolean jj_3R_56() {
-    if (jj_3R_34()) return true;
+    if (jj_3R_37()) return true;
     Token xsp;
     while (true) {
       xsp = jj_scanpos;
@@ -3849,43 +3963,43 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     return false;
   }
 
-  final private boolean jj_3R_121() {
+  final private boolean jj_3R_126() {
     if (jj_3R_56()) return true;
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3_6()) jj_scanpos = xsp;
+    if (jj_3_8()) jj_scanpos = xsp;
     return false;
   }
 
-  final private boolean jj_3_5() {
+  final private boolean jj_3_7() {
+    if (jj_3R_37()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_125() {
+    if (jj_3R_36()) return true;
+    if (jj_scan_token(COLON)) return true;
     if (jj_3R_34()) return true;
     return false;
   }
 
-  final private boolean jj_3R_120() {
-    if (jj_3R_33()) return true;
-    if (jj_scan_token(COLON)) return true;
-    if (jj_3R_31()) return true;
-    return false;
-  }
-
-  final private boolean jj_3R_119() {
+  final private boolean jj_3R_124() {
     if (jj_scan_token(SEMICOLON)) return true;
     return false;
   }
 
   final private boolean jj_3R_211() {
-    if (jj_3R_39()) return true;
+    if (jj_3R_33()) return true;
     return false;
   }
 
   final private boolean jj_3R_210() {
-    if (jj_3R_34()) return true;
+    if (jj_3R_37()) return true;
     return false;
   }
 
-  final private boolean jj_3R_197() {
-    if (jj_3R_185()) return true;
+  final private boolean jj_3R_200() {
+    if (jj_3R_173()) return true;
     return false;
   }
 
@@ -3906,7 +4020,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
   }
 
   final private boolean jj_3R_54() {
-    if (jj_3R_33()) return true;
+    if (jj_3R_36()) return true;
     Token xsp;
     xsp = jj_scanpos;
     if (jj_3R_114()) jj_scanpos = xsp;
@@ -3923,134 +4037,126 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     return false;
   }
 
-  final private boolean jj_3R_71() {
-    if (jj_3R_131()) return true;
+  final private boolean jj_3R_75() {
+    if (jj_3R_136()) return true;
     return false;
   }
 
-  final private boolean jj_3R_118() {
+  final private boolean jj_3R_123() {
     if (jj_scan_token(VAR)) return true;
     if (jj_3R_53()) return true;
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3_4()) jj_scanpos = xsp;
+    if (jj_3_6()) jj_scanpos = xsp;
     return false;
   }
 
-  final private boolean jj_3R_32() {
+  final private boolean jj_3R_35() {
     if (jj_scan_token(LBRACE)) return true;
     Token xsp;
     while (true) {
       xsp = jj_scanpos;
-      if (jj_3R_71()) { jj_scanpos = xsp; break; }
+      if (jj_3R_75()) { jj_scanpos = xsp; break; }
     }
     if (jj_scan_token(RBRACE)) return true;
     return false;
   }
 
+  final private boolean jj_3R_74() {
+    if (jj_3R_135()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_73() {
+    if (jj_3R_134()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_72() {
+    if (jj_3R_133()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_71() {
+    if (jj_3R_132()) return true;
+    return false;
+  }
+
   final private boolean jj_3R_70() {
-    if (jj_3R_130()) return true;
+    if (jj_3R_131()) return true;
     return false;
   }
 
   final private boolean jj_3R_69() {
-    if (jj_3R_129()) return true;
+    if (jj_3R_130()) return true;
     return false;
   }
 
-  final private boolean jj_3R_68() {
-    if (jj_3R_128()) return true;
-    return false;
-  }
-
-  final private boolean jj_3R_67() {
-    if (jj_3R_127()) return true;
-    return false;
-  }
-
-  final private boolean jj_3R_66() {
-    if (jj_3R_126()) return true;
-    return false;
-  }
-
-  final private boolean jj_3R_65() {
-    if (jj_3R_125()) return true;
-    return false;
-  }
-
-  final private boolean jj_3_3() {
-    if (jj_3R_33()) return true;
+  final private boolean jj_3_5() {
+    if (jj_3R_36()) return true;
     if (jj_scan_token(COLON)) return true;
     return false;
   }
 
+  final private boolean jj_3R_68() {
+    if (jj_3R_129()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_67() {
+    if (jj_3R_128()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_199() {
+    if (jj_scan_token(COMMA)) return true;
+    if (jj_3R_36()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_66() {
+    if (jj_3R_127()) return true;
+    return false;
+  }
+
+  final private boolean jj_3_4() {
+    if (jj_3R_35()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_65() {
+    if (jj_3R_126()) return true;
+    return false;
+  }
+
   final private boolean jj_3R_64() {
-    if (jj_3R_124()) return true;
+    if (jj_3R_125()) return true;
     return false;
   }
 
   final private boolean jj_3R_63() {
-    if (jj_3R_123()) return true;
-    return false;
-  }
-
-  final private boolean jj_3R_204() {
-    if (jj_scan_token(COMMA)) return true;
-    if (jj_3R_33()) return true;
+    if (jj_3R_124()) return true;
     return false;
   }
 
   final private boolean jj_3R_62() {
-    if (jj_3R_122()) return true;
-    return false;
-  }
-
-  final private boolean jj_3_2() {
-    if (jj_3R_32()) return true;
+    if (jj_3R_123()) return true;
     return false;
   }
 
   final private boolean jj_3R_61() {
-    if (jj_3R_121()) return true;
+    if (jj_3R_35()) return true;
     return false;
   }
 
-  final private boolean jj_3R_60() {
-    if (jj_3R_120()) return true;
+  final private boolean jj_3_3() {
+    if (jj_3R_34()) return true;
     return false;
   }
 
-  final private boolean jj_3R_59() {
-    if (jj_3R_119()) return true;
-    return false;
-  }
-
-  final private boolean jj_3R_58() {
-    if (jj_3R_118()) return true;
-    return false;
-  }
-
-  final private boolean jj_3R_57() {
-    if (jj_3R_32()) return true;
-    return false;
-  }
-
-  final private boolean jj_3_1() {
-    if (jj_3R_31()) return true;
-    return false;
-  }
-
-  final private boolean jj_3R_31() {
+  final private boolean jj_3R_34() {
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3R_57()) {
-    jj_scanpos = xsp;
-    if (jj_3R_58()) {
-    jj_scanpos = xsp;
-    if (jj_3R_59()) {
-    jj_scanpos = xsp;
-    if (jj_3R_60()) {
-    jj_scanpos = xsp;
     if (jj_3R_61()) {
     jj_scanpos = xsp;
     if (jj_3R_62()) {
@@ -4069,7 +4175,15 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     jj_scanpos = xsp;
     if (jj_3R_69()) {
     jj_scanpos = xsp;
-    if (jj_3R_70()) return true;
+    if (jj_3R_70()) {
+    jj_scanpos = xsp;
+    if (jj_3R_71()) {
+    jj_scanpos = xsp;
+    if (jj_3R_72()) {
+    jj_scanpos = xsp;
+    if (jj_3R_73()) {
+    jj_scanpos = xsp;
+    if (jj_3R_74()) return true;
     }
     }
     }
@@ -4086,18 +4200,83 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     return false;
   }
 
-  final private boolean jj_3R_186() {
-    if (jj_3R_131()) return true;
+  final private boolean jj_3R_174() {
+    if (jj_3R_136()) return true;
     return false;
   }
 
-  final private boolean jj_3R_198() {
+  final private boolean jj_3R_201() {
     Token xsp;
-    if (jj_3_1()) return true;
+    if (jj_3_3()) return true;
     while (true) {
       xsp = jj_scanpos;
-      if (jj_3_1()) { jj_scanpos = xsp; break; }
+      if (jj_3_3()) { jj_scanpos = xsp; break; }
     }
+    return false;
+  }
+
+  final private boolean jj_3R_251() {
+    if (jj_3R_56()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_122() {
+    Token xsp;
+    while (true) {
+      xsp = jj_scanpos;
+      if (jj_3R_174()) { jj_scanpos = xsp; break; }
+    }
+    return false;
+  }
+
+  final private boolean jj_3R_173() {
+    if (jj_3R_36()) return true;
+    Token xsp;
+    while (true) {
+      xsp = jj_scanpos;
+      if (jj_3R_199()) { jj_scanpos = xsp; break; }
+    }
+    return false;
+  }
+
+  final private boolean jj_3R_36() {
+    if (jj_scan_token(IDENTIFIER_NAME)) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_119() {
+    if (jj_scan_token(FUNCTION)) return true;
+    return false;
+  }
+
+  final private boolean jj_3_2() {
+    if (jj_scan_token(LPAREN)) return true;
+    if (jj_3R_33()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_182() {
+    if (jj_3R_201()) return true;
+    return false;
+  }
+
+  final private boolean jj_3_1() {
+    if (jj_3R_31()) return true;
+    if (jj_3R_32()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_181() {
+    if (jj_3R_119()) return true;
+    if (jj_3R_36()) return true;
+    if (jj_scan_token(LPAREN)) return true;
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_200()) jj_scanpos = xsp;
+    if (jj_scan_token(RPAREN)) return true;
+    if (jj_scan_token(LBRACE)) return true;
+    if (jj_3R_122()) return true;
+    if (jj_scan_token(RBRACE)) return true;
     return false;
   }
 
@@ -4106,66 +4285,44 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     return false;
   }
 
-  final private boolean jj_3R_140() {
-    Token xsp;
-    while (true) {
-      xsp = jj_scanpos;
-      if (jj_3R_186()) { jj_scanpos = xsp; break; }
-    }
-    return false;
-  }
-
-  final private boolean jj_3R_185() {
-    if (jj_3R_33()) return true;
-    Token xsp;
-    while (true) {
-      xsp = jj_scanpos;
-      if (jj_3R_204()) { jj_scanpos = xsp; break; }
-    }
-    return false;
-  }
-
-  final private boolean jj_3R_33() {
-    if (jj_scan_token(IDENTIFIER_NAME)) return true;
-    return false;
-  }
-
-  final private boolean jj_3R_137() {
-    if (jj_scan_token(FUNCTION)) return true;
-    return false;
-  }
-
-  final private boolean jj_3R_178() {
-    if (jj_3R_198()) return true;
-    return false;
-  }
-
-  final private boolean jj_3R_177() {
-    if (jj_3R_137()) return true;
-    if (jj_3R_33()) return true;
-    if (jj_scan_token(LPAREN)) return true;
+  final private boolean jj_3R_136() {
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3R_197()) jj_scanpos = xsp;
-    if (jj_scan_token(RPAREN)) return true;
-    if (jj_scan_token(LBRACE)) return true;
-    if (jj_3R_140()) return true;
-    if (jj_scan_token(RBRACE)) return true;
+    if (jj_3R_181()) {
+    jj_scanpos = xsp;
+    if (jj_3R_182()) return true;
+    }
     return false;
   }
 
-  final private boolean jj_3R_247() {
+  final private boolean jj_3R_250() {
     if (jj_3R_56()) return true;
     return false;
   }
 
-  final private boolean jj_3R_131() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3R_177()) {
-    jj_scanpos = xsp;
-    if (jj_3R_178()) return true;
-    }
+  final private boolean jj_3R_268() {
+    if (jj_3R_266()) return true;
+    return false;
+  }
+
+  final private boolean jj_3_45() {
+    if (jj_scan_token(SEMICOLON)) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_278() {
+    if (jj_3R_201()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_266() {
+    if (jj_scan_token(FINALLY)) return true;
+    if (jj_3R_35()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_272() {
+    if (jj_3R_263()) return true;
     return false;
   }
 
@@ -4174,8 +4331,25 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     return false;
   }
 
-  final private boolean jj_3R_265() {
-    if (jj_3R_263()) return true;
+  final private boolean jj_3R_267() {
+    if (jj_scan_token(CATCH)) return true;
+    if (jj_scan_token(LPAREN)) return true;
+    if (jj_3R_36()) return true;
+    if (jj_scan_token(RPAREN)) return true;
+    if (jj_3R_35()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_255() {
+    if (jj_3R_267()) return true;
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_268()) jj_scanpos = xsp;
+    return false;
+  }
+
+  final private boolean jj_3R_254() {
+    if (jj_3R_266()) return true;
     return false;
   }
 
@@ -4184,97 +4358,49 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     return false;
   }
 
-  final private boolean jj_3R_278() {
-    if (jj_3R_198()) return true;
-    return false;
-  }
-
-  final private boolean jj_3R_263() {
-    if (jj_scan_token(FINALLY)) return true;
-    if (jj_3R_32()) return true;
-    return false;
-  }
-
-  final private boolean jj_3R_272() {
-    if (jj_3R_260()) return true;
-    return false;
-  }
-
-  final private boolean jj_3R_246() {
-    if (jj_3R_56()) return true;
-    return false;
-  }
-
-  final private boolean jj_3R_264() {
-    if (jj_scan_token(CATCH)) return true;
-    if (jj_scan_token(LPAREN)) return true;
-    if (jj_3R_33()) return true;
-    if (jj_scan_token(RPAREN)) return true;
-    if (jj_3R_32()) return true;
-    return false;
-  }
-
-  final private boolean jj_3R_253() {
-    if (jj_3R_264()) return true;
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3R_265()) jj_scanpos = xsp;
-    return false;
-  }
-
-  final private boolean jj_3R_252() {
-    if (jj_3R_263()) return true;
-    return false;
-  }
-
-  final private boolean jj_3_41() {
-    if (jj_scan_token(SEMICOLON)) return true;
-    return false;
-  }
-
   final private boolean jj_3R_277() {
-    if (jj_3R_198()) return true;
+    if (jj_3R_201()) return true;
     return false;
   }
 
-  final private boolean jj_3_32() {
+  final private boolean jj_3_34() {
     if (jj_scan_token(SEMICOLON)) return true;
     return false;
   }
 
-  final private boolean jj_3R_241() {
+  final private boolean jj_3R_242() {
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3R_252()) {
+    if (jj_3R_254()) {
     jj_scanpos = xsp;
-    if (jj_3R_253()) return true;
+    if (jj_3R_255()) return true;
     }
     return false;
   }
 
-  final private boolean jj_3R_130() {
+  final private boolean jj_3R_135() {
     if (jj_scan_token(TRY)) return true;
-    if (jj_3R_32()) return true;
-    if (jj_3R_241()) return true;
+    if (jj_3R_35()) return true;
+    if (jj_3R_242()) return true;
     return false;
   }
 
-  final private boolean jj_3R_129() {
+  final private boolean jj_3_33() {
+    if (jj_scan_token(ELSE)) return true;
+    if (jj_3R_34()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_134() {
     if (jj_scan_token(THROW)) return true;
     if (jj_3R_56()) return true;
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3_43()) jj_scanpos = xsp;
+    if (jj_3_45()) jj_scanpos = xsp;
     return false;
   }
 
-  final private boolean jj_3_31() {
-    if (jj_scan_token(ELSE)) return true;
-    if (jj_3R_31()) return true;
-    return false;
-  }
-
-  final private boolean jj_3_39() {
+  final private boolean jj_3_41() {
     if (jj_scan_token(SEMICOLON)) return true;
     return false;
   }
@@ -4288,7 +4414,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     return false;
   }
 
-  final private boolean jj_3_37() {
+  final private boolean jj_3_39() {
     if (jj_scan_token(SEMICOLON)) return true;
     return false;
   }
@@ -4308,7 +4434,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     return false;
   }
 
-  final private boolean jj_3R_260() {
+  final private boolean jj_3R_263() {
     Token xsp;
     if (jj_3R_270()) return true;
     while (true) {
@@ -4318,7 +4444,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     return false;
   }
 
-  final private boolean jj_3R_262() {
+  final private boolean jj_3R_265() {
     if (jj_3R_271()) return true;
     Token xsp;
     xsp = jj_scanpos;
@@ -4327,70 +4453,70 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     return false;
   }
 
-  final private boolean jj_3R_261() {
+  final private boolean jj_3R_264() {
     if (jj_scan_token(RBRACE)) return true;
     return false;
   }
 
-  final private boolean jj_3R_250() {
-    if (jj_3R_260()) return true;
+  final private boolean jj_3R_252() {
+    if (jj_3R_263()) return true;
     return false;
   }
 
-  final private boolean jj_3R_245() {
+  final private boolean jj_3R_247() {
     if (jj_3R_56()) return true;
     return false;
   }
 
-  final private boolean jj_3R_251() {
+  final private boolean jj_3R_253() {
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3R_261()) {
+    if (jj_3R_264()) {
     jj_scanpos = xsp;
-    if (jj_3R_262()) return true;
+    if (jj_3R_265()) return true;
     }
     return false;
   }
 
-  final private boolean jj_3R_240() {
+  final private boolean jj_3R_241() {
     if (jj_scan_token(LBRACE)) return true;
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3R_250()) jj_scanpos = xsp;
-    if (jj_3R_251()) return true;
+    if (jj_3R_252()) jj_scanpos = xsp;
+    if (jj_3R_253()) return true;
     return false;
   }
 
-  final private boolean jj_3_42() {
+  final private boolean jj_3_44() {
     if (jj_3R_56()) return true;
     return false;
   }
 
-  final private boolean jj_3R_128() {
+  final private boolean jj_3R_133() {
     if (jj_scan_token(SWITCH)) return true;
     if (jj_scan_token(LPAREN)) return true;
     if (jj_3R_56()) return true;
     if (jj_scan_token(RPAREN)) return true;
-    if (jj_3R_240()) return true;
+    if (jj_3R_241()) return true;
     return false;
   }
 
-  final private boolean jj_3_40() {
+  final private boolean jj_3_42() {
     if (jj_3R_55()) return true;
     return false;
   }
 
-  final private boolean jj_3R_127() {
+  final private boolean jj_3R_132() {
     if (jj_scan_token(WITH)) return true;
     if (jj_scan_token(LPAREN)) return true;
     if (jj_3R_56()) return true;
     if (jj_scan_token(RPAREN)) return true;
-    if (jj_3R_31()) return true;
+    if (jj_3R_34()) return true;
     return false;
   }
 
   final private boolean jj_3R_116() {
-    if (jj_3R_39()) return true;
+    if (jj_3R_33()) return true;
     return false;
   }
 
@@ -4399,12 +4525,12 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     return false;
   }
 
-  final private boolean jj_3_38() {
-    if (jj_3R_33()) return true;
+  final private boolean jj_3_40() {
+    if (jj_3R_36()) return true;
     return false;
   }
 
-  final private boolean jj_3_30() {
+  final private boolean jj_3_32() {
     if (jj_3R_51()) return true;
     return false;
   }
@@ -4419,8 +4545,8 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     return false;
   }
 
-  final private boolean jj_3_36() {
-    if (jj_3R_33()) return true;
+  final private boolean jj_3_38() {
+    if (jj_3R_36()) return true;
     return false;
   }
 
@@ -4429,17 +4555,17 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     return false;
   }
 
-  final private boolean jj_3R_126() {
+  final private boolean jj_3R_131() {
     if (jj_scan_token(RETURN)) return true;
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3_40()) jj_scanpos = xsp;
+    if (jj_3_42()) jj_scanpos = xsp;
     xsp = jj_scanpos;
-    if (jj_3_41()) jj_scanpos = xsp;
+    if (jj_3_43()) jj_scanpos = xsp;
     return false;
   }
 
-  final private boolean jj_3_35() {
+  final private boolean jj_3_37() {
     if (jj_scan_token(FOR)) return true;
     if (jj_scan_token(LPAREN)) return true;
     if (jj_scan_token(VAR)) return true;
@@ -4448,17 +4574,17 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     return false;
   }
 
-  final private boolean jj_3R_125() {
+  final private boolean jj_3R_130() {
     if (jj_scan_token(BREAK)) return true;
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3_38()) jj_scanpos = xsp;
+    if (jj_3_40()) jj_scanpos = xsp;
     xsp = jj_scanpos;
-    if (jj_3_39()) jj_scanpos = xsp;
+    if (jj_3_41()) jj_scanpos = xsp;
     return false;
   }
 
-  final private boolean jj_3_34() {
+  final private boolean jj_3_36() {
     if (jj_scan_token(FOR)) return true;
     if (jj_scan_token(LPAREN)) return true;
     if (jj_scan_token(VAR)) return true;
@@ -4467,7 +4593,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     return false;
   }
 
-  final private boolean jj_3_33() {
+  final private boolean jj_3_35() {
     if (jj_scan_token(FOR)) return true;
     if (jj_scan_token(LPAREN)) return true;
     Token xsp;
@@ -4477,28 +4603,28 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     return false;
   }
 
-  final private boolean jj_3R_124() {
+  final private boolean jj_3R_129() {
     if (jj_scan_token(CONTINUE)) return true;
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3_36()) jj_scanpos = xsp;
+    if (jj_3_38()) jj_scanpos = xsp;
     xsp = jj_scanpos;
-    if (jj_3_37()) jj_scanpos = xsp;
+    if (jj_3_39()) jj_scanpos = xsp;
     return false;
   }
 
-  final private boolean jj_3R_176() {
+  final private boolean jj_3R_180() {
     if (jj_scan_token(FOR)) return true;
     if (jj_scan_token(LPAREN)) return true;
-    if (jj_3R_35()) return true;
+    if (jj_3R_38()) return true;
     if (jj_scan_token(IN)) return true;
     if (jj_3R_56()) return true;
     if (jj_scan_token(RPAREN)) return true;
-    if (jj_3R_31()) return true;
+    if (jj_3R_34()) return true;
     return false;
   }
 
-  final private boolean jj_3R_175() {
+  final private boolean jj_3R_179() {
     if (jj_scan_token(FOR)) return true;
     if (jj_scan_token(LPAREN)) return true;
     if (jj_scan_token(VAR)) return true;
@@ -4506,11 +4632,11 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     if (jj_scan_token(IN)) return true;
     if (jj_3R_56()) return true;
     if (jj_scan_token(RPAREN)) return true;
-    if (jj_3R_31()) return true;
+    if (jj_3R_34()) return true;
     return false;
   }
 
-  final private boolean jj_3R_174() {
+  final private boolean jj_3R_178() {
     if (jj_scan_token(FOR)) return true;
     if (jj_scan_token(LPAREN)) return true;
     if (jj_scan_token(VAR)) return true;
@@ -4518,68 +4644,68 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     if (jj_scan_token(SEMICOLON)) return true;
     Token xsp;
     xsp = jj_scanpos;
+    if (jj_3R_250()) jj_scanpos = xsp;
+    if (jj_scan_token(SEMICOLON)) return true;
+    xsp = jj_scanpos;
+    if (jj_3R_251()) jj_scanpos = xsp;
+    if (jj_scan_token(RPAREN)) return true;
+    if (jj_3R_34()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_177() {
+    if (jj_scan_token(FOR)) return true;
+    if (jj_scan_token(LPAREN)) return true;
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_247()) jj_scanpos = xsp;
+    if (jj_scan_token(SEMICOLON)) return true;
+    xsp = jj_scanpos;
     if (jj_3R_248()) jj_scanpos = xsp;
     if (jj_scan_token(SEMICOLON)) return true;
     xsp = jj_scanpos;
     if (jj_3R_249()) jj_scanpos = xsp;
     if (jj_scan_token(RPAREN)) return true;
-    if (jj_3R_31()) return true;
+    if (jj_3R_34()) return true;
     return false;
   }
 
-  final private boolean jj_3R_173() {
-    if (jj_scan_token(FOR)) return true;
-    if (jj_scan_token(LPAREN)) return true;
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3R_245()) jj_scanpos = xsp;
-    if (jj_scan_token(SEMICOLON)) return true;
-    xsp = jj_scanpos;
-    if (jj_3R_246()) jj_scanpos = xsp;
-    if (jj_scan_token(SEMICOLON)) return true;
-    xsp = jj_scanpos;
-    if (jj_3R_247()) jj_scanpos = xsp;
-    if (jj_scan_token(RPAREN)) return true;
-    if (jj_3R_31()) return true;
-    return false;
-  }
-
-  final private boolean jj_3R_172() {
+  final private boolean jj_3R_176() {
     if (jj_scan_token(WHILE)) return true;
     if (jj_scan_token(LPAREN)) return true;
     if (jj_3R_56()) return true;
     if (jj_scan_token(RPAREN)) return true;
-    if (jj_3R_31()) return true;
+    if (jj_3R_34()) return true;
     return false;
   }
 
-  final private boolean jj_3R_171() {
+  final private boolean jj_3R_175() {
     if (jj_scan_token(DO)) return true;
-    if (jj_3R_31()) return true;
+    if (jj_3R_34()) return true;
     if (jj_scan_token(WHILE)) return true;
     if (jj_scan_token(LPAREN)) return true;
     if (jj_3R_56()) return true;
     if (jj_scan_token(RPAREN)) return true;
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3_32()) jj_scanpos = xsp;
+    if (jj_3_34()) jj_scanpos = xsp;
     return false;
   }
 
-  final private boolean jj_3R_123() {
+  final private boolean jj_3R_128() {
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3R_171()) {
-    jj_scanpos = xsp;
-    if (jj_3R_172()) {
-    jj_scanpos = xsp;
-    if (jj_3R_173()) {
-    jj_scanpos = xsp;
-    if (jj_3R_174()) {
-    jj_scanpos = xsp;
     if (jj_3R_175()) {
     jj_scanpos = xsp;
-    if (jj_3R_176()) return true;
+    if (jj_3R_176()) {
+    jj_scanpos = xsp;
+    if (jj_3R_177()) {
+    jj_scanpos = xsp;
+    if (jj_3R_178()) {
+    jj_scanpos = xsp;
+    if (jj_3R_179()) {
+    jj_scanpos = xsp;
+    if (jj_3R_180()) return true;
     }
     }
     }
@@ -4588,15 +4714,15 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     return false;
   }
 
-  final private boolean jj_3R_122() {
+  final private boolean jj_3R_127() {
     if (jj_scan_token(IF)) return true;
     if (jj_scan_token(LPAREN)) return true;
     if (jj_3R_56()) return true;
     if (jj_scan_token(RPAREN)) return true;
-    if (jj_3R_31()) return true;
+    if (jj_3R_34()) return true;
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3_31()) jj_scanpos = xsp;
+    if (jj_3_33()) jj_scanpos = xsp;
     return false;
   }
 
@@ -4621,10 +4747,10 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
   }
 
   final private boolean jj_3R_195() {
-    if (jj_3R_35()) return true;
+    if (jj_3R_38()) return true;
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3_30()) jj_scanpos = xsp;
+    if (jj_3_32()) jj_scanpos = xsp;
     return false;
   }
 
@@ -4678,7 +4804,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     return false;
   }
 
-  final private boolean jj_3_28() {
+  final private boolean jj_3_30() {
     if (jj_3R_49()) return true;
     return false;
   }
@@ -4720,7 +4846,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     return false;
   }
 
-  final private boolean jj_3_29() {
+  final private boolean jj_3_31() {
     if (jj_3R_50()) return true;
     return false;
   }
@@ -4733,10 +4859,10 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
 
   final private boolean jj_3R_169() {
     Token xsp;
-    if (jj_3_29()) return true;
+    if (jj_3_31()) return true;
     while (true) {
       xsp = jj_scanpos;
-      if (jj_3_29()) { jj_scanpos = xsp; break; }
+      if (jj_3_31()) { jj_scanpos = xsp; break; }
     }
     return false;
   }
@@ -4836,7 +4962,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     Token xsp;
     while (true) {
       xsp = jj_scanpos;
-      if (jj_3_28()) { jj_scanpos = xsp; break; }
+      if (jj_3_30()) { jj_scanpos = xsp; break; }
     }
     return false;
   }
@@ -4846,7 +4972,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     return false;
   }
 
-  final private boolean jj_3_27() {
+  final private boolean jj_3_29() {
     if (jj_3R_48()) return true;
     return false;
   }
@@ -4982,7 +5108,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     Token xsp;
     while (true) {
       xsp = jj_scanpos;
-      if (jj_3_27()) { jj_scanpos = xsp; break; }
+      if (jj_3_29()) { jj_scanpos = xsp; break; }
     }
     return false;
   }
@@ -5035,8 +5161,8 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     return false;
   }
 
-  final private boolean jj_3R_182() {
-    if (jj_3R_201()) return true;
+  final private boolean jj_3R_186() {
+    if (jj_3R_204()) return true;
     return false;
   }
 
@@ -5070,10 +5196,10 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     return false;
   }
 
-  final private boolean jj_3_26() {
+  final private boolean jj_3_28() {
     if (jj_3R_47()) return true;
     if (jj_scan_token(SC_OR)) return true;
-    if (jj_3R_39()) return true;
+    if (jj_3R_33()) return true;
     return false;
   }
 
@@ -5097,12 +5223,12 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     return false;
   }
 
-  final private boolean jj_3_25() {
-    if (jj_3R_34()) return true;
+  final private boolean jj_3_27() {
+    if (jj_3R_37()) return true;
     return false;
   }
 
-  final private boolean jj_3R_200() {
+  final private boolean jj_3R_203() {
     if (jj_3R_47()) return true;
     Token xsp;
     while (true) {
@@ -5112,10 +5238,10 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     return false;
   }
 
-  final private boolean jj_3R_199() {
+  final private boolean jj_3R_202() {
     if (jj_3R_47()) return true;
     if (jj_scan_token(SC_OR)) return true;
-    if (jj_3R_39()) return true;
+    if (jj_3R_33()) return true;
     Token xsp;
     while (true) {
       xsp = jj_scanpos;
@@ -5124,23 +5250,23 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     return false;
   }
 
-  final private boolean jj_3R_181() {
+  final private boolean jj_3R_185() {
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3R_199()) {
+    if (jj_3R_202()) {
     jj_scanpos = xsp;
-    if (jj_3R_200()) return true;
+    if (jj_3R_203()) return true;
     }
     return false;
   }
 
   final private boolean jj_3R_226() {
-    if (jj_3R_39()) return true;
+    if (jj_3R_33()) return true;
     return false;
   }
 
   final private boolean jj_3R_225() {
-    if (jj_3R_34()) return true;
+    if (jj_3R_37()) return true;
     return false;
   }
 
@@ -5154,7 +5280,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     return false;
   }
 
-  final private boolean jj_3R_201() {
+  final private boolean jj_3R_204() {
     if (jj_scan_token(HOOK)) return true;
     if (jj_3R_214()) return true;
     if (jj_scan_token(COLON)) return true;
@@ -5162,67 +5288,87 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     return false;
   }
 
-  final private boolean jj_3R_133() {
-    if (jj_3R_181()) return true;
+  final private boolean jj_3R_138() {
+    if (jj_3R_185()) return true;
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_3R_182()) jj_scanpos = xsp;
+    if (jj_3R_186()) jj_scanpos = xsp;
     return false;
   }
 
-  final private boolean jj_3R_88() {
+  final private boolean jj_3R_92() {
     if (jj_scan_token(ORASSIGN)) return true;
     return false;
   }
 
-  final private boolean jj_3R_87() {
+  final private boolean jj_3R_91() {
     if (jj_scan_token(XORASSIGN)) return true;
     return false;
   }
 
-  final private boolean jj_3R_86() {
+  final private boolean jj_3R_90() {
     if (jj_scan_token(ANDASSIGN)) return true;
     return false;
   }
 
-  final private boolean jj_3R_85() {
+  final private boolean jj_3R_89() {
     if (jj_scan_token(RUNSIGNEDSHIFTASSIGN)) return true;
     return false;
   }
 
-  final private boolean jj_3R_84() {
+  final private boolean jj_3R_172() {
+    if (jj_scan_token(COMMA)) return true;
+    if (jj_3R_171()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_88() {
     if (jj_scan_token(RSIGNEDSHIFTASSIGN)) return true;
     return false;
   }
 
-  final private boolean jj_3R_83() {
+  final private boolean jj_3R_87() {
     if (jj_scan_token(LSHIFTASSIGN)) return true;
     return false;
   }
 
-  final private boolean jj_3R_82() {
+  final private boolean jj_3R_86() {
     if (jj_scan_token(MINUSASSIGN)) return true;
     return false;
   }
 
-  final private boolean jj_3R_184() {
-    if (jj_scan_token(COMMA)) return true;
-    if (jj_3R_183()) return true;
-    return false;
-  }
-
-  final private boolean jj_3R_81() {
+  final private boolean jj_3R_85() {
     if (jj_scan_token(PLUSASSIGN)) return true;
     return false;
   }
 
-  final private boolean jj_3R_80() {
+  final private boolean jj_3R_84() {
     if (jj_scan_token(REMASSIGN)) return true;
     return false;
   }
 
-  final private boolean jj_3_21() {
+  final private boolean jj_3_23() {
     if (jj_3R_46()) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_83() {
+    if (jj_scan_token(SLASHASSIGN)) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_82() {
+    if (jj_scan_token(STARASSIGN)) return true;
+    return false;
+  }
+
+  final private boolean jj_3R_81() {
+    if (jj_scan_token(ASSIGN)) return true;
+    return false;
+  }
+
+  final private boolean jj_3_24() {
+    if (jj_3R_41()) return true;
     return false;
   }
 
@@ -5234,7 +5380,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
   public boolean lookingAhead = false;
   private boolean jj_semLA;
   private int jj_gen;
-  final private int[] jj_la1 = new int[77];
+  final private int[] jj_la1 = new int[81];
   static private int[] jj_la1_0;
   static private int[] jj_la1_1;
   static private int[] jj_la1_2;
@@ -5248,21 +5394,21 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
       jj_la1_4();
    }
    private static void jj_la1_0() {
-      jj_la1_0 = new int[] {0xfddc0000,0x0,0xfddc0000,0x0,0x0,0xfddc0000,0x40000000,0xbd5c0000,0xfddc0000,0x0,0x0,0x800000,0x0,0xb4100000,0x800000,0x0,0x0,0x800000,0x14000000,0x0,0x14000000,0x10000000,0x0,0x0,0x0,0x800000,0x0,0x0,0x0,0xb4900000,0x0,0x0,0x800000,0x0,0x0,0xb4900000,0x0,0x800000,0x0,0x0,0x0,0x0,0x800000,0x0,0x0,0xb4100000,0x0,0x0,0x0,0x0,0x0,0x0,0x2000000,0x0,0x0,0x0,0x0,0x0,0xb4100000,0xa0100000,0x0,0xb4100000,0xb4100000,0xb4100000,0xb4100000,0xb4100000,0x0,0x400000,0x800000,0x0,0x0,0x0,0x0,0xfd5c0000,0xfd5c0000,0x0,0x0,};
+      jj_la1_0 = new int[] {0xfddc0000,0x0,0x0,0xfddc0000,0xfddc0000,0x0,0xfddc0000,0x0,0x0,0xfddc0000,0x40000000,0xbd5c0000,0xfddc0000,0x0,0x0,0x800000,0x0,0xb4100000,0x800000,0x0,0x0,0x800000,0x14000000,0x0,0x14000000,0x10000000,0x0,0x0,0x0,0x800000,0x0,0x0,0x0,0xb4900000,0x0,0x0,0x800000,0x0,0x0,0xb4900000,0x0,0x800000,0x0,0x0,0x0,0x0,0x800000,0x0,0x0,0xb4100000,0x0,0x0,0x0,0x0,0x0,0x0,0x2000000,0x0,0x0,0x0,0x0,0x0,0xb4100000,0xa0100000,0x0,0xb4100000,0xb4100000,0xb4100000,0xb4100000,0xb4100000,0x0,0x400000,0x800000,0x0,0x0,0x0,0x0,0xfd5c0000,0xfd5c0000,0x0,0x0,};
    }
    private static void jj_la1_1() {
-      jj_la1_1 = new int[] {0x2578103,0x0,0x2578103,0x0,0x4000000,0x2578103,0x2000000,0x578103,0x2578103,0x4000000,0x0,0x100000,0x4000000,0x540000,0x100000,0x0,0x0,0x100000,0x540000,0x100000,0x540000,0x540000,0x0,0x4000000,0x4000000,0x100000,0x0,0x4000000,0x4000000,0x4540000,0x4000000,0x4000000,0x100000,0x0,0x1400000,0x540000,0x4000000,0x100000,0x500000,0x1000000,0x0,0x0,0x100000,0x0,0x0,0x540000,0x0,0x0,0x0,0x0,0x80000000,0x80000000,0x78000000,0x0,0x0,0x0,0x0,0x0,0x540000,0x0,0x0,0x540000,0x540000,0x540000,0x540000,0x540000,0x101,0x0,0x100000,0x4,0x4,0x80080,0x4,0x2578103,0x2578103,0x1000,0x1008,};
+      jj_la1_1 = new int[] {0x2578103,0x2000000,0x2000000,0x2578103,0x2578103,0x0,0x2578103,0x0,0x4000000,0x2578103,0x2000000,0x578103,0x2578103,0x4000000,0x0,0x100000,0x4000000,0x540000,0x100000,0x0,0x0,0x100000,0x540000,0x100000,0x540000,0x540000,0x0,0x4000000,0x4000000,0x100000,0x0,0x4000000,0x4000000,0x4540000,0x4000000,0x4000000,0x100000,0x0,0x1400000,0x540000,0x4000000,0x100000,0x500000,0x1000000,0x0,0x0,0x100000,0x0,0x0,0x540000,0x0,0x0,0x0,0x0,0x80000000,0x80000000,0x78000000,0x0,0x0,0x0,0x0,0x0,0x540000,0x0,0x0,0x540000,0x540000,0x540000,0x540000,0x540000,0x101,0x0,0x100000,0x4,0x4,0x80080,0x4,0x2578103,0x2578103,0x1000,0x1008,};
    }
    private static void jj_la1_2() {
-      jj_la1_2 = new int[] {0x30318,0x0,0x30318,0x0,0x0,0x30318,0x0,0x30318,0x30318,0x0,0x400000,0x0,0x0,0x30318,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x30318,0x0,0x0,0x0,0x0,0x0,0x30318,0x0,0x0,0x0,0x0,0xffc00000,0x100000,0x0,0x80000,0x80000,0x30318,0x40000,0x4000,0x8000,0x2000,0x7,0x7,0x0,0x1c00,0x1c00,0x18,0xe0,0xe0,0x30318,0x30318,0x300,0x30318,0x30318,0x30318,0x30318,0x30318,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x30318,0x30318,0x0,0x0,};
+      jj_la1_2 = new int[] {0x30318,0x0,0x0,0x30318,0x30318,0x0,0x30318,0x0,0x0,0x30318,0x0,0x30318,0x30318,0x0,0x400000,0x0,0x0,0x30318,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x30318,0x0,0x0,0x0,0x0,0x0,0x30318,0x0,0x0,0x0,0x0,0xffc00000,0x100000,0x0,0x80000,0x80000,0x30318,0x40000,0x4000,0x8000,0x2000,0x7,0x7,0x0,0x1c00,0x1c00,0x18,0xe0,0xe0,0x30318,0x30318,0x300,0x30318,0x30318,0x30318,0x30318,0x30318,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x30318,0x30318,0x0,0x0,};
    }
    private static void jj_la1_3() {
-      jj_la1_3 = new int[] {0x401c88,0x400000,0x401c88,0x400000,0x0,0x401c88,0x0,0x401c88,0x401c88,0x0,0x0,0x0,0x0,0x401c88,0x0,0x400000,0x400000,0x0,0x401c88,0x0,0x401c88,0x401c88,0x401008,0x0,0x0,0x0,0x401008,0x0,0x0,0x401c88,0x0,0x0,0x0,0x1c88,0x0,0x401c88,0x0,0x0,0x0,0x0,0x3,0x0,0x0,0x0,0x0,0x401c88,0x0,0x0,0x0,0x0,0x0,0x0,0x4,0x0,0x0,0x0,0x0,0x0,0x401c88,0x0,0x0,0x401c88,0x401c88,0x401c88,0x401c88,0x401c88,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x401c88,0x401c88,0x0,0x0,};
+      jj_la1_3 = new int[] {0x401c88,0x0,0x0,0x401c88,0x401c88,0x400000,0x401c88,0x400000,0x0,0x401c88,0x0,0x401c88,0x401c88,0x0,0x0,0x0,0x0,0x401c88,0x0,0x400000,0x400000,0x0,0x401c88,0x0,0x401c88,0x401c88,0x401008,0x0,0x0,0x0,0x401008,0x0,0x0,0x401c88,0x0,0x0,0x0,0x1c88,0x0,0x401c88,0x0,0x0,0x0,0x0,0x3,0x0,0x0,0x0,0x0,0x401c88,0x0,0x0,0x0,0x0,0x0,0x0,0x4,0x0,0x0,0x0,0x0,0x0,0x401c88,0x0,0x0,0x401c88,0x401c88,0x401c88,0x401c88,0x401c88,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x401c88,0x401c88,0x0,0x0,};
    }
    private static void jj_la1_4() {
-      jj_la1_4 = new int[] {0x8,0x0,0x8,0x0,0x0,0x8,0x0,0x8,0x8,0x0,0x0,0x0,0x0,0x8,0x0,0x0,0x0,0x0,0x8,0x0,0x8,0x8,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x8,0x0,0x0,0x0,0x8,0x0,0x8,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x8,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x8,0x0,0x0,0x8,0x8,0x8,0x8,0x8,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x8,0x8,0x0,0x0,};
+      jj_la1_4 = new int[] {0x8,0x0,0x0,0x8,0x8,0x0,0x8,0x0,0x0,0x8,0x0,0x8,0x8,0x0,0x0,0x0,0x0,0x8,0x0,0x0,0x0,0x0,0x8,0x0,0x8,0x8,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x8,0x0,0x0,0x0,0x8,0x0,0x8,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x8,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x8,0x0,0x0,0x8,0x8,0x8,0x8,0x8,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x8,0x8,0x0,0x0,};
    }
-  final private JJCalls[] jj_2_rtns = new JJCalls[43];
+  final private JJCalls[] jj_2_rtns = new JJCalls[45];
   private boolean jj_rescan = false;
   private int jj_gc = 0;
 
@@ -5271,7 +5417,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 77; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 81; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -5280,7 +5426,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 77; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 81; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -5289,7 +5435,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 77; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 81; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -5298,7 +5444,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 77; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 81; i++) jj_la1[i] = -1;
     for (int i = 0; i < jj_2_rtns.length; i++) jj_2_rtns[i] = new JJCalls();
   }
 
@@ -5417,7 +5563,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
-    for (int i = 0; i < 77; i++) {
+    for (int i = 0; i < 81; i++) {
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
           if ((jj_la1_0[i] & (1<<j)) != 0) {
@@ -5463,7 +5609,7 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
 
   final private void jj_rescan_token() {
     jj_rescan = true;
-    for (int i = 0; i < 43; i++) {
+    for (int i = 0; i < 45; i++) {
     try {
       JJCalls p = jj_2_rtns[i];
       do {
@@ -5513,6 +5659,8 @@ public class JavaScriptMergeParser extends AbstractFSTParser implements JavaScri
             case 40: jj_3_41(); break;
             case 41: jj_3_42(); break;
             case 42: jj_3_43(); break;
+            case 43: jj_3_44(); break;
+            case 44: jj_3_45(); break;
           }
         }
         p = p.next;
