@@ -154,7 +154,7 @@ public class JSFSTMerge {
 			long t0 = System.nanoTime();
 			try {
 				//running unstructured merge first is necessary due to future steps.
-				context.unstructuredOutput = TextualMerge.merge(left, base, right, false);
+				context.unstructuredOutput = TextualMerge.merge(left, base, right, true);
 				context.unstructuredMergeTime = System.nanoTime() - t0;
 
 				context.semistructuredOutput = SemistructuredMerge.merge(left, base, right, context);
