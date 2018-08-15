@@ -1282,6 +1282,8 @@ Initializer: "=" InitializerExpression;
 InitializerExpression:
 		LOOK_AHEAD("AssignmentExpression()") AssignmentExpression
 		|
+		LOOK_AHEAD("FunctionExpression() Arguments()") FunctionExpression CallExpressionArguments
+		|
 		FunctionExpression
 ;
 
@@ -1301,6 +1303,8 @@ AssignmentExpression:
 ;
 
 AssignmentExpressionInternal:
+		LOOK_AHEAD("FunctionExpression() Arguments()") FunctionExpression CallExpressionArguments
+		|
 		LOOK_AHEAD("AssignmentExpression()") AssignmentExpression
 		|
 		FunctionExpression
@@ -1316,13 +1320,13 @@ FunctionExpression:
 LeftHandSideExpression:
 		LOOK_AHEAD("CallExpressionInternal() Arguments()") CallExpression
 		|
-		LOOK_AHEAD("\"(\" FunctionExpression()")  CallExpressionIIFECrockford
+		LOOK_AHEAD("\"(\" FunctionExpression()") CallExpressionIIFECrockford
 		|
 		MemberExpression
 ;
 
 @FSTNonTerminal()
-CallExpression: CallExpressionInternal Arguments ( LOOK_AHEAD(2) CallExpressionPart )*;
+CallExpression: CallExpressionInternal CallExpressionArguments;
 
 @FSTNonTerminal()
 CallExpressionInternal:
@@ -1332,7 +1336,10 @@ CallExpressionInternal:
 ;
 
 @FSTNonTerminal()
-CallExpressionIIFECrockford: "(" FunctionExpression Arguments ( LOOK_AHEAD(2) CallExpressionPart )* ")";
+CallExpressionArguments: Arguments ( LOOK_AHEAD(2) CallExpressionPart )*;
+
+@FSTNonTerminal()
+CallExpressionIIFECrockford: "(" FunctionExpression CallExpressionArguments ")";
 
 MemberExpression: 
 		PrimaryExpression ( LOOK_AHEAD(2) MemberExpressionPart )*
@@ -1368,6 +1375,8 @@ PropertyNameAndValue: PropertyName ":" PropertyValue;
 
 PropertyValue:
 		LOOK_AHEAD("AssignmentExpression()") AssignmentExpression
+		|
+		LOOK_AHEAD("FunctionExpression() Arguments()") FunctionExpression CallExpressionArguments
 		|
 		FunctionExpression
 ;

@@ -178,13 +178,10 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 				}
 			}
 			{
-				FSTNode v=getChild(nonTerminal, "Arguments");
+				FSTNode v=getChild(nonTerminal, "CallExpressionArguments");
 				if (v!=null) {
 					v.accept(this);
 				}
-			}
-			for (FSTNode v : getChildren(nonTerminal,"CallExpressionPart")) {
-				v.accept(this);
 			}
 			printFeatures(nonTerminal,false);
 			return false;
@@ -216,6 +213,20 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 			printFeatures(nonTerminal,false);
 			return false;
 		}
+		if (nonTerminal.getType().equals("CallExpressionArguments")) {
+			printFeatures(nonTerminal,true);
+			{
+				FSTNode v=getChild(nonTerminal, "Arguments");
+				if (v!=null) {
+					v.accept(this);
+				}
+			}
+			for (FSTNode v : getChildren(nonTerminal,"CallExpressionPart")) {
+				v.accept(this);
+			}
+			printFeatures(nonTerminal,false);
+			return false;
+		}
 		if (nonTerminal.getType().equals("CallExpressionIIFECrockford")) {
 			printFeatures(nonTerminal,true);
 			printToken("(");
@@ -226,13 +237,10 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 				}
 			}
 			{
-				FSTNode v=getChild(nonTerminal, "Arguments");
+				FSTNode v=getChild(nonTerminal, "CallExpressionArguments");
 				if (v!=null) {
 					v.accept(this);
 				}
-			}
-			for (FSTNode v : getChildren(nonTerminal,"CallExpressionPart")) {
-				v.accept(this);
 			}
 			printToken(")");
 			printFeatures(nonTerminal,false);
@@ -293,6 +301,7 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 		if (type.equals("TryStatementInternal2") && expectedType.equals("TryStatementInternal")) return true;
 		if (type.equals("PropertyName1") && expectedType.equals("PropertyName")) return true;
 		if (type.equals("UnaryExpression1") && expectedType.equals("UnaryExpression")) return true;
+		if (type.equals("AssignmentExpressionInternal3") && expectedType.equals("AssignmentExpressionInternal")) return true;
 		if (type.equals("UnaryOperator7") && expectedType.equals("UnaryOperator")) return true;
 		if (type.equals("StmtList") && expectedType.equals("SourceElement")) return true;
 		if (type.equals("AssignmentOperator12") && expectedType.equals("AssignmentOperator")) return true;
@@ -347,6 +356,7 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 		if (type.equals("Literal1") && expectedType.equals("Literal")) return true;
 		if (type.equals("UnaryOperator3") && expectedType.equals("UnaryOperator")) return true;
 		if (type.equals("AssignmentOperator6") && expectedType.equals("AssignmentOperator")) return true;
+		if (type.equals("InitializerExpression3") && expectedType.equals("InitializerExpression")) return true;
 		if (type.equals("Argument2") && expectedType.equals("Argument")) return true;
 		if (type.equals("PropertyNameAndValueListInternal1") && expectedType.equals("PropertyNameAndValueListInternal")) return true;
 		if (type.equals("ShiftOperator1") && expectedType.equals("ShiftOperator")) return true;
@@ -390,6 +400,7 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 		if (type.equals("RelationalOperator1") && expectedType.equals("RelationalOperator")) return true;
 		if (type.equals("Statement2") && expectedType.equals("Statement")) return true;
 		if (type.equals("IterationStatement5") && expectedType.equals("IterationStatement")) return true;
+		if (type.equals("PropertyValue3") && expectedType.equals("PropertyValue")) return true;
 		if (type.equals("UnaryOperator9") && expectedType.equals("UnaryOperator")) return true;
 		if (type.equals("AssignmentExpression1") && expectedType.equals("AssignmentExpression")) return true;
 		if (type.equals("AssignmentOperator9") && expectedType.equals("AssignmentOperator")) return true;

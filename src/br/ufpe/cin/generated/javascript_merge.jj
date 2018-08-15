@@ -1266,7 +1266,9 @@ FSTInfo InitializerExpression(boolean inTerminal) : { Token first=null,t;FSTInfo
 } { {first=getToken(1); productionStart(inTerminal); } (
 	LOOKAHEAD(AssignmentExpression()) n=AssignmentExpression(true){ replaceName(n);} {return productionEndTerminal("InitializerExpression1","-","-","Replacement","Default",first,token);}
  |
-	n=FunctionExpression(true){ replaceName(n);} {return productionEndTerminal("InitializerExpression2","-","-","Replacement","Default",first,token);}
+	LOOKAHEAD(FunctionExpression() Arguments()) n=FunctionExpression(true){ replaceName(n);} n=CallExpressionArguments(true){ replaceName(n);} {return productionEndTerminal("InitializerExpression2","-","-","Replacement","Default",first,token);}
+ |
+	n=FunctionExpression(true){ replaceName(n);} {return productionEndTerminal("InitializerExpression3","-","-","Replacement","Default",first,token);}
 
  )  }
 
@@ -1304,9 +1306,11 @@ FSTInfo AssignmentExpression(boolean inTerminal) : { Token first=null,t;FSTInfo 
 
 FSTInfo AssignmentExpressionInternal(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
-	LOOKAHEAD(AssignmentExpression()) n=AssignmentExpression(true){ replaceName(n);} {return productionEndTerminal("AssignmentExpressionInternal1","-","-","Replacement","Default",first,token);}
+	LOOKAHEAD(FunctionExpression() Arguments()) n=FunctionExpression(true){ replaceName(n);} n=CallExpressionArguments(true){ replaceName(n);} {return productionEndTerminal("AssignmentExpressionInternal1","-","-","Replacement","Default",first,token);}
  |
-	n=FunctionExpression(true){ replaceName(n);} {return productionEndTerminal("AssignmentExpressionInternal2","-","-","Replacement","Default",first,token);}
+	LOOKAHEAD(AssignmentExpression()) n=AssignmentExpression(true){ replaceName(n);} {return productionEndTerminal("AssignmentExpressionInternal2","-","-","Replacement","Default",first,token);}
+ |
+	n=FunctionExpression(true){ replaceName(n);} {return productionEndTerminal("AssignmentExpressionInternal3","-","-","Replacement","Default",first,token);}
 
  )  }
 
@@ -1330,7 +1334,7 @@ FSTInfo LeftHandSideExpression(boolean inTerminal) : { Token first=null,t;FSTInf
 
 FSTInfo CallExpression(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
-	n=CallExpressionInternal(inTerminal){ replaceName(n);} n=Arguments(inTerminal){ replaceName(n);} (LOOKAHEAD(2) n=CallExpressionPart(inTerminal){ replaceName(n);})* {return productionEndNonTerminal("CallExpression","-","-");}
+	n=CallExpressionInternal(inTerminal){ replaceName(n);} n=CallExpressionArguments(inTerminal){ replaceName(n);} {return productionEndNonTerminal("CallExpression","-","-");}
 
  )  }
 
@@ -1342,9 +1346,15 @@ FSTInfo CallExpressionInternal(boolean inTerminal) : { Token first=null,t;FSTInf
 
  )  }
 
+FSTInfo CallExpressionArguments(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	n=Arguments(inTerminal){ replaceName(n);} (LOOKAHEAD(2) n=CallExpressionPart(inTerminal){ replaceName(n);})* {return productionEndNonTerminal("CallExpressionArguments","-","-");}
+
+ )  }
+
 FSTInfo CallExpressionIIFECrockford(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
-	"(" n=FunctionExpression(inTerminal){ replaceName(n);} n=Arguments(inTerminal){ replaceName(n);} (LOOKAHEAD(2) n=CallExpressionPart(inTerminal){ replaceName(n);})* ")" {return productionEndNonTerminal("CallExpressionIIFECrockford","-","-");}
+	"(" n=FunctionExpression(inTerminal){ replaceName(n);} n=CallExpressionArguments(inTerminal){ replaceName(n);} ")" {return productionEndNonTerminal("CallExpressionIIFECrockford","-","-");}
 
  )  }
 
@@ -1402,7 +1412,9 @@ FSTInfo PropertyValue(boolean inTerminal) : { Token first=null,t;FSTInfo n;
 } { {first=getToken(1); productionStart(inTerminal); } (
 	LOOKAHEAD(AssignmentExpression()) n=AssignmentExpression(true){ replaceName(n);} {return productionEndTerminal("PropertyValue1","-","-","Replacement","Default",first,token);}
  |
-	n=FunctionExpression(true){ replaceName(n);} {return productionEndTerminal("PropertyValue2","-","-","Replacement","Default",first,token);}
+	LOOKAHEAD(FunctionExpression() Arguments()) n=FunctionExpression(true){ replaceName(n);} n=CallExpressionArguments(true){ replaceName(n);} {return productionEndTerminal("PropertyValue2","-","-","Replacement","Default",first,token);}
+ |
+	n=FunctionExpression(true){ replaceName(n);} {return productionEndTerminal("PropertyValue3","-","-","Replacement","Default",first,token);}
 
  )  }
 
