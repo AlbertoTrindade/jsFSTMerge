@@ -36,11 +36,8 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 					v.accept(this);
 				}
 			}
-			{
-				FSTNode v=getChild(nonTerminal, "EmptyStatement");
-				if (v!=null) {
-					v.accept(this);
-				}
+			for (FSTNode v : getChildren(nonTerminal,"EmptyStatement")) {
+				v.accept(this);
 			}
 			printFeatures(nonTerminal,false);
 			return false;
@@ -53,11 +50,8 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 					v.accept(this);
 				}
 			}
-			{
-				FSTNode v=getChild(nonTerminal, "EmptyStatement");
-				if (v!=null) {
-					v.accept(this);
-				}
+			for (FSTNode v : getChildren(nonTerminal,"EmptyStatement")) {
+				v.accept(this);
 			}
 			printFeatures(nonTerminal,false);
 			return false;

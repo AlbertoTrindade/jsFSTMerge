@@ -1195,9 +1195,9 @@ CompilationUnit: ( SourceElements )? <EOF>;
 
 @FSTNonTerminal()
 SourceElements:
-	LOOK_AHEAD("CallExpressionInternal() Arguments()") CallExpression ( EmptyStatement )?
+	LOOK_AHEAD("CallExpressionInternal() Arguments()") CallExpression ( EmptyStatement )*
 	|
-	LOOK_AHEAD("\"(\" FunctionExpression()")  CallExpressionIIFECrockford ( EmptyStatement )?
+	LOOK_AHEAD("\"(\" FunctionExpression()")  CallExpressionIIFECrockford ( EmptyStatement )*
 	|
 	( SourceElement )+
 ;
