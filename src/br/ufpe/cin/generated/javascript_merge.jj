@@ -1594,7 +1594,9 @@ FSTInfo LogicalORExpression(boolean inTerminal) : { Token first=null,t;FSTInfo n
 
 FSTInfo LogicalANDExpression(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
-	n=BitwiseORExpression(true){ replaceName(n);} ("&&" n=BitwiseORExpression(true){ replaceName(n);})* {return productionEndTerminal("LogicalANDExpression","-","-","Replacement","Default",first,token);}
+	LOOKAHEAD(BitwiseORExpression() "&&" FunctionExpression()) n=BitwiseORExpression(true){ replaceName(n);} "&&" n=FunctionExpression(true){ replaceName(n);} ("&&" n=BitwiseORExpression(true){ replaceName(n);})* {return productionEndTerminal("LogicalANDExpression1","-","-","Replacement","Default",first,token);}
+ |
+	n=BitwiseORExpression(true){ replaceName(n);} ("&&" n=BitwiseORExpression(true){ replaceName(n);})* {return productionEndTerminal("LogicalANDExpression2","-","-","Replacement","Default",first,token);}
 
  )  }
 

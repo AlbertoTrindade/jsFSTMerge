@@ -1476,7 +1476,11 @@ LogicalORExpression:
 		LogicalANDExpression ( "||" LogicalANDExpression )*
 ;
 
-LogicalANDExpression: BitwiseORExpression ( "&&" BitwiseORExpression )*;
+LogicalANDExpression:
+		LOOK_AHEAD("BitwiseORExpression() \"&&\" FunctionExpression()") BitwiseORExpression "&&" FunctionExpression ( "&&" BitwiseORExpression )*
+		|
+		BitwiseORExpression ( "&&" BitwiseORExpression )*
+;
 
 BitwiseORExpression: BitwiseXORExpression ( "|" BitwiseXORExpression )*;
 
