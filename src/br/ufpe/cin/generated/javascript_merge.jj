@@ -451,8 +451,6 @@ TOKEN:
 		| 
 			"0" 
 		| 
-			<HEX_ESCAPE_SEQUENCE>
-		| 
 			<UNICODE_ESCAPE_SEQUENCE>
 	>
 |
@@ -469,11 +467,6 @@ TOKEN:
 	| 
 		~["0"-"9"]
 	>
-}
-
-TOKEN:
-{
-	< HEX_ESCAPE_SEQUENCE: "x" <HEX_DIGIT> <HEX_DIGIT> >
 }
 
 /*
