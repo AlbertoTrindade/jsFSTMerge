@@ -1421,7 +1421,9 @@ MemberExpressionPart:
 		|
 		LOOK_AHEAD(2) "." Id
 		|
-		"." <_DEFAULT>
+		LOOK_AHEAD(2) "." <_DEFAULT>
+		|
+		"." <CLASS>
 ;
 
 AllocationExpression: "new" MemberExpression ( LOOK_AHEAD(2) AllocationExpressionInternal )*;

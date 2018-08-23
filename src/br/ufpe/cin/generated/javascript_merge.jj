@@ -1483,7 +1483,9 @@ FSTInfo MemberExpressionPart(boolean inTerminal) : { Token first=null,t;FSTInfo 
  |
 	LOOKAHEAD(2) "." n=Id(true){ replaceName(n);} {return productionEndTerminal("MemberExpressionPart2","-","-","Replacement","Default",first,token);}
  |
-	"." <_DEFAULT> {return productionEndTerminal("MemberExpressionPart3","-","-","Replacement","Default",first,token);}
+	LOOKAHEAD(2) "." <_DEFAULT> {return productionEndTerminal("MemberExpressionPart3","-","-","Replacement","Default",first,token);}
+ |
+	"." <CLASS> {return productionEndTerminal("MemberExpressionPart4","-","-","Replacement","Default",first,token);}
 
  )  }
 
