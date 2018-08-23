@@ -1419,7 +1419,9 @@ Literal:
 MemberExpressionPart: 
 		"[" Expression "]"
 		|
-		"." Id
+		LOOK_AHEAD(2) "." Id
+		|
+		"." <_DEFAULT>
 ;
 
 AllocationExpression: "new" MemberExpression ( LOOK_AHEAD(2) AllocationExpressionInternal )*;
