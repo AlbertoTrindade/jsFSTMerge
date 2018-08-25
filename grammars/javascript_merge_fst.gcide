@@ -1188,6 +1188,8 @@ CompilationUnit: ( SourceElements )? <EOF>;
 
 @FSTNonTerminal()
 SourceElements:
+	LOOK_AHEAD("[ <SEMICOLON> ] <BANG> FunctionExpression()") [ <SEMICOLON> ] <BANG> FunctionExpression CallExpressionArguments ( EmptyStatement )*
+	|
 	LOOK_AHEAD("CallExpressionInternal() Arguments()") CallExpression ( EmptyStatement )*
 	|
 	LOOK_AHEAD("\"(\" FunctionExpression()")  CallExpressionIIFECrockford ( EmptyStatement )*

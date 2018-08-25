@@ -31,7 +31,13 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 		if (nonTerminal.getType().equals("SourceElements1")) {
 			printFeatures(nonTerminal,true);
 			{
-				FSTNode v=getChild(nonTerminal, "CallExpression");
+				FSTNode v=getChild(nonTerminal, "FunctionExpression");
+				if (v!=null) {
+					v.accept(this);
+				}
+			}
+			{
+				FSTNode v=getChild(nonTerminal, "CallExpressionArguments");
 				if (v!=null) {
 					v.accept(this);
 				}
@@ -45,7 +51,7 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 		if (nonTerminal.getType().equals("SourceElements2")) {
 			printFeatures(nonTerminal,true);
 			{
-				FSTNode v=getChild(nonTerminal, "CallExpressionIIFECrockford");
+				FSTNode v=getChild(nonTerminal, "CallExpression");
 				if (v!=null) {
 					v.accept(this);
 				}
@@ -57,6 +63,20 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 			return false;
 		}
 		if (nonTerminal.getType().equals("SourceElements3")) {
+			printFeatures(nonTerminal,true);
+			{
+				FSTNode v=getChild(nonTerminal, "CallExpressionIIFECrockford");
+				if (v!=null) {
+					v.accept(this);
+				}
+			}
+			for (FSTNode v : getChildren(nonTerminal,"EmptyStatement")) {
+				v.accept(this);
+			}
+			printFeatures(nonTerminal,false);
+			return false;
+		}
+		if (nonTerminal.getType().equals("SourceElements4")) {
 			printFeatures(nonTerminal,true);
 			for (FSTNode v : getChildren(nonTerminal,"SourceElement")) {
 				v.accept(this);
@@ -376,6 +396,7 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 		if (type.equals("Statement9") && expectedType.equals("Statement")) return true;
 		if (type.equals("ShiftOperator2") && expectedType.equals("ShiftOperator")) return true;
 		if (type.equals("LogicalORExpression1") && expectedType.equals("LogicalORExpression")) return true;
+		if (type.equals("SourceElements4") && expectedType.equals("SourceElements")) return true;
 		if (type.equals("CallExpressionPart2") && expectedType.equals("CallExpressionPart")) return true;
 		if (type.equals("Statement10") && expectedType.equals("Statement")) return true;
 		if (type.equals("LeftHandSideExpression3") && expectedType.equals("LeftHandSideExpression")) return true;
