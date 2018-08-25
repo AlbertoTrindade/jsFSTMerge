@@ -1143,9 +1143,9 @@ FSTInfo SourceElements(boolean inTerminal) : { Token first=null,t;FSTInfo n;
 } { {first=getToken(1); productionStart(inTerminal); } (
 	LOOKAHEAD([ <SEMICOLON> ] <BANG> FunctionExpression()) [<SEMICOLON>] <BANG> n=FunctionExpression(inTerminal){ replaceName(n);} n=CallExpressionArguments(inTerminal){ replaceName(n);} (n=EmptyStatement(inTerminal){ replaceName(n);})* {return productionEndNonTerminal("SourceElements1","-","-");}
  |
-	LOOKAHEAD([ <SEMICOLON> ] CallExpressionInternal() Arguments()) [<SEMICOLON>] n=CallExpression(inTerminal){ replaceName(n);} (n=EmptyStatement(inTerminal){ replaceName(n);})* {return productionEndNonTerminal("SourceElements2","-","-");}
+	LOOKAHEAD([ <STRING_LITERAL> ] [ <SEMICOLON> ] CallExpressionInternal() Arguments()) [LOOKAHEAD(2) <STRING_LITERAL>] [<SEMICOLON>] n=CallExpression(inTerminal){ replaceName(n);} (n=EmptyStatement(inTerminal){ replaceName(n);})* {return productionEndNonTerminal("SourceElements2","-","-");}
  |
-	LOOKAHEAD([ <SEMICOLON> ] "(" FunctionExpression()) [<SEMICOLON>] n=CallExpressionIIFECrockford(inTerminal){ replaceName(n);} (n=EmptyStatement(inTerminal){ replaceName(n);})* {return productionEndNonTerminal("SourceElements3","-","-");}
+	LOOKAHEAD([ <STRING_LITERAL> ] [ <SEMICOLON> ] "(" FunctionExpression()) [<STRING_LITERAL>] [<SEMICOLON>] n=CallExpressionIIFECrockford(inTerminal){ replaceName(n);} (n=EmptyStatement(inTerminal){ replaceName(n);})* {return productionEndNonTerminal("SourceElements3","-","-");}
  |
 	(n=SourceElement(inTerminal){ replaceName(n);})+ {return productionEndNonTerminal("SourceElements4","-","-");}
 
