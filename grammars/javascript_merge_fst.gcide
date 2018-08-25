@@ -1190,9 +1190,9 @@ CompilationUnit: ( SourceElements )? <EOF>;
 SourceElements:
 	LOOK_AHEAD("[ <SEMICOLON> ] <BANG> FunctionExpression()") [ <SEMICOLON> ] <BANG> FunctionExpression CallExpressionArguments ( EmptyStatement )*
 	|
-	LOOK_AHEAD("CallExpressionInternal() Arguments()") CallExpression ( EmptyStatement )*
+	LOOK_AHEAD("[ <SEMICOLON> ] CallExpressionInternal() Arguments()") [ <SEMICOLON> ] CallExpression ( EmptyStatement )*
 	|
-	LOOK_AHEAD("\"(\" FunctionExpression()")  CallExpressionIIFECrockford ( EmptyStatement )*
+	LOOK_AHEAD("[ <SEMICOLON> ] \"(\" FunctionExpression()") [ <SEMICOLON> ] CallExpressionIIFECrockford ( EmptyStatement )*
 	|
 	( SourceElement )+
 ;
