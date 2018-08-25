@@ -1188,6 +1188,8 @@ CompilationUnit: ( SourceElements )? <EOF>;
 
 @FSTNonTerminal()
 SourceElements:
+	LOOK_AHEAD("LeftHandSideExpression() AssignmentOperator()") LeftHandSideExpression AssignmentOperator AssignmentExpressionInternal ( EmptyStatement )*
+	|
 	LOOK_AHEAD("[ <SEMICOLON> ] <BANG> FunctionExpression()") [ <SEMICOLON> ] <BANG> FunctionExpression CallExpressionArguments ( EmptyStatement )*
 	|
 	LOOK_AHEAD("[ <STRING_LITERAL> ] [ <SEMICOLON> ] CallExpressionInternal() Arguments()") [ LOOK_AHEAD(2) <STRING_LITERAL> ] [ <SEMICOLON> ] CallExpression ( EmptyStatement )*
@@ -1297,6 +1299,7 @@ AssignmentExpression:
 		ConditionalExpression
 ;
 
+@FSTNonTerminal()
 AssignmentExpressionInternal:
 		LOOK_AHEAD("FunctionExpression() Arguments()") FunctionExpression CallExpressionArguments
 		|
