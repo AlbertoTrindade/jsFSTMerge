@@ -1188,15 +1188,19 @@ CompilationUnit: ( SourceElements )? <EOF>;
 
 @FSTNonTerminal()
 SourceElements:
-	LOOK_AHEAD("[ <STRING_LITERAL> ] [ <SEMICOLON> ] LeftHandSideExpression() AssignmentOperator()") [  LOOK_AHEAD(2) <STRING_LITERAL> ] [ <SEMICOLON> ] LeftHandSideExpression AssignmentOperator AssignmentExpressionInternal ( EmptyStatement )*
+	LOOK_AHEAD("[ StringLiteral() ] CallExpressionInternal() Arguments()")
+	[ LOOK_AHEAD(2) StringLiteral ] CallExpression ( EmptyStatement )* :: CallExpressionProgram
 	|
-	LOOK_AHEAD("[ <SEMICOLON> ] <BANG> FunctionExpression()") [ <SEMICOLON> ] <BANG> FunctionExpression CallExpressionArguments ( EmptyStatement )*
+	LOOK_AHEAD("[ StringLiteral() ] \"(\" FunctionExpression()")
+	[ StringLiteral ] CallExpressionIIFECrockford ( EmptyStatement )* :: IIFECrockfordProgram
 	|
-	LOOK_AHEAD("[ <STRING_LITERAL> ] [ <SEMICOLON> ] CallExpressionInternal() Arguments()") [ LOOK_AHEAD(2) <STRING_LITERAL> ] [ <SEMICOLON> ] CallExpression ( EmptyStatement )*
+	LOOK_AHEAD("[ StringLiteral() ] LeftHandSideExpression() AssignmentOperator()")
+	[ LOOK_AHEAD(2) StringLiteral ] LeftHandSideExpression AssignmentOperator AssignmentExpressionInternal ( EmptyStatement )* :: AssignmentGlobalVariableProgram
 	|
-	LOOK_AHEAD("[ <STRING_LITERAL> ] [ <SEMICOLON> ] \"(\" FunctionExpression()") [ <STRING_LITERAL> ] [ <SEMICOLON> ] CallExpressionIIFECrockford ( EmptyStatement )*
+	LOOK_AHEAD("BangOperator() FunctionExpression()")
+	BangOperator FunctionExpression CallExpressionArguments ( EmptyStatement )* :: IIFEWithBangProgram
 	|
-	( SourceElement )+
+	( SourceElement )+ :: SrcElements
 ;
 
 /*
@@ -1204,6 +1208,17 @@ SourceElements:
  */
 
 // Handle functions and statements
+
+@FSTTerminal(merge="LineBased")
+StringLiteral:
+	<STRING_LITERAL> ( EmptyStatement )*
+	|
+	( EmptyStatement )+
+;
+
+@FSTTerminal(merge="LineBased")
+BangOperator: ( EmptyStatement )* <BANG>;
+
 @FSTNonTerminal()
 SourceElement:
 		@FSTNonTerminal(name="{Id}")

@@ -1141,15 +1141,29 @@ FSTInfo CompilationUnit(boolean inTerminal) : { Token first=null,t;FSTInfo n;
 
 FSTInfo SourceElements(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
-	LOOKAHEAD([ <STRING_LITERAL> ] [ <SEMICOLON> ] LeftHandSideExpression() AssignmentOperator()) [LOOKAHEAD(2) <STRING_LITERAL>] [<SEMICOLON>] n=LeftHandSideExpression(inTerminal){ replaceName(n);} n=AssignmentOperator(inTerminal){ replaceName(n);} n=AssignmentExpressionInternal(inTerminal){ replaceName(n);} (n=EmptyStatement(inTerminal){ replaceName(n);})* {return productionEndNonTerminal("SourceElements1","-","-");}
+	LOOKAHEAD([ StringLiteral() ] CallExpressionInternal() Arguments()) [LOOKAHEAD(2) n=StringLiteral(inTerminal){ replaceName(n);}] n=CallExpression(inTerminal){ replaceName(n);} (n=EmptyStatement(inTerminal){ replaceName(n);})* {return productionEndNonTerminal("CallExpressionProgram","-","-");}
  |
-	LOOKAHEAD([ <SEMICOLON> ] <BANG> FunctionExpression()) [<SEMICOLON>] <BANG> n=FunctionExpression(inTerminal){ replaceName(n);} n=CallExpressionArguments(inTerminal){ replaceName(n);} (n=EmptyStatement(inTerminal){ replaceName(n);})* {return productionEndNonTerminal("SourceElements2","-","-");}
+	LOOKAHEAD([ StringLiteral() ] "(" FunctionExpression()) [n=StringLiteral(inTerminal){ replaceName(n);}] n=CallExpressionIIFECrockford(inTerminal){ replaceName(n);} (n=EmptyStatement(inTerminal){ replaceName(n);})* {return productionEndNonTerminal("IIFECrockfordProgram","-","-");}
  |
-	LOOKAHEAD([ <STRING_LITERAL> ] [ <SEMICOLON> ] CallExpressionInternal() Arguments()) [LOOKAHEAD(2) <STRING_LITERAL>] [<SEMICOLON>] n=CallExpression(inTerminal){ replaceName(n);} (n=EmptyStatement(inTerminal){ replaceName(n);})* {return productionEndNonTerminal("SourceElements3","-","-");}
+	LOOKAHEAD([ StringLiteral() ] LeftHandSideExpression() AssignmentOperator()) [LOOKAHEAD(2) n=StringLiteral(inTerminal){ replaceName(n);}] n=LeftHandSideExpression(inTerminal){ replaceName(n);} n=AssignmentOperator(inTerminal){ replaceName(n);} n=AssignmentExpressionInternal(inTerminal){ replaceName(n);} (n=EmptyStatement(inTerminal){ replaceName(n);})* {return productionEndNonTerminal("AssignmentGlobalVariableProgram","-","-");}
  |
-	LOOKAHEAD([ <STRING_LITERAL> ] [ <SEMICOLON> ] "(" FunctionExpression()) [<STRING_LITERAL>] [<SEMICOLON>] n=CallExpressionIIFECrockford(inTerminal){ replaceName(n);} (n=EmptyStatement(inTerminal){ replaceName(n);})* {return productionEndNonTerminal("SourceElements4","-","-");}
+	LOOKAHEAD(BangOperator() FunctionExpression()) n=BangOperator(inTerminal){ replaceName(n);} n=FunctionExpression(inTerminal){ replaceName(n);} n=CallExpressionArguments(inTerminal){ replaceName(n);} (n=EmptyStatement(inTerminal){ replaceName(n);})* {return productionEndNonTerminal("IIFEWithBangProgram","-","-");}
  |
-	(n=SourceElement(inTerminal){ replaceName(n);})+ {return productionEndNonTerminal("SourceElements5","-","-");}
+	(n=SourceElement(inTerminal){ replaceName(n);})+ {return productionEndNonTerminal("SrcElements","-","-");}
+
+ )  }
+
+FSTInfo StringLiteral(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	<STRING_LITERAL> (n=EmptyStatement(true){ replaceName(n);})* {return productionEndTerminal("StringLiteral1","-","-","Replacement","LineBased",first,token);}
+ |
+	(n=EmptyStatement(true){ replaceName(n);})+ {return productionEndTerminal("StringLiteral2","-","-","Replacement","LineBased",first,token);}
+
+ )  }
+
+FSTInfo BangOperator(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
+} { {first=getToken(1); productionStart(inTerminal); } (
+	(n=EmptyStatement(true){ replaceName(n);})* <BANG> {return productionEndTerminal("BangOperator","-","-","Replacement","LineBased",first,token);}
 
  )  }
 
