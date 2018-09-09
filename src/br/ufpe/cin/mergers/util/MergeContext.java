@@ -49,6 +49,7 @@ public class MergeContext {
 	//statistics
 	public int newElementReferencingEditedOneConflicts = 0;
 	public int renamingConflicts = 0;
+	public int functionConversionConflict = 0;
 	public int typeAmbiguityErrorsConflicts = 0;
 	public int deletionConflicts = 0;
 	public int innerDeletionConflicts = 0;

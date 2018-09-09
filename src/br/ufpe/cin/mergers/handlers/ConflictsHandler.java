@@ -23,9 +23,14 @@ final public class ConflictsHandler {
 		context.semistructuredOutput = Prettyprinter.print(context.superImposedTree); //partial result of semistructured merge is necessary for further processing
 		
 		findRenamingConflicts(context);
+		findFunctionConversionConflicts(context);
 	}
 
 	private static void findRenamingConflicts(MergeContext context) {
 		RenamingHandler.handle(context);
+	}
+	
+	private static void findFunctionConversionConflicts(MergeContext context) {
+		FunctionConversionHandler.handle(context);
 	}
 }
