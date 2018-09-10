@@ -42,8 +42,7 @@ public final class Statistics {
 		context.equalConflicts = computeEqualConflicts(unstructuredMergeConflits,semistructuredMergeConflicts);
 
 		context.orderingConflicts = (context.unstructuredNumberOfConflicts  - context.semistructuredNumberOfConflicts) 
-				+  context.duplicatedDeclarationErrors 
-				- (context.typeAmbiguityErrorsConflicts + context.newElementReferencingEditedOneConflicts + context.initializationBlocksConflicts);
+				+  context.duplicatedDeclarationErrors;
 		context.orderingConflicts =(context.orderingConflicts>0)?context.orderingConflicts:0;
 
 		context.acidentalConflicts = context.unstructuredNumberOfConflicts - context.equalConflicts - context.orderingConflicts;
@@ -58,7 +57,7 @@ public final class Statistics {
 				+ "," + context.renamingConflicts
 				+ "," + context.deletionConflicts
 				+ "," + context.innerDeletionConflicts
-				+ "," + context.typeAmbiguityErrorsConflicts
+				+ "," + context.functionConversionConflict
 				+ "," + context.newElementReferencingEditedOneConflicts
 				+ "," + context.initializationBlocksConflicts
 				+ "," + context.acidentalConflicts
@@ -86,7 +85,7 @@ public final class Statistics {
 		int renamingConflicts = 0;
 		int deletionConflicts = 0;
 		int innerDeletionConflicts = 0;
-		int typeAmbiguityErrorsConflicts = 0;
+		int functionConversionConflict = 0;
 		int newElementReferencingEditedOneConflicts = 0;
 		int initializationBlocksConflicts = 0;
 		int acidentalConflicts = 0;
@@ -105,7 +104,7 @@ public final class Statistics {
 			renamingConflicts += context.renamingConflicts;
 			deletionConflicts += context.deletionConflicts;
 			innerDeletionConflicts += context.innerDeletionConflicts;
-			typeAmbiguityErrorsConflicts += context.typeAmbiguityErrorsConflicts;
+			functionConversionConflict += context.functionConversionConflict;
 			newElementReferencingEditedOneConflicts += context.newElementReferencingEditedOneConflicts;
 			initializationBlocksConflicts += context.initializationBlocksConflicts;
 			acidentalConflicts += context.acidentalConflicts;
@@ -124,7 +123,7 @@ public final class Statistics {
 				+ "," + renamingConflicts
 				+ "," + deletionConflicts
 				+ "," + innerDeletionConflicts
-				+ "," + typeAmbiguityErrorsConflicts
+				+ "," + functionConversionConflict
 				+ "," + newElementReferencingEditedOneConflicts
 				+ "," + initializationBlocksConflicts
 				+ "," + acidentalConflicts
