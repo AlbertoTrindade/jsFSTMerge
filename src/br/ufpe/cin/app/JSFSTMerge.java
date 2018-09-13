@@ -224,7 +224,7 @@ public class JSFSTMerge {
 			}
 		} catch (ParameterException pe) {
 			System.err.println(pe.getMessage());
-			commandLineOptions.setProgramName("JFSTMerge");
+			commandLineOptions.setProgramName("JSFSTMerge");
 			commandLineOptions.usage();
 		}
 	}
