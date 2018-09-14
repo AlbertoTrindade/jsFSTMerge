@@ -97,7 +97,8 @@ public class FunctionConversionHandler {
 		FSTNonTerminal editedFunctionDeclaration = correspondingInSource.getParent();
 		if (!editedFunctionDeclaration.getType().equals("FuncDeclaration")) return;
 		
-		FSTNode editedFunctionBody = editedFunctionDeclaration.getChildren().get(3);
+		FSTNode editedFunctionBody = editedFunctionDeclaration.getChildren().size() > 3 ?
+				editedFunctionDeclaration.getChildren().get(3) : editedFunctionDeclaration.getChildren().get(2);
 		String editedFunctionBodyContent = FilesManager.prettyPrint((FSTNonTerminal) editedFunctionBody);
 		
 		for (MergeConflict mergeConflict : semistructuredMergeConflicts) {
