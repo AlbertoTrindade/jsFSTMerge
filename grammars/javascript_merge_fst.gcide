@@ -1184,40 +1184,13 @@ GRAMMARSTART
  */
 
 @FSTNonTerminal()
-CompilationUnit: ( SourceElements )? <EOF>;
-
-@FSTNonTerminal()
-SourceElements:
-	LOOK_AHEAD("[ StringLiteral() ] CallExpressionInternal() Arguments()")
-	[ LOOK_AHEAD(2) StringLiteral ] CallExpression ( EmptyStatement )* :: CallExpressionProgram
-	|
-	LOOK_AHEAD("[ StringLiteral() ] \"(\" FunctionExpression()")
-	[ StringLiteral ] CallExpressionIIFECrockford ( EmptyStatement )* :: IIFECrockfordProgram
-	|
-	LOOK_AHEAD("[ StringLiteral() ] LeftHandSideExpression() AssignmentOperator()")
-	[ LOOK_AHEAD(2) StringLiteral ] LeftHandSideExpression AssignmentOperator AssignmentExpressionInternal ( EmptyStatement )* :: AssignmentGlobalVariableProgram
-	|
-	LOOK_AHEAD("BangOperator() FunctionExpression()")
-	BangOperator FunctionExpression CallExpressionArguments ( EmptyStatement )* :: IIFEWithBangProgram
-	|
-	( SourceElement )+ :: SrcElements
-;
+CompilationUnit: ( SourceElement )* <EOF>;
 
 /*
  * Declaration syntax follows.
  */
 
 // Handle functions and statements
-
-@FSTTerminal(merge="LineBased")
-StringLiteral:
-	<STRING_LITERAL> ( EmptyStatement )*
-	|
-	( EmptyStatement )+
-;
-
-@FSTTerminal(merge="LineBased")
-BangOperator: ( EmptyStatement )* <BANG>;
 
 @FSTNonTerminal()
 SourceElement:
@@ -1307,14 +1280,12 @@ ExpressionStatement: Expression [ LOOK_AHEAD(2) <SEMICOLON> ];
 
 Expression: AssignmentExpression ( "," AssignmentExpression)*;
 
-@FSTTerminal(merge="LineBased")
 AssignmentExpression: 
 		LOOK_AHEAD("LeftHandSideExpression() AssignmentOperator()") LeftHandSideExpression AssignmentOperator AssignmentExpressionInternal
 		|
 		ConditionalExpression
 ;
 
-@FSTNonTerminal()
 AssignmentExpressionInternal:
 		LOOK_AHEAD("FunctionExpression() Arguments()") FunctionExpression CallExpressionArguments
 		|
@@ -1323,7 +1294,6 @@ AssignmentExpressionInternal:
 		FunctionExpression
 ;
 
-@FSTNonTerminal()
 FunctionExpression:
 		Function [ Id ] "(" [ FormalParameters ] ")" "{" FunctionBody "}"
 		|
@@ -1338,20 +1308,16 @@ LeftHandSideExpression:
 		MemberExpression
 ;
 
-@FSTNonTerminal()
 CallExpression: CallExpressionInternal CallExpressionArguments;
 
-@FSTNonTerminal()
 CallExpressionInternal:
 		LOOK_AHEAD(3) MemberExpression
 		|
 		"(" FunctionExpression ")" ( LOOK_AHEAD(2) MemberExpressionPart )*
 ;
 
-@FSTNonTerminal()
 CallExpressionArguments: Arguments ( LOOK_AHEAD(2) CallExpressionPart )*;
 
-@FSTNonTerminal()
 CallExpressionIIFECrockford: "(" FunctionExpression CallExpressionArguments ")";
 
 MemberExpression: 
@@ -1450,13 +1416,10 @@ AllocationExpression: "new" MemberExpression ( LOOK_AHEAD(2) AllocationExpressio
 
 AllocationExpressionInternal: Arguments ( LOOK_AHEAD(2) MemberExpressionPart )*;
 
-@FSTNonTerminal()
 Arguments: "(" ( ArgumentList )? ")";
 
-@FSTNonTerminal()
 ArgumentList: &LI Argument ( "," &LI Argument )*;
 
-@FSTNonTerminal()
 Argument:
 		LOOK_AHEAD("AssignmentExpression()") AssignmentExpression
 		|
