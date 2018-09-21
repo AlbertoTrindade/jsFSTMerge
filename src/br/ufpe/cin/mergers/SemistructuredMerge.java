@@ -3,6 +3,8 @@ package br.ufpe.cin.mergers;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.lang3.tuple.Pair;
@@ -51,10 +53,10 @@ public final class SemistructuredMerge {
 			FSTNode baseTree = parser.parse(base);
 			FSTNode rightTree = parser.parse(right);
 			
-			// name statementlists by order
-			nameStatementLists(leftTree);
-			nameStatementLists(baseTree);
-			nameStatementLists(rightTree);
+			// join StatementLists
+			joinStatementLists(leftTree);
+			joinStatementLists(baseTree);
+			joinStatementLists(rightTree);
 
 			// merging
 			context.join(merge(leftTree, baseTree, rightTree));
@@ -200,6 +202,11 @@ public final class SemistructuredMerge {
 
 				if (!terminalA.getMergingMechanism().equals("Default")) {
 					terminalComposed.setBody(markContributions(terminalA.getBody(), terminalB.getBody(),isProcessingBaseTree, terminalA.index, terminalB.index));
+					
+					String terminalComposedPrefix = (terminalA.getSpecialTokenPrefix().length() > terminalB.getSpecialTokenPrefix().length()) ?
+							terminalA.getSpecialTokenPrefix() : terminalB.getSpecialTokenPrefix();
+
+					terminalComposed.setSpecialTokenPrefix(terminalComposedPrefix);
 				}
 				return terminalComposed;
 			}
@@ -337,19 +344,46 @@ public final class SemistructuredMerge {
 		}
 	}
 	
-	private static void nameStatementLists(FSTNode node) {
+	private static void joinStatementLists(FSTNode node) {
 		if (node instanceof FSTNonTerminal) {
 			FSTNonTerminal nonTerminalNode = (FSTNonTerminal) node;
-			int statementListCount = 1;
 			
-			for (FSTNode childNode : nonTerminalNode.getChildren()) {
-				if (childNode.getType().equals(STATEMENT_LIST_TYPE)) {
-					childNode.setName(STATEMENT_LIST_TYPE + statementListCount);
-					statementListCount++;
-				}
+			FSTNonTerminal firstStatementList = null;
+			List<FSTNonTerminal> additionalStatementLists = new ArrayList<>();
+			
+			for (Iterator<FSTNode> childrenNodesIterator = nonTerminalNode.getChildren().iterator(); childrenNodesIterator.hasNext(); ) {
+				FSTNode childNode = childrenNodesIterator.next();
 				
-				nameStatementLists(childNode);
+				if (childNode.getType().equals(STATEMENT_LIST_TYPE)) {
+					if (firstStatementList == null) {
+						firstStatementList = (FSTNonTerminal) childNode;
+					}
+					else {
+						additionalStatementLists.add((FSTNonTerminal) childNode);
+						childrenNodesIterator.remove();
+					}
+				}
+				else {
+					joinStatementLists(childNode);
+				}
 			}
+
+			if (!additionalStatementLists.isEmpty()) {
+				addStatementLists(firstStatementList, additionalStatementLists);
+			}
+		}
+	}
+	
+	private static void addStatementLists(FSTNonTerminal baseStatementList, List<FSTNonTerminal> additionalStatementLists) {		
+		for (FSTNonTerminal additionalStatementList : additionalStatementLists) {
+			FSTTerminal terminalBaseStatementLists = (FSTTerminal) baseStatementList.getChildren().get(0);
+			FSTTerminal terminalCurrentAdditionalStatementList = (FSTTerminal) additionalStatementList.getChildren().get(0);
+			
+			terminalBaseStatementLists.setBody(
+				terminalBaseStatementLists.getBody() +
+				terminalCurrentAdditionalStatementList.getSpecialTokenPrefix() +
+				terminalCurrentAdditionalStatementList.getBody()
+			);
 		}
 	}
 	
