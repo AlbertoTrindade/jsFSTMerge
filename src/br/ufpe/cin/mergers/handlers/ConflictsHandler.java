@@ -25,6 +25,7 @@ final public class ConflictsHandler {
 		findRenamingConflicts(context);
 		findFunctionConversionConflicts(context);
 		findDuplicatedDeclarationsErrors(context);
+		removeDeletedDeclarations(context);
 	}
 
 	private static void findRenamingConflicts(MergeContext context) {
@@ -37,5 +38,9 @@ final public class ConflictsHandler {
 	
 	private static void findDuplicatedDeclarationsErrors(MergeContext context) {
 		DuplicatedDeclarationHandler.handle(context);
+	}
+	
+	private static void removeDeletedDeclarations(MergeContext context) {
+		DeletionsHandler.handle(context);
 	}
 }
