@@ -73,8 +73,8 @@ public class LoggerStatistics {
 		logpath = logpath + "jfstmerge.statistics.scenarios";
 
 		//reading the log file to see if it is not empty neither contains the header
-		String header = "revision,ssmergeconfs,ssmergeloc,ssmergerenamingconfs,ssmergedeletionconfs,ssmergeinnerdeletionconfs,ssmergetaeconfs,ssmergenereoconfs,"
-				+ "ssmergeinitlblocksconfs,ssmergeacidentalconfs,unmergeconfs,unmergeloc,unmergetime,ssmergetime,unmergeduplicateddeclarationerrors,"
+		String header = "revision,ssmergeconfs,ssmergeloc,ssmergerenamingconfs,ssmergefunctionconvconfs,"
+				+ "ssmergeacidentalconfs,unmergeconfs,unmergeloc,unmergetime,ssmergetime,unmergeduplicateddeclarationerrors,"
 				+ "unmergeorderingconfs,equalconfs\n";
 		File statisticsLog = new File(logpath);
 		if(!statisticsLog.exists()){
@@ -121,10 +121,7 @@ public class LoggerStatistics {
 				int ssmergeconfs = 0;
 				int ssmergeloc = 0;
 				int ssmergerenamingconfs = 0;
-				int ssmergedeletionconfs = 0;
-				int ssmergetaeconfs = 0;
-				int ssmergenereoconfs = 0;
-				int ssmergeinitlblocksconfs = 0;
+				int ssmergefunctionconvconfs = 0;
 				int ssmergeacidentalconfs = 0;
 				int unmergeconfs = 0;
 				int unmergeloc = 0;
@@ -142,27 +139,24 @@ public class LoggerStatistics {
 					ssmergeconfs += Integer.valueOf(columns[2]);
 					ssmergeloc 	 += Integer.valueOf(columns[3]);
 					ssmergerenamingconfs += Integer.valueOf(columns[4]);
-					ssmergedeletionconfs += Integer.valueOf(columns[5]);
-					ssmergetaeconfs   += Integer.valueOf(columns[7]);
-					ssmergenereoconfs += Integer.valueOf(columns[8]);
-					ssmergeinitlblocksconfs += Integer.valueOf(columns[9]);
-					ssmergeacidentalconfs 	+= Integer.valueOf(columns[10]);
-					unmergeconfs += Integer.valueOf(columns[11]);
-					unmergeloc 	 += Integer.valueOf(columns[12]);
-					unmergetime  += Long.parseLong(columns[13]);
-					ssmergetime  += Long.parseLong((columns[14]));
-					duplicateddeclarationerrors += Integer.valueOf(columns[15]);
-					unmergeorderingconfs += Integer.valueOf(columns[16]);
-					equalconfs 	 += Integer.valueOf(columns[17]);
+					ssmergefunctionconvconfs   += Integer.valueOf(columns[5]);
+					ssmergeacidentalconfs 	+= Integer.valueOf(columns[6]);
+					unmergeconfs += Integer.valueOf(columns[7]);
+					unmergeloc 	 += Integer.valueOf(columns[8]);
+					unmergetime  += Long.parseLong(columns[9]);
+					ssmergetime  += Long.parseLong((columns[10]));
+					duplicateddeclarationerrors += Integer.valueOf(columns[11]);
+					unmergeorderingconfs += Integer.valueOf(columns[12]);
+					equalconfs 	 += Integer.valueOf(columns[13]);
 
 				}
 				CryptoUtils.encrypt(statistics, statistics);
 
 				//summarizing retrieved statistics
 				int X = lines.size()-1;
-				int Y = (unmergeconfs - ssmergeconfs) + duplicateddeclarationerrors - (ssmergetaeconfs + ssmergenereoconfs + ssmergeinitlblocksconfs);Y=(Y>0)?Y:0;
+				int Y = (unmergeconfs - ssmergeconfs) + duplicateddeclarationerrors;Y=(Y>0)?Y:0;
 				int Z = duplicateddeclarationerrors;
-				int A = ssmergerenamingconfs;
+				int A = ssmergerenamingconfs + ssmergefunctionconvconfs;
 				int B = unmergeconfs - equalconfs - Y;B=(B>0)?B:0;
 				double M = ((double)ssmergetime / 1000000000);
 				double N = ((double)unmergetime / 1000000000);

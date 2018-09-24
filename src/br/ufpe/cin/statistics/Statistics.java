@@ -55,11 +55,7 @@ public final class Statistics {
 				+ "," + context.semistructuredNumberOfConflicts 
 				+ "," + context.semistructuredMergeConflictsLOC
 				+ "," + context.renamingConflicts
-				+ "," + context.deletionConflicts
-				+ "," + context.innerDeletionConflicts
 				+ "," + context.functionConversionConflict
-				+ "," + context.newElementReferencingEditedOneConflicts
-				+ "," + context.initializationBlocksConflicts
 				+ "," + context.acidentalConflicts
 				+ "," + context.unstructuredNumberOfConflicts 
 				+ "," + context.unstructuredMergeConflictsLOC
@@ -83,11 +79,7 @@ public final class Statistics {
 		int semistructuredNumberOfConflicts = 0; 
 		int semistructuredMergeConflictsLOC = 0;
 		int renamingConflicts = 0;
-		int deletionConflicts = 0;
-		int innerDeletionConflicts = 0;
 		int functionConversionConflict = 0;
-		int newElementReferencingEditedOneConflicts = 0;
-		int initializationBlocksConflicts = 0;
 		int acidentalConflicts = 0;
 		int unstructuredNumberOfConflicts = 0;
 		int unstructuredMergeConflictsLOC = 0;
@@ -102,11 +94,7 @@ public final class Statistics {
 			semistructuredNumberOfConflicts += context.semistructuredNumberOfConflicts;
 			semistructuredMergeConflictsLOC += context.semistructuredMergeConflictsLOC;
 			renamingConflicts += context.renamingConflicts;
-			deletionConflicts += context.deletionConflicts;
-			innerDeletionConflicts += context.innerDeletionConflicts;
 			functionConversionConflict += context.functionConversionConflict;
-			newElementReferencingEditedOneConflicts += context.newElementReferencingEditedOneConflicts;
-			initializationBlocksConflicts += context.initializationBlocksConflicts;
 			acidentalConflicts += context.acidentalConflicts;
 			unstructuredNumberOfConflicts += context.unstructuredNumberOfConflicts;
 			unstructuredMergeConflictsLOC += context.unstructuredMergeConflictsLOC;
@@ -121,11 +109,7 @@ public final class Statistics {
 				+ "," + semistructuredNumberOfConflicts 
 				+ "," + semistructuredMergeConflictsLOC
 				+ "," + renamingConflicts
-				+ "," + deletionConflicts
-				+ "," + innerDeletionConflicts
 				+ "," + functionConversionConflict
-				+ "," + newElementReferencingEditedOneConflicts
-				+ "," + initializationBlocksConflicts
 				+ "," + acidentalConflicts
 				+ "," + unstructuredNumberOfConflicts 
 				+ "," + unstructuredMergeConflictsLOC
