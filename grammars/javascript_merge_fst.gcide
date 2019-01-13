@@ -1192,12 +1192,12 @@ CompilationUnit: ( SourceElement )* <EOF>;
 
 // Handle functions and statements
 
-@FSTNonTerminal()
 SourceElement:
+		@FSTTerminal(merge="LineBased")
+		Statement :: Stmt
+		|
 		@FSTNonTerminal(name="{Id}")
 		FunctionDeclaration :: FuncDeclaration
-		|
-		StatementList :: StmtList
 ;
 
 @FSTInline		

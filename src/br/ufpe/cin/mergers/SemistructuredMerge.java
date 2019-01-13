@@ -52,11 +52,6 @@ public final class SemistructuredMerge {
 			FSTNode leftTree = parser.parse(left);
 			FSTNode baseTree = parser.parse(base);
 			FSTNode rightTree = parser.parse(right);
-			
-			// join StatementLists
-			joinStatementLists(leftTree);
-			joinStatementLists(baseTree);
-			joinStatementLists(rightTree);
 
 			// merging
 			context.join(merge(leftTree, baseTree, rightTree));
@@ -341,49 +336,6 @@ public final class SemistructuredMerge {
 			} else if (baseContenttrim.equals(rightContenttrim) && !leftContenttrim.equals(rightContenttrim)) {
 				context.editedLeftNodes.add(node);
 			}
-		}
-	}
-	
-	private static void joinStatementLists(FSTNode node) {
-		if (node instanceof FSTNonTerminal) {
-			FSTNonTerminal nonTerminalNode = (FSTNonTerminal) node;
-			
-			FSTNonTerminal firstStatementList = null;
-			List<FSTNonTerminal> additionalStatementLists = new ArrayList<>();
-			
-			for (Iterator<FSTNode> childrenNodesIterator = nonTerminalNode.getChildren().iterator(); childrenNodesIterator.hasNext(); ) {
-				FSTNode childNode = childrenNodesIterator.next();
-				
-				if (childNode.getType().equals(STATEMENT_LIST_TYPE)) {
-					if (firstStatementList == null) {
-						firstStatementList = (FSTNonTerminal) childNode;
-					}
-					else {
-						additionalStatementLists.add((FSTNonTerminal) childNode);
-						childrenNodesIterator.remove();
-					}
-				}
-				else {
-					joinStatementLists(childNode);
-				}
-			}
-
-			if (!additionalStatementLists.isEmpty()) {
-				addStatementLists(firstStatementList, additionalStatementLists);
-			}
-		}
-	}
-	
-	private static void addStatementLists(FSTNonTerminal baseStatementList, List<FSTNonTerminal> additionalStatementLists) {		
-		for (FSTNonTerminal additionalStatementList : additionalStatementLists) {
-			FSTTerminal terminalBaseStatementLists = (FSTTerminal) baseStatementList.getChildren().get(0);
-			FSTTerminal terminalCurrentAdditionalStatementList = (FSTTerminal) additionalStatementList.getChildren().get(0);
-			
-			terminalBaseStatementLists.setBody(
-				terminalBaseStatementLists.getBody() +
-				terminalCurrentAdditionalStatementList.getSpecialTokenPrefix() +
-				terminalCurrentAdditionalStatementList.getBody()
-			);
 		}
 	}
 	

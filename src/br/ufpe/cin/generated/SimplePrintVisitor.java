@@ -59,17 +59,6 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 			printFeatures(nonTerminal,false);
 			return false;
 		}
-		if (nonTerminal.getType().equals("StmtList")) {
-			printFeatures(nonTerminal,true);
-			{
-				FSTNode v=getChild(nonTerminal, "StatementList");
-				if (v!=null) {
-					v.accept(this);
-				}
-			}
-			printFeatures(nonTerminal,false);
-			return false;
-		}
 		if (nonTerminal.getType().equals("FunctionBody")) {
 			printFeatures(nonTerminal,true);
 			for (FSTNode v : getChildren(nonTerminal,"SourceElement")) {
@@ -87,7 +76,6 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 		if (type.equals("UnaryExpression1") && expectedType.equals("UnaryExpression")) return true;
 		if (type.equals("AssignmentExpressionInternal3") && expectedType.equals("AssignmentExpressionInternal")) return true;
 		if (type.equals("UnaryOperator7") && expectedType.equals("UnaryOperator")) return true;
-		if (type.equals("StmtList") && expectedType.equals("SourceElement")) return true;
 		if (type.equals("AssignmentOperator12") && expectedType.equals("AssignmentOperator")) return true;
 		if (type.equals("RelationalOperator3") && expectedType.equals("RelationalOperator")) return true;
 		if (type.equals("AdditiveOperator1") && expectedType.equals("AdditiveOperator")) return true;
@@ -160,6 +148,7 @@ public class SimplePrintVisitor extends AbstractFSTPrintVisitor  {
 		if (type.equals("IterationStatement3") && expectedType.equals("IterationStatement")) return true;
 		if (type.equals("ArrayLiteralInternal1") && expectedType.equals("ArrayLiteralInternal")) return true;
 		if (type.equals("Literal2") && expectedType.equals("Literal")) return true;
+		if (type.equals("Stmt") && expectedType.equals("SourceElement")) return true;
 		if (type.equals("UnaryOperator2") && expectedType.equals("UnaryOperator")) return true;
 		if (type.equals("PrimaryExpression6") && expectedType.equals("PrimaryExpression")) return true;
 		if (type.equals("Statement9") && expectedType.equals("Statement")) return true;

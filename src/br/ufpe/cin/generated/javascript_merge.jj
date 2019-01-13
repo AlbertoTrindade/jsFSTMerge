@@ -1141,9 +1141,9 @@ FSTInfo CompilationUnit(boolean inTerminal) : { Token first=null,t;FSTInfo n;
 
 FSTInfo SourceElement(boolean inTerminal) : { Token first=null,t;FSTInfo n; 
 } { {first=getToken(1); productionStart(inTerminal); } (
-	n=Function(inTerminal){ replaceName(n);} n=Id(inTerminal){ replaceName("Id", n);}{ replaceName(n);} "(" [n=FormalParameters(inTerminal){ replaceName(n);}] ")" "{" n=FunctionBody(inTerminal){ replaceName(n);} "}" {return productionEndNonTerminal("FuncDeclaration","{Id}","{Id}");}
+	n=Statement(true){ replaceName(n);} {return productionEndTerminal("Stmt","-","-","Replacement","LineBased",first,token);}
  |
-	n=StatementList(inTerminal){ replaceName(n);} {return productionEndNonTerminal("StmtList","-","-");}
+	n=Function(inTerminal){ replaceName(n);} n=Id(inTerminal){ replaceName("Id", n);}{ replaceName(n);} "(" [n=FormalParameters(inTerminal){ replaceName(n);}] ")" "{" n=FunctionBody(inTerminal){ replaceName(n);} "}" {return productionEndNonTerminal("FuncDeclaration","{Id}","{Id}");}
 
  )  }
 
